@@ -33,4 +33,19 @@
   @include valo;
 
   // Insert your own theme rules here
+
 }
+
+  
+.v-label-song-title {
+ font-family: Arial, Helvetica, sans-serif;
+ text-align: center;
+ font-size:200%;
+ color: red;
+} 
+
+.v-label-song-artist {
+ font-family: Arial, Helvetica, sans-serif;
+ text-align: center;
+ font-size:150%; 
+} 
