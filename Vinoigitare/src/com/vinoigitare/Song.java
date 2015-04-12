@@ -11,6 +11,14 @@ public class Song implements Serializable {
 	private String artist;
 	private String title;
 	private String text;
+	
+
+	public Song(String artist, String title, String text) {
+		super();
+		this.artist = artist;
+		this.title = title;
+		this.text = text;
+	}
 
 	public String getArtist() {
 		return artist;
