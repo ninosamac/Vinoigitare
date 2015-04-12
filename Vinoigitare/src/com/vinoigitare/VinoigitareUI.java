@@ -28,17 +28,9 @@ public class VinoigitareUI extends UI {
 		layout.setMargin(true);
 		setContent(layout);
 
-		Song song = getTestSong();		
-		Label title = new Label(song.getTitle());
-		layout.addComponent(title);
-
-		Label artist = new Label(song.getArtist());
-		layout.addComponent(artist);
-
-		Label text = new Label();
-		text.setContentMode(ContentMode.PREFORMATTED);
-		text.setValue(song.getText());
-		layout.addComponent(text);
+		Song song = getTestSong();
+		SongPanel songPanel = new SongPanel(song);
+		layout.addComponent(songPanel);
 
 	}
 
