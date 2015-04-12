@@ -8,40 +8,31 @@ public class Song implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String artist;
-	private String title;
-	private String text;
-	
+	private final String artist;
+	private final String title;
+	private final String chords;
 
-	public Song(String artist, String title, String text) {
+	public Song(String artist, String title, String chords) {
 		super();
 		this.artist = artist;
 		this.title = title;
-		this.text = text;
+		this.chords = chords;
 	}
 
 	public String getArtist() {
 		return artist;
 	}
 
-	public void setArtist(String artist) {
-		this.artist = artist;
-	}
-
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public String getChords() {
+		return chords;
 	}
 
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
+	public String getKey() {
+		return artist + " - " + title;
 	}
 
 }
