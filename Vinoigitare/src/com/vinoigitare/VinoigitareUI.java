@@ -33,7 +33,7 @@ public class VinoigitareUI extends UI {
 
 		setContent(layout);
 
-		Collection<Song> testSongs = null;
+		Collection<Song> testSongs = TestDataGenerator.getTestSongs();
 		SongTree songTree = new SongTree(testSongs);
 
 		Song song = TestDataGenerator.getTestSong();

@@ -1,13 +1,15 @@
 package com.vinoigitare;
 
-public class TestDataGenerator {
-	
-	public static Song getTestSong() {
+import java.util.ArrayList;
+import java.util.Collection;
 
+public class TestDataGenerator {
+
+	public static Song getTestSong() {
 
 		String artist = "QUEEN";
 		String title = "A kind of magic";
-		String text = "N.C. (no chord!)\r\n"
+		String chords = "N.C. (no chord!)\r\n"
 				+ "Its a kind of magic, its a kind of magic, its a kind of magic\r\n"
 				+ "\r\n"
 				+ "    A                    B9\r\n"
@@ -66,7 +68,21 @@ public class TestDataGenerator {
 				+ "D -----2-----1-----0-----2-----0-----2------------------------------------------\r\n"
 				+ "A -----0-----2-----x-----4-----x-----2------------------------------------------\r\n"
 				+ "E -----x-----x-----x-----2-----x-----0------------------------------------------";
-		return new Song(artist, title, text);
-	}	
-	
+		return new Song(artist, title, chords);
+	}
+
+	public static Collection<Song> getTestSongs() {
+		ArrayList<Song> songs = new ArrayList<Song>();
+
+		songs.add(new Song("Artist 1", "Title 1", "Text 1/nText 1"));
+		songs.add(new Song("Artist 1", "Title 2", "Text 2/nText 2"));
+		songs.add(new Song("Artist 1", "Title 3", "Text 3/nText 3"));
+		songs.add(new Song("Artist 2", "Title 4", "Text 4/nText 4"));
+		songs.add(new Song("Artist 2", "Title 5", "Text 5/nText 5"));
+		songs.add(new Song("Artist 3", "Title 6", "Text 6/nText 6"));
+
+		return songs;
+
+	}
+
 }
