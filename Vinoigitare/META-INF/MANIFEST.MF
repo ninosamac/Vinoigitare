@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vinoigitare
+Bundle-SymbolicName: Vinoigitare
+Bundle-Version: 1.0.0.qualifier
+Export-Package: com.example.vinoigitare
+Service-Component: OSGI-INF/component.xml
