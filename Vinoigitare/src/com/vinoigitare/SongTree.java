@@ -61,7 +61,7 @@ public class SongTree extends Tree {
 		}
 
 		Collection<?> itemIds = getItemIds();
-		log.debug("Item ids: " + itemIds.toString());
+		log.info("Item ids: " + itemIds.toString());
 
 	}
 
