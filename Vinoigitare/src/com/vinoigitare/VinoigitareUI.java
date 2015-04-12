@@ -28,27 +28,28 @@ public class VinoigitareUI extends UI {
 		layout.setMargin(true);
 		setContent(layout);
 
-		Label title = new Label("The Song");
+		Song song = getTestSong();		
+		Label title = new Label(song.getTitle());
 		layout.addComponent(title);
 
-		Label artist = new Label("John Doe");
+		Label artist = new Label(song.getArtist());
 		layout.addComponent(artist);
 
 		Label text = new Label();
 		text.setContentMode(ContentMode.PREFORMATTED);
-		text.setValue(getLoremIpsum());
+		text.setValue(song.getText());
 		layout.addComponent(text);
 
 	}
 
-	private String getLoremIpsum() {
-		return "Queen\r\n"
-				+ "A Kind Of Magic\r\n"
-				+ "\r\n"
-				+ "Words and music by Roger Taylor\r\n"
-				+ "\r\n"
-				+ "Transcribed by Damien Foster (d_foster@hilbert.maths.utas.edu.au) \r\n"
-				+ "N.C. (no chord!)\r\n"
+	private Song getTestSong() {
+
+		Song testSong = new Song();
+		testSong.setArtist("QUEEN");
+		testSong.setTitle("A kind of magic");
+		testSong.setText(
+
+		"N.C. (no chord!)\r\n"
 				+ "Its a kind of magic, its a kind of magic, its a kind of magic\r\n"
 				+ "\r\n"
 				+ "    A                    B9\r\n"
@@ -106,7 +107,7 @@ public class VinoigitareUI extends UI {
 				+ "G -----2-----2-----2-----2-----2-----1------------------------------------------\r\n"
 				+ "D -----2-----1-----0-----2-----0-----2------------------------------------------\r\n"
 				+ "A -----0-----2-----x-----4-----x-----2------------------------------------------\r\n"
-				+ "E -----x-----x-----x-----2-----x-----0------------------------------------------";
-
+				+ "E -----x-----x-----x-----2-----x-----0------------------------------------------");
+		return testSong;
 	}
 }
