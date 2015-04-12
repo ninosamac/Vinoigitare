@@ -2,7 +2,7 @@ package com.vinoigitare;
 
 import java.io.Serializable;
 
-public class Song implements Serializable {
+public class Song implements Serializable, Comparable<Song> {
 
 	/**
 	 * 
@@ -11,12 +11,14 @@ public class Song implements Serializable {
 	private final String artist;
 	private final String title;
 	private final String chords;
+	private String key;
 
 	public Song(String artist, String title, String chords) {
 		super();
 		this.artist = artist;
 		this.title = title;
 		this.chords = chords;
+		key = artist + " - " + title;
 	}
 
 	public String getArtist() {
@@ -32,7 +34,12 @@ public class Song implements Serializable {
 	}
 
 	public String getKey() {
-		return artist + " - " + title;
+		return key;
 	}
 
+	@Override
+	public int compareTo(Song o) {
+		return key.compareTo(o.getKey());
+	}
+	
 }
