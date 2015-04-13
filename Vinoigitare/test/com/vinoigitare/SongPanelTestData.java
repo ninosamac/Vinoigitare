@@ -5,7 +5,7 @@ public class SongPanelTestData {
 
 	public static Song generate() {
 
-		String artist = "QUEEN";
+		Artist artist = new Artist("QUEEN");
 		String title = "A kind of magic";
 		String chords = "N.C. (no chord!)\r\n"
 				+ "Its a kind of magic, its a kind of magic, its a kind of magic\r\n"

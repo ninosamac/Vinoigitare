@@ -8,20 +8,20 @@ public class Song implements Serializable, Comparable<Song> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final String artist;
+	private final Artist artist;
 	private final String title;
 	private final String chords;
 	private String key;
 
-	public Song(String artist, String title, String chords) {
+	public Song(Artist artist, String title, String chords) {
 		super();
 		this.artist = artist;
 		this.title = title;
 		this.chords = chords;
-		key = artist + " - " + title;
+		key = artist.getName() + " - " + title;
 	}
 
-	public String getArtist() {
+	public Artist getArtist() {
 		return artist;
 	}
 

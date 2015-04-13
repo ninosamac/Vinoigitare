@@ -32,15 +32,14 @@ public class SongPanel extends VerticalLayout {
 		title.addStyleName("song-title");
 		addComponent(title);
 
-		Label artist = new Label(song.getArtist());
+		Label artist = new Label(song.getArtist().getName());
 		artist.addStyleName("song-artist");
 		addComponent(artist);
 
 		Label chords = new Label();
 		chords.setContentMode(ContentMode.PREFORMATTED);
 		chords.setValue(song.getChords());
-		addComponent(chords);
-		
+		addComponent(chords);		
 
 	}
 }
