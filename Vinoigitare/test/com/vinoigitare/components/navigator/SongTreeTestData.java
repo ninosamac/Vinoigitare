@@ -1,4 +1,4 @@
-package com.vinoigitare.components;
+package com.vinoigitare.components.navigator;
 
 import java.util.ArrayList;
 import java.util.Collection;

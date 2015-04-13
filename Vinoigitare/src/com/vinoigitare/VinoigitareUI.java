@@ -18,8 +18,8 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.components.SongPanel;
 import com.vinoigitare.components.SongPanelTestData;
-import com.vinoigitare.components.SongTree;
-import com.vinoigitare.components.SongTreeTestData;
+import com.vinoigitare.components.navigator.SongTree;
+import com.vinoigitare.components.navigator.SongTreeTestData;
 
 @SuppressWarnings("serial")
 @Theme("vinoigitare")
