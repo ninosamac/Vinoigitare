@@ -1,7 +1,10 @@
-package com.vinoigitare;
+package com.vinoigitare.components;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import com.vinoigitare.Artist;
+import com.vinoigitare.Song;
 
 public class SongTreeTestData {
 

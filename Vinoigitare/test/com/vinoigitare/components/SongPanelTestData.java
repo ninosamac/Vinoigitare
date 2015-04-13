@@ -1,4 +1,7 @@
-package com.vinoigitare;
+package com.vinoigitare.components;
+
+import com.vinoigitare.Artist;
+import com.vinoigitare.Song;
 
 
 public class SongPanelTestData {

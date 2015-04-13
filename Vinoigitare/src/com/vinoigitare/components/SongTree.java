@@ -1,4 +1,4 @@
-package com.vinoigitare;
+package com.vinoigitare.components;
 
 import java.util.Collection;
 import java.util.TreeMap;
@@ -13,6 +13,8 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 //import com.vaadin.external.org.slf4j.Logger;
 //import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.ui.Tree;
+import com.vinoigitare.Artist;
+import com.vinoigitare.Song;
 
 public class SongTree extends Tree {
 
@@ -85,7 +87,7 @@ public class SongTree extends Tree {
 			for (Song song : songsByArtist) {
 				String title = song.getTitle();
 				addItem(title);
-				setParent(title, artist);
+				setParent(title, artist.getName());
 				setChildrenAllowed(title, false);
 			}
 		}

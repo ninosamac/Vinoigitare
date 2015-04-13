@@ -1,8 +1,9 @@
-package com.vinoigitare;
+package com.vinoigitare.components;
 
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
+import com.vinoigitare.Song;
 
 public class SongPanel extends VerticalLayout {
 
