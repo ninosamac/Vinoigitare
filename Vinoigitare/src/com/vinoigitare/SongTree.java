@@ -3,9 +3,12 @@ package com.vinoigitare;
 import java.util.Collection;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
 import java.util.logging.Logger;
 
+import com.vaadin.data.Item;
+import com.vaadin.data.Property;
+import com.vaadin.event.ItemClickEvent;
+import com.vaadin.event.ItemClickEvent.ItemClickListener;
 //import com.vaadin.external.org.slf4j.Logger;
 //import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.ui.Tree;
@@ -16,8 +19,8 @@ public class SongTree extends Tree {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final static Logger log = Logger.getLogger(SongTree.class
-			.getName());
+	private final static Logger log = Logger
+			.getLogger(SongTree.class.getName());
 
 	private Collection<Song> songs;
 	private TreeMap<String, TreeSet<Song>> songsByArtists = new TreeMap<String, TreeSet<Song>>();
@@ -38,18 +41,43 @@ public class SongTree extends Tree {
 		setSizeFull();
 		populateItems();
 
+		@SuppressWarnings("serial")
+		ItemClickListener listener = new ItemClickListener() {
+
+			@Override
+			public void itemClick(ItemClickEvent event) {
+				Item item = event.getItem();
+				System.out.println(event.getItemId());
+
+			}
+		};
+		addItemClickListener(listener);
+
 	}
 
 	private void populateItems() {
 
-		TreeSet<String> artists = getArtists();
-		createSongsByArtists(artists);
-		populateSongsByArtists();
+		TreeSet<String> artists = new TreeSet<String>();
+
+		for (Song song : songs) {
+			String artist = song.getArtist();
+			artists.add(artist);
+		}
 
 		for (String artist : artists) {
-			addItem(artist);
-			setChildrenAllowed(artist, true);
+			TreeSet<Song> songsByArtist = new TreeSet<Song>();
+			songsByArtists.put(artist, songsByArtist);
+		}
 
+		for (Song song : songs) {
+			String artist = song.getArtist();
+			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
+			songsByArtist.add(song);
+		}
+
+		for (String artist : artists) {
+			Item item = addItem(artist);
+			setChildrenAllowed(artist, true);
 
 			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
 			for (Song song : songsByArtist) {
@@ -59,32 +87,6 @@ public class SongTree extends Tree {
 				setChildrenAllowed(title, false);
 			}
 		}
-	}
-
-	private void populateSongsByArtists() {
-		for (Song song : songs) {
-			String artist = song.getArtist();
-			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
-			songsByArtist.add(song);
-		}
-	}
-
-	private void createSongsByArtists(TreeSet<String> artists) {
-		for (String artist : artists) {
-			TreeSet<Song> songsByArtist = new TreeSet<Song>();
-			songsByArtists.put(artist, songsByArtist);
-		}
-	}
-
-	private TreeSet<String> getArtists() {
-		TreeSet<String> artists = new TreeSet<String>();
-
-		for (Song song : songs) {
-			String artist = song.getArtist();
-			artists.add(artist);
-		}
-
-		return artists;
 	}
 
 	// private void populateItems() {
