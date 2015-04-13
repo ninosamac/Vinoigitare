@@ -49,7 +49,7 @@ public class SongTree extends Tree {
 		for (String artist : artists) {
 			addItem(artist);
 			setChildrenAllowed(artist, true);
-			log.info("Populating artist: " + artist);
+
 
 			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
 			for (Song song : songsByArtist) {
@@ -57,7 +57,6 @@ public class SongTree extends Tree {
 				addItem(title);
 				setParent(title, artist);
 				setChildrenAllowed(title, false);
-				log.info("Populating song: " + title);
 			}
 		}
 	}
