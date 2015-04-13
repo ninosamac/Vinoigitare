@@ -1,12 +1,13 @@
 package com.vinoigitare;
 
 import java.util.Collection;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.vaadin.external.org.slf4j.Logger;
-import com.vaadin.external.org.slf4j.LoggerFactory;
+import java.util.logging.Logger;
+
+//import com.vaadin.external.org.slf4j.Logger;
+//import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.ui.Tree;
 
 public class SongTree extends Tree {
@@ -15,7 +16,7 @@ public class SongTree extends Tree {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final static Logger log = LoggerFactory.getLogger(SongTree.class
+	private final static Logger log = Logger.getLogger(SongTree.class
 			.getName());
 
 	private Collection<Song> songs;
@@ -42,12 +43,13 @@ public class SongTree extends Tree {
 	private void populateItems() {
 
 		TreeSet<String> artists = getArtists();
-		createSongsByArtists(artists);	
+		createSongsByArtists(artists);
 		populateSongsByArtists();
-		
+
 		for (String artist : artists) {
 			addItem(artist);
 			setChildrenAllowed(artist, true);
+			log.info("Populating artist: " + artist);
 
 			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
 			for (Song song : songsByArtist) {
@@ -55,39 +57,34 @@ public class SongTree extends Tree {
 				addItem(title);
 				setParent(title, artist);
 				setChildrenAllowed(title, false);
-
+				log.info("Populating song: " + title);
 			}
-
 		}
-
-		Collection<?> itemIds = getItemIds();
-		log.info("Item ids: " + itemIds.toString());
-
 	}
 
 	private void populateSongsByArtists() {
-		for(Song song:songs){
+		for (Song song : songs) {
 			String artist = song.getArtist();
 			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
-			songsByArtist.add(song);	
+			songsByArtist.add(song);
 		}
 	}
 
 	private void createSongsByArtists(TreeSet<String> artists) {
-		for(String artist:artists){
-		TreeSet<Song> songsByArtist = new TreeSet<Song>();
-		songsByArtists.put(artist, songsByArtist);
+		for (String artist : artists) {
+			TreeSet<Song> songsByArtist = new TreeSet<Song>();
+			songsByArtists.put(artist, songsByArtist);
 		}
 	}
 
 	private TreeSet<String> getArtists() {
 		TreeSet<String> artists = new TreeSet<String>();
-		
+
 		for (Song song : songs) {
-			String artist = song.getArtist();			
+			String artist = song.getArtist();
 			artists.add(artist);
 		}
-		
+
 		return artists;
 	}
 
