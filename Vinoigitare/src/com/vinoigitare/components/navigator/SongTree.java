@@ -6,12 +6,8 @@ import java.util.TreeSet;
 import java.util.logging.Logger;
 
 import com.vaadin.data.Item;
-import com.vaadin.data.Property;
-import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
-//import com.vaadin.external.org.slf4j.Logger;
-//import com.vaadin.external.org.slf4j.LoggerFactory;
 import com.vaadin.ui.Tree;
 import com.vinoigitare.Artist;
 import com.vinoigitare.Song;
@@ -42,6 +38,7 @@ public class SongTree extends Tree {
 	protected void init() {
 
 		setSizeFull();
+		setItemCaptionMode(ItemCaptionMode.EXPLICIT);
 		populateItems();
 
 		@SuppressWarnings("serial")
@@ -50,8 +47,8 @@ public class SongTree extends Tree {
 			@Override
 			public void itemClick(ItemClickEvent event) {
 				Item item = event.getItem();
-				System.out.println(event.getItemId());
-
+				Object itemId = event.getItemId();
+				System.out.println(itemId);
 			}
 		};
 		addItemClickListener(listener);
@@ -79,16 +76,18 @@ public class SongTree extends Tree {
 		}
 
 		for (Artist artist : artists) {
-			
-			Item item = addItem(artist.getName());
+			String name = artist.getName();				
+			setItemCaption(artist, name);
+			addItem(artist);
 			setChildrenAllowed(artist, true);
 
 			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
 			for (Song song : songsByArtist) {
-				String title = song.getTitle();
-				addItem(title);
-				setParent(title, artist.getName());
-				setChildrenAllowed(title, false);
+				String title = song.getTitle();				
+				setItemCaption(song, title);
+				addItem(song);				
+				setParent(song, artist);
+				setChildrenAllowed(song, false);
 			}
 		}
 	}
