@@ -27,8 +27,8 @@ public class SongPanel extends VerticalLayout {
 	protected void init() {
 
 		setSizeFull();
-		//setMargin(true);
-		
+		// setMargin(true);
+
 		Label title = new Label(song.getTitle());
 		title.addStyleName("song-title");
 		addComponent(title);
@@ -40,7 +40,8 @@ public class SongPanel extends VerticalLayout {
 		Label chords = new Label();
 		chords.setContentMode(ContentMode.PREFORMATTED);
 		chords.setValue(song.getChords());
-		addComponent(chords);		
+		addComponent(chords);
 
 	}
+
 }

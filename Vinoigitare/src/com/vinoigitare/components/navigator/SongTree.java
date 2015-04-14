@@ -3,30 +3,34 @@ package com.vinoigitare.components.navigator;
 import java.util.Collection;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.logging.Logger;
 
 import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Tree;
+import com.vinoigitare.event.EventBus;
+import com.vinoigitare.event.EventSource;
+import com.vinoigitare.event.SongSelected;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
-public class SongTree extends Tree {
+public class SongTree extends Tree implements EventSource {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final static Logger log = Logger
-			.getLogger(SongTree.class.getName());
+	// private final static Log log =
+	// LogFactory.getLog(SongTree.class.getName());
 
 	private Collection<Song> songs;
 	private TreeMap<Artist, TreeSet<Song>> songsByArtists = new TreeMap<Artist, TreeSet<Song>>();
+	private EventBus eventBus;
 
-	public SongTree(Collection<Song> songs) {
+	public SongTree(Collection<Song> songs, EventBus eventBus) {
 		super();
 		this.songs = songs;
+		this.eventBus = eventBus;
 	}
 
 	@Override
@@ -51,9 +55,12 @@ public class SongTree extends Tree {
 
 				if (itemId instanceof Song) {
 					System.out.println("Song: " + itemId);
+					Song song = (Song) itemId;
+					SongSelected songSelected = new SongSelected(song);
+					eventBus.onEvent(songSelected);
 				}
-				
-				else if(itemId instanceof Artist){
+
+				else if (itemId instanceof Artist) {
 					System.out.println("Artist: " + itemId);
 				}
 			}
@@ -98,4 +105,10 @@ public class SongTree extends Tree {
 			}
 		}
 	}
+
+	@Override
+	public void attachEventBus(EventBus eventBus) {
+		this.eventBus = eventBus;
+	}
+
 }
