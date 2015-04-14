@@ -1,4 +1,4 @@
-package com.vinoigitare.event;
+package com.vinoigitare.eventbus;
 
 import com.vinoigitare.model.Song;
 

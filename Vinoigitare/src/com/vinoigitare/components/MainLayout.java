@@ -2,19 +2,15 @@ package com.vinoigitare.components;
 
 import java.util.Collection;
 
-
-
-import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.components.navigator.SongTree;
 import com.vinoigitare.components.navigator.SongTreeTestData;
 import com.vinoigitare.components.songpanel.SongPanel;
 import com.vinoigitare.components.songpanel.SongPanelTestData;
-import com.vinoigitare.event.EventBus;
-import com.vinoigitare.event.SongSelected;
-import com.vinoigitare.event.SongSelectedHandler;
+import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.eventbus.SongSelected;
+import com.vinoigitare.eventbus.SongSelectedHandler;
 import com.vinoigitare.model.Song;
 
 public class MainLayout extends VerticalLayout implements SongSelectedHandler {
@@ -29,7 +25,7 @@ public class MainLayout extends VerticalLayout implements SongSelectedHandler {
 		
 		setSizeFull();
 		Collection<Song> testSongs = SongTreeTestData.generate();
-		songTree = new SongTree(testSongs, eventBus);		
+		songTree = new SongTree(eventBus, testSongs);		
 
 		Song song = SongPanelTestData.generate();
 		songPanel = new SongPanel(song);

@@ -8,13 +8,12 @@ import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Tree;
-import com.vinoigitare.event.EventBus;
-import com.vinoigitare.event.EventSource;
-import com.vinoigitare.event.SongSelected;
+import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.eventbus.SongSelected;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
-public class SongTree extends Tree implements EventSource {
+public class SongTree extends Tree {
 
 	/**
 	 * 
@@ -27,10 +26,10 @@ public class SongTree extends Tree implements EventSource {
 	private TreeMap<Artist, TreeSet<Song>> songsByArtists = new TreeMap<Artist, TreeSet<Song>>();
 	private EventBus eventBus;
 
-	public SongTree(Collection<Song> songs, EventBus eventBus) {
+	public SongTree(EventBus eventBus, Collection<Song> songs) {
 		super();
-		this.songs = songs;
-		this.eventBus = eventBus;
+		this.eventBus=eventBus;
+		this.songs = songs;		
 	}
 
 	@Override
@@ -44,7 +43,7 @@ public class SongTree extends Tree implements EventSource {
 		setSizeFull();
 		setItemCaptionMode(ItemCaptionMode.EXPLICIT);
 		populateItems();
-
+		
 		@SuppressWarnings("serial")
 		ItemClickListener listener = new ItemClickListener() {
 
@@ -104,11 +103,6 @@ public class SongTree extends Tree implements EventSource {
 				setChildrenAllowed(song, false);
 			}
 		}
-	}
-
-	@Override
-	public void attachEventBus(EventBus eventBus) {
-		this.eventBus = eventBus;
 	}
 
 }

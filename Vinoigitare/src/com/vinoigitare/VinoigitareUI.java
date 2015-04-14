@@ -8,11 +8,11 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vinoigitare.components.MainLayout;
-import com.vinoigitare.event.EventBus;
+import com.vinoigitare.eventbus.EventBus;
 
 @SuppressWarnings("serial")
 @Theme("vinoigitare")
-public class VinoigitareUI extends UI {
+public class VinoigitareUI extends UI implements Vinoigitare {
 
 	@WebServlet(value = "/*", asyncSupported = true)
 	@VaadinServletConfiguration(productionMode = false, ui = com.vinoigitare.VinoigitareUI.class)
@@ -20,28 +20,17 @@ public class VinoigitareUI extends UI {
 	}
 
 	private static final EventBus eventBus = new EventBus();
-	
+
 	@Override
 	protected void init(VaadinRequest request) {
 		MainLayout layout = new MainLayout(eventBus);
-		System.out.println(layout.isAttached());
-		
 		setSizeFull();
-
 		setContent(layout);
-		System.out.println(layout.isAttached());
-		
-//		Collection<Song> testSongs = SongTreeTestData.generate();
-//		SongTree songTree = new SongTree(testSongs, eventBus);
-//
-//		Song song = SongPanelTestData.generate();
-//		SongPanel songPanel = new SongPanel(song);
-//
-//		HorizontalSplitPanel panel = new HorizontalSplitPanel(songTree,
-//				songPanel);
-//		panel.setSplitPosition(300, Unit.PIXELS);
-//		layout.addComponent(panel);
+	}
 
+	@Override
+	public EventBus getEventBus() {
+		return eventBus;
 	}
 
 }
