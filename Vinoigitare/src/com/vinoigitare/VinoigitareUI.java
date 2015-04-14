@@ -8,21 +8,13 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
-import com.vinoigitare.components.SongPanelTestData;
 import com.vinoigitare.components.navigator.SongTree;
 import com.vinoigitare.components.navigator.SongTreeTestData;
 import com.vinoigitare.components.songpanel.SongPanel;
 import com.vinoigitare.components.songpanel.SongPanelTestData;
-import com.vinoigitare.components.songpanel.SongPanel;
 
 @SuppressWarnings("serial")
 @Theme("vinoigitare")
@@ -48,10 +40,9 @@ public class VinoigitareUI extends UI {
 
 		HorizontalSplitPanel panel = new HorizontalSplitPanel(songTree,
 				songPanel);
-		panel.setSplitPosition(300, Unit.PIXELS);		
+		panel.setSplitPosition(300, Unit.PIXELS);
 		layout.addComponent(panel);
 
 	}
 
-	
 }
