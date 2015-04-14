@@ -16,10 +16,10 @@ import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vinoigitare.components.SongPanel;
-import com.vinoigitare.components.SongPanelTestData;
 import com.vinoigitare.components.navigator.SongTree;
 import com.vinoigitare.components.navigator.SongTreeTestData;
+import com.vinoigitare.components.songpanel.SongPanel;
+import com.vinoigitare.components.songpanel.SongPanelTestData;
 
 @SuppressWarnings("serial")
 @Theme("vinoigitare")
