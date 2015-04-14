@@ -5,4 +5,5 @@ Bundle-SymbolicName: Vinoigitare
 Bundle-Version: 1.0.0.qualifier
 Export-Package: com.vinoigitare
 Service-Component: OSGI-INF/component.xml
-Import-Package: org.apache.commons.logging
+Import-Package: com.vaadin.data;version="7.4.3",
+ org.apache.commons.logging
