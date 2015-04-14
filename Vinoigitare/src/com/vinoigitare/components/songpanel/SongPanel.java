@@ -40,6 +40,7 @@ public class SongPanel extends VerticalLayout {
 
 		Label chords = new Label();
 		chords.setContentMode(ContentMode.PREFORMATTED);
+		chords.addStyleName("song-chords");
 		chords.setValue(song.getChords());
 		addComponent(chords);
 		

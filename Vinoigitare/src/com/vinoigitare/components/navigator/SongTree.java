@@ -10,6 +10,8 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Tree;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.SongSelected;
+import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.eventbus.SongSelected;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 

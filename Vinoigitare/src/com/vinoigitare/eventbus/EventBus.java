@@ -1,5 +1,6 @@
 package com.vinoigitare.eventbus;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 import com.vaadin.external.org.slf4j.Logger;
 import com.vaadin.external.org.slf4j.LoggerFactory;
 
-public class EventBus implements SongSelectedHandler {
+public class EventBus implements Serializable, SongSelectedHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(EventBus.class
 			.getName());

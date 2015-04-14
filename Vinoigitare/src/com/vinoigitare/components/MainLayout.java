@@ -1,6 +1,7 @@
 package com.vinoigitare.components;
 
 import java.util.Collection;
+import java.util.logging.Logger;
 
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
@@ -19,6 +20,8 @@ public class MainLayout extends VerticalLayout implements SongSelectedHandler {
 	private SongPanel songPanel;
 	private EventBus eventBus;
 	private HorizontalSplitPanel panel;
+	
+	private static final Logger log = Logger.getLogger(MainLayout.class.getName());
 
 	public MainLayout(EventBus eventBus) {
 		this.eventBus = eventBus;
@@ -35,6 +38,13 @@ public class MainLayout extends VerticalLayout implements SongSelectedHandler {
 		addComponent(panel);
 		
 		eventBus.registerForEvents(SongSelected.class, this);
+		
+		log.fine("FINE");
+		log.finer("FINER");
+		log.finest("FINEST");
+		log.info("INFO");
+		log.warning("WARNING");
+		log.severe("SEVERE");
 	}
 
 
