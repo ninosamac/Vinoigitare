@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.vaadin.external.org.slf4j.Logger;
+import com.vaadin.external.org.slf4j.LoggerFactory;
 
 public class EventBus implements SongSelectedHandler {
 
-	//private static final Log log = LogFactory.getLog(EventBus.class.getName());
+	private static final Logger log = LoggerFactory.getLogger(EventBus.class
+			.getName());
 
 	/**
 	 * Collection of event handlers grouped by event type.
@@ -28,7 +29,8 @@ public class EventBus implements SongSelectedHandler {
 	@SuppressWarnings("rawtypes")
 	public void registerForEvents(Class<?> eventType,
 			EventHandler<?> eventHandler) {
-		//log.info("register eventHandler " + eventHandler + " for " + eventType);
+		 log.info("register eventHandler " + eventHandler + " for " +
+		 eventType);
 		// Synchronized to disable changing of event handlers list while sending
 		// events
 		synchronized (eventHandlers) {
@@ -40,8 +42,8 @@ public class EventBus implements SongSelectedHandler {
 	}
 
 	public void unRegister(Class<?> eventType, EventHandler<?> eventHandler) {
-		//log.info("unregister eventHandler " + eventHandler + " from "
-		//		+ eventType);
+		 log.info("unregister eventHandler " + eventHandler + " from "
+		 + eventType);
 		// Synchronized to disable changing of event handlers list while sending
 		// events
 		synchronized (eventHandlers) {
@@ -59,14 +61,14 @@ public class EventBus implements SongSelectedHandler {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected final void fireEvent(Event<?> event) {
-		//log.trace("fire " + event + " to eventhandlers");
+		// log.trace("fire " + event + " to eventhandlers");
 		// Synchronized to disable changing of event handlers list while sending
 		// events
 		// synchronized (eventHandlers) {
 		List<EventHandler> targetHandlers = eventHandlers.get(event.getClass());
 		if (targetHandlers != null) {
-			//log.trace("firing " + event + " to " + targetHandlers.size()
-				//	+ " eventhandlers");
+			// log.trace("firing " + event + " to " + targetHandlers.size()
+			// + " eventhandlers");
 			for (EventHandler handler : targetHandlers) {
 				try {
 					handler.onEvent(event);
@@ -78,12 +80,12 @@ public class EventBus implements SongSelectedHandler {
 					// error on listener
 					// does not break process of sending events to other
 					// listeners
-					//log.error("Error firing event", ex);
+					// log.error("Error firing event", ex);
 				}
 			}
 
 		} else {
-			//log.trace("No registererd handlers found for " + event);
+			// log.trace("No registererd handlers found for " + event);
 		}
 
 	}

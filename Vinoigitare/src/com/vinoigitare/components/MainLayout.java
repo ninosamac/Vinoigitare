@@ -2,11 +2,7 @@ package com.vinoigitare.components;
 
 import java.util.Collection;
 
-
-
-import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.HorizontalSplitPanel;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.components.navigator.SongTree;
 import com.vinoigitare.components.navigator.SongTreeTestData;
@@ -29,7 +25,7 @@ public class MainLayout extends VerticalLayout implements SongSelectedHandler {
 		
 		setSizeFull();
 		Collection<Song> testSongs = SongTreeTestData.generate();
-		songTree = new SongTree(testSongs, eventBus);		
+		songTree = new SongTree(eventBus, testSongs);		
 
 		Song song = SongPanelTestData.generate();
 		songPanel = new SongPanel(song);
