@@ -48,7 +48,14 @@ public class SongTree extends Tree {
 			public void itemClick(ItemClickEvent event) {
 				Item item = event.getItem();
 				Object itemId = event.getItemId();
-				System.out.println(itemId);
+
+				if (itemId instanceof Song) {
+					System.out.println("Song: " + itemId);
+				}
+				
+				else if(itemId instanceof Artist){
+					System.out.println("Artist: " + itemId);
+				}
 			}
 		};
 		addItemClickListener(listener);
@@ -76,16 +83,16 @@ public class SongTree extends Tree {
 		}
 
 		for (Artist artist : artists) {
-			String name = artist.getName();				
+			String name = artist.getName();
 			setItemCaption(artist, name);
 			addItem(artist);
 			setChildrenAllowed(artist, true);
 
 			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
 			for (Song song : songsByArtist) {
-				String title = song.getTitle();				
+				String title = song.getTitle();
 				setItemCaption(song, title);
-				addItem(song);				
+				addItem(song);
 				setParent(song, artist);
 				setChildrenAllowed(song, false);
 			}
