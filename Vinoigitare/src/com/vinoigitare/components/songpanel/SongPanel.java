@@ -3,7 +3,7 @@ package com.vinoigitare.components.songpanel;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
-import com.vinoigitare.Song;
+import com.vinoigitare.model.Song;
 
 public class SongPanel extends VerticalLayout {
 

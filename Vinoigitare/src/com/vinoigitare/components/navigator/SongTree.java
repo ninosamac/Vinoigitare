@@ -9,8 +9,8 @@ import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Tree;
-import com.vinoigitare.Artist;
-import com.vinoigitare.Song;
+import com.vinoigitare.model.Artist;
+import com.vinoigitare.model.Song;
 
 public class SongTree extends Tree {
 

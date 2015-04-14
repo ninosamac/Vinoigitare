@@ -3,8 +3,8 @@ package com.vinoigitare.components.navigator;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.vinoigitare.Artist;
-import com.vinoigitare.Song;
+import com.vinoigitare.model.Artist;
+import com.vinoigitare.model.Song;
 
 public class SongTreeTestData {
 

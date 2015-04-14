@@ -1,4 +1,4 @@
-package com.vinoigitare;
+package com.vinoigitare.model;
 
 import java.io.Serializable;
 

@@ -15,6 +15,7 @@ import com.vinoigitare.components.navigator.SongTree;
 import com.vinoigitare.components.navigator.SongTreeTestData;
 import com.vinoigitare.components.songpanel.SongPanel;
 import com.vinoigitare.components.songpanel.SongPanelTestData;
+import com.vinoigitare.model.Song;
 
 @SuppressWarnings("serial")
 @Theme("vinoigitare")
