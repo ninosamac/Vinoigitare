@@ -42,6 +42,4 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 		return songService;
 	}
 
-
-
 }

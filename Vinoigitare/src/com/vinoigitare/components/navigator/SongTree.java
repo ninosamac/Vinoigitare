@@ -27,8 +27,8 @@ public class SongTree extends Tree {
 
 	public SongTree(EventBus eventBus, Collection<Song> songs) {
 		super();
-		this.eventBus=eventBus;
-		this.songs = songs;		
+		this.eventBus = eventBus;
+		this.songs = songs;
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class SongTree extends Tree {
 		setSizeFull();
 		setItemCaptionMode(ItemCaptionMode.EXPLICIT);
 		populateItems();
-		
+
 		@SuppressWarnings("serial")
 		ItemClickListener listener = new ItemClickListener() {
 

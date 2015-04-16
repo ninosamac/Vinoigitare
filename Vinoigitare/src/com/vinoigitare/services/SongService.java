@@ -9,13 +9,13 @@ public class SongService implements DataService<Song> {
 	@Override
 	public void store(Song song) throws DataServiceException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void remove(Song song) throws DataServiceException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class SongService implements DataService<Song> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public List<Song> loadAll() throws DataServiceException {
 		// TODO Auto-generated method stub
@@ -41,6 +41,5 @@ public class SongService implements DataService<Song> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

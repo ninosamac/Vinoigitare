@@ -3,7 +3,6 @@ package com.vinoigitare.components.songpanel;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
-
 public class SongPanelTestData {
 
 	public static Song generate() {

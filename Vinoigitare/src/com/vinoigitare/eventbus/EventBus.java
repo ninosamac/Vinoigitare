@@ -8,6 +8,7 @@ import java.util.List;
 import com.vaadin.external.org.slf4j.Logger;
 import com.vaadin.external.org.slf4j.LoggerFactory;
 
+@SuppressWarnings("serial")
 public class EventBus implements Serializable, SongSelectedHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(EventBus.class
@@ -30,8 +31,7 @@ public class EventBus implements Serializable, SongSelectedHandler {
 	@SuppressWarnings("rawtypes")
 	public void registerForEvents(Class<?> eventType,
 			EventHandler<?> eventHandler) {
-		 log.info("register eventHandler " + eventHandler + " for " +
-		 eventType);
+		log.info("register eventHandler " + eventHandler + " for " + eventType);
 		// Synchronized to disable changing of event handlers list while sending
 		// events
 		synchronized (eventHandlers) {
@@ -43,8 +43,8 @@ public class EventBus implements Serializable, SongSelectedHandler {
 	}
 
 	public void unRegister(Class<?> eventType, EventHandler<?> eventHandler) {
-		 log.info("unregister eventHandler " + eventHandler + " from "
-		 + eventType);
+		log.info("unregister eventHandler " + eventHandler + " from "
+				+ eventType);
 		// Synchronized to disable changing of event handlers list while sending
 		// events
 		synchronized (eventHandlers) {
@@ -68,25 +68,16 @@ public class EventBus implements Serializable, SongSelectedHandler {
 		// synchronized (eventHandlers) {
 		List<EventHandler> targetHandlers = eventHandlers.get(event.getClass());
 		if (targetHandlers != null) {
-			// log.trace("firing " + event + " to " + targetHandlers.size()
-			// + " eventhandlers");
 			for (EventHandler handler : targetHandlers) {
 				try {
 					handler.onEvent(event);
-
-					// CHECKSTYLE:OFF
 				} catch (Exception ex) {
-					// CHECKSTYLE:ON
-					// Catching all exceptions to ensure that event handling
-					// error on listener
-					// does not break process of sending events to other
-					// listeners
-					// log.error("Error firing event", ex);
+					log.error("Error firing event", ex);
 				}
 			}
 
 		} else {
-			// log.trace("No registererd handlers found for " + event);
+			log.warn("No registererd handlers found for " + event);
 		}
 
 	}

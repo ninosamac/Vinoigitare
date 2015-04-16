@@ -1,5 +1,5 @@
 package com.vinoigitare.eventbus;
 
-public interface SongSelectedHandler extends EventHandler<SongSelected>{
+public interface SongSelectedHandler extends EventHandler<SongSelected> {
 
 }

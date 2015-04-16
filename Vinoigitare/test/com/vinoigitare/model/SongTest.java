@@ -1,8 +1,10 @@
 package com.vinoigitare.model;
 
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.fail;
 
-import static org.testng.Assert.*;
+import org.testng.annotations.Test;
 
 public class SongTest {
 
@@ -89,18 +91,17 @@ public class SongTest {
 	public void testGetIdAfterSettersCalled() {
 		Song song = new Song();
 		assertEquals(song.getId(), "unknown - no title");
-		
+
 		song.setArtist(new Artist("Vojislav Šešelj"));
 		assertEquals(song.getId(), "Vojislav Šešelj - no title");
-		
+
 		song.setTitle("S kim si me noæas vavava");
 		assertEquals(song.getId(), "Vojislav Šešelj - S kim si me noæas vavava");
-		
+
 		song = new Song();
 		song.setTitle("S kim si me noæas vavava");
-		assertEquals(song.getId(), "unknown - S kim si me noæas vavava");		
+		assertEquals(song.getId(), "unknown - S kim si me noæas vavava");
 	}
-	
 
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testSetArtist() {
@@ -109,11 +110,11 @@ public class SongTest {
 		song.setArtist(artist);
 		assertEquals(artist, song.getArtist());
 	}
-	
-	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions={NullPointerException.class})
+
+	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions = { NullPointerException.class })
 	public void testSetArtistThrowsNullPointerException() {
 		Song song = new Song();
-		song.setArtist(null);		
+		song.setArtist(null);
 		fail("No exception was thrown");
 	}
 
@@ -124,14 +125,13 @@ public class SongTest {
 		song.setTitle(title);
 		assertEquals(title, song.getTitle());
 	}
-	
-	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions={NullPointerException.class})
+
+	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions = { NullPointerException.class })
 	public void testSetTitleThrowsNullPointerException() {
 		Song song = new Song();
-		song.setTitle(null);		
+		song.setTitle(null);
 		fail("No exception was thrown");
 	}
-
 
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testSetChords() {
@@ -140,11 +140,11 @@ public class SongTest {
 		song.setChords(chords);
 		assertEquals(chords, song.getChords());
 	}
-	
-	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions={NullPointerException.class})
+
+	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions = { NullPointerException.class })
 	public void testSetChordsThrowsNullPointerException() {
 		Song song = new Song();
-		song.setChords(null);		
+		song.setChords(null);
 		fail("No exception was thrown");
 	}
 

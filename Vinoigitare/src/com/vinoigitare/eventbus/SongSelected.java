@@ -2,6 +2,7 @@ package com.vinoigitare.eventbus;
 
 import com.vinoigitare.model.Song;
 
+@SuppressWarnings("rawtypes")
 public class SongSelected implements Event {
 
 	private final static Class<SongSelected> type = SongSelected.class;
