@@ -10,10 +10,17 @@ public class Song implements Serializable, Comparable<Song>, Storable<String> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final Artist artist;
-	private final String title;
-	private final String chords;
+	private Artist artist;
+	private String title;
+	private String chords;
 	private String id;
+
+	public Song() {
+		artist = new Artist("unknown");
+		title = "no title";
+		chords = "";
+		id = artist.getName() + " - " + title;
+	}
 
 	public Song(Artist artist, String title, String chords) {
 		super();
@@ -25,16 +32,29 @@ public class Song implements Serializable, Comparable<Song>, Storable<String> {
 		id = artist.getName() + " - " + title;
 	}
 
+
 	public Artist getArtist() {
 		return artist;
+	}
+
+	public void setArtist(Artist artist) {
+		this.artist = artist;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public String getChords() {
 		return chords;
+	}
+
+	public void setChords(String chords) {
+		this.chords = chords;
 	}
 
 	@Override
@@ -49,8 +69,7 @@ public class Song implements Serializable, Comparable<Song>, Storable<String> {
 
 	@Override
 	public void setId(String id) {
-		throw new UnsupportedOperationException(
-				"Setting id for Song is not supported. See the class constructor.");
+		this.id = id;
 	}
 
 	@Override

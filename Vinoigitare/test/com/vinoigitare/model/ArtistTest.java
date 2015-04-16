@@ -7,6 +7,13 @@ import static org.testng.Assert.*;
 @Test
 public class ArtistTest {
 	
+	@Test(groups = { "fast" }, suiteName = "model")
+	public void testEmptyConstructor() {
+		Artist artist = new Artist();
+		assertNotNull(artist.getName());
+		assertNotNull(artist.getId());		
+	}
+	
 	@Test(groups = { "fast" }, expectedExceptions = { NullPointerException.class }, suiteName = "model")
 	public void testConstructorThrowsNullPointException() {
 		new Artist(null);		

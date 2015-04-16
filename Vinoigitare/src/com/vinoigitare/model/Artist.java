@@ -11,7 +11,7 @@ public class Artist implements Serializable, Comparable<Artist>,
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final String name;
+	private String name;
 	private String id;
 
 	public Artist(String name) {
@@ -20,6 +20,11 @@ public class Artist implements Serializable, Comparable<Artist>,
 			throw new NullPointerException("Name can not be null.");
 		this.name = name;
 		id = name;
+	}
+
+	public Artist() {
+		name = "unknown";
+		id = "unknown";
 	}
 
 	public String getName() {
@@ -77,7 +82,5 @@ public class Artist implements Serializable, Comparable<Artist>,
 	public String toString() {
 		return "Artist [name=" + name + "]";
 	}
-	
-	
 
 }
