@@ -7,6 +7,13 @@ import static org.testng.Assert.*;
 @Test
 public class ArtistTest {
 	
+	@Test(groups = { "fast" }, suiteName = "model")
+	public void testEmptyConstructor() {
+		Artist artist = new Artist();
+		assertNotNull(artist.getName());
+		assertNotNull(artist.getId());		
+	}
+	
 	@Test(groups = { "fast" }, expectedExceptions = { NullPointerException.class }, suiteName = "model")
 	public void testConstructorThrowsNullPointException() {
 		new Artist(null);		
@@ -28,5 +35,17 @@ public class ArtistTest {
 		assertEquals(false, artist1.equals(artist3));
 	}
 	
+	@Test(groups = { "fast" }, suiteName = "model")
+	public void testSetId() {
+		Artist artist = new Artist();
+		artist.setId("new id");
+		assertEquals("new id", artist.getId());
+	}
 	
+	@Test(groups = { "fast" }, suiteName = "model")
+	public void testSetName() {
+		Artist artist = new Artist();
+		artist.setName("new name");
+		assertEquals("new name", artist.getName());
+	}
 }
