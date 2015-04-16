@@ -52,6 +52,7 @@ public interface DataService<T> {
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
+
 	T load(Object id) throws DataServiceException;
 
 	/**
