@@ -5,17 +5,17 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
 public class SongTest {
-	
+
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testEmptyConstructor() {
-		
+
 		Song song = new Song();
 		assertNotNull(song.getArtist());
 		assertNotNull(song.getChords());
 		assertNotNull(song.getId());
 		assertNotNull(song.getTitle());
 	}
-	
+
 	@Test(groups = { "fast" }, expectedExceptions = { NullPointerException.class }, suiteName = "model")
 	public void testConstructorThrowsNullPointException() {
 		new Song(new Artist("artist"), "title", "chords");
@@ -27,7 +27,7 @@ public class SongTest {
 
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testConstructor() {
-		
+
 		Song song = new Song(new Artist("artist"), "title", "chords");
 		assertEquals(song.getArtist(), new Artist("artist"));
 		assertEquals(song.getChords(), "chords");
@@ -37,7 +37,7 @@ public class SongTest {
 
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testEquals() {
-		
+
 		Artist artist1 = new Artist("artist1");
 		Artist artist2 = new Artist("artist2");
 
@@ -46,43 +46,62 @@ public class SongTest {
 
 		String title1 = "title1";
 		String title2 = "title2";
-		
+
 		Song song1 = new Song(artist1, title1, chords1);
 		Song song2 = new Song(artist1, title1, chords1);
 		assertEquals(true, song1.equals(song2));
-		
+
 		song2 = new Song(artist1, title1, chords2);
 		assertEquals(false, song1.equals(song2));
-		
+
 		song2 = new Song(artist1, title2, chords1);
 		assertEquals(false, song1.equals(song2));
-		
+
 		song2 = new Song(artist2, title1, chords1);
-		assertEquals(false, song1.equals(song2));		
+		assertEquals(false, song1.equals(song2));
 	}
 
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testId() {
-		
-		Artist artist1 = new Artist("artist");
-		Artist artist2 = new Artist("artist");
-		
-		Song song1 = new Song(artist1, "title", "chords");		
-		Song song2 = new Song(artist1, "title", "chords");
-		Song song3 = new Song(artist2, "title", "chords");
-				
+
+		Artist artist1 = new Artist("artist1");
+		Artist artist2 = new Artist("artist2");
+
+		Song song1 = new Song(artist1, "title1", "chords");
+		Song song2 = new Song(artist1, "title1", "chords");
+		Song song3 = new Song(artist2, "title1", "chords");
+		Song song4 = new Song(artist1, "title2", "chords");
+
 		assertEquals(song1.getId().equals(song2.getId()), true);
-		assertEquals(song1.getId().equals(song3.getId()), true);
-		assertEquals(song1.getId(), "artist - title");		
+		assertEquals(song1.getId().equals(song3.getId()), false);
+		assertEquals(song1.getId().equals(song4.getId()), false);
+		assertEquals(song1.getId(), "artist1 - title1");
 	}
-	
+
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testSetId() {
 		Song song = new Song();
 		song.setId("new id");
 		assertEquals("new id", song.getId());
 	}
+
+	@Test(groups = { "fast" }, suiteName = "model")
+	public void testGetIdAfterSettersCalled() {
+		Song song = new Song();
+		assertEquals(song.getId(), "unknown - no title");
+		
+		song.setArtist(new Artist("Vojislav Šešelj"));
+		assertEquals(song.getId(), "Vojislav Šešelj - no title");
+		
+		song.setTitle("S kim si me noæas vavava");
+		assertEquals(song.getId(), "Vojislav Šešelj - S kim si me noæas vavava");
+		
+		song = new Song();
+		song.setTitle("S kim si me noæas vavava");
+		assertEquals(song.getId(), "unknown - S kim si me noæas vavava");		
+	}
 	
+
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testSetArtist() {
 		Song song = new Song();
@@ -91,6 +110,13 @@ public class SongTest {
 		assertEquals(artist, song.getArtist());
 	}
 	
+	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions={NullPointerException.class})
+	public void testSetArtistThrowsNullPointerException() {
+		Song song = new Song();
+		song.setArtist(null);		
+		fail("No exception was thrown");
+	}
+
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testSetTitle() {
 		Song song = new Song();
@@ -99,6 +125,14 @@ public class SongTest {
 		assertEquals(title, song.getTitle());
 	}
 	
+	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions={NullPointerException.class})
+	public void testSetTitleThrowsNullPointerException() {
+		Song song = new Song();
+		song.setTitle(null);		
+		fail("No exception was thrown");
+	}
+
+
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testSetChords() {
 		Song song = new Song();
@@ -106,4 +140,12 @@ public class SongTest {
 		song.setChords(chords);
 		assertEquals(chords, song.getChords());
 	}
+	
+	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions={NullPointerException.class})
+	public void testSetChordsThrowsNullPointerException() {
+		Song song = new Song();
+		song.setChords(null);		
+		fail("No exception was thrown");
+	}
+
 }

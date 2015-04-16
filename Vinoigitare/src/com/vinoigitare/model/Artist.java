@@ -27,12 +27,14 @@ public class Artist implements Serializable, Comparable<Artist>,
 		id = "unknown";
 	}
 
-	
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
+		if (name == null) {
+			throw new NullPointerException("Argument can not be null.");
+		}
 		this.name = name;
 	}
 
@@ -48,6 +50,9 @@ public class Artist implements Serializable, Comparable<Artist>,
 
 	@Override
 	public void setId(String id) {
+		if (id == null) {
+			throw new NullPointerException("Argument can not be null.");
+		}
 		this.id = id;
 	}
 

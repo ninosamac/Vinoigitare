@@ -6,6 +6,7 @@ import com.ninosamac.storage.Storable;
 
 public class Song implements Serializable, Comparable<Song>, Storable<String> {
 
+	private static final String ARTIST_UNKNOWN = "unknown";
 	/**
 	 * 
 	 */
@@ -16,7 +17,7 @@ public class Song implements Serializable, Comparable<Song>, Storable<String> {
 	private String id;
 
 	public Song() {
-		artist = new Artist("unknown");
+		artist = new Artist(ARTIST_UNKNOWN);
 		title = "no title";
 		chords = "";
 		id = artist.getName() + " - " + title;
@@ -32,13 +33,16 @@ public class Song implements Serializable, Comparable<Song>, Storable<String> {
 		id = artist.getName() + " - " + title;
 	}
 
-
 	public Artist getArtist() {
 		return artist;
 	}
 
 	public void setArtist(Artist artist) {
+		if (artist == null) {
+			throw new NullPointerException("Argument can not be null.");
+		}
 		this.artist = artist;
+		this.id = artist.getName() + " - " + title;
 	}
 
 	public String getTitle() {
@@ -46,7 +50,11 @@ public class Song implements Serializable, Comparable<Song>, Storable<String> {
 	}
 
 	public void setTitle(String title) {
+		if (title == null) {
+			throw new NullPointerException("Argument can not be null.");
+		}
 		this.title = title;
+		this.id = artist.getName() + " - " + title;
 	}
 
 	public String getChords() {
@@ -54,6 +62,9 @@ public class Song implements Serializable, Comparable<Song>, Storable<String> {
 	}
 
 	public void setChords(String chords) {
+		if (chords == null) {
+			throw new NullPointerException("Argument can not be null.");
+		}
 		this.chords = chords;
 	}
 

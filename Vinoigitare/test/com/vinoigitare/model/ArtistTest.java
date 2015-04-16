@@ -42,10 +42,24 @@ public class ArtistTest {
 		assertEquals("new id", artist.getId());
 	}
 	
+	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions={NullPointerException.class})
+	public void testSetIdThrowsNullPointerException() {
+		Artist artist = new Artist();
+		artist.setId(null);
+		fail("Exception not thrown");
+	}
+	
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testSetName() {
 		Artist artist = new Artist();
 		artist.setName("new name");
 		assertEquals("new name", artist.getName());
+	}
+	
+	@Test(groups = { "fast" }, suiteName = "model", expectedExceptions={NullPointerException.class})
+	public void testSetNameThrowsNullPointerException() {
+		Artist artist = new Artist();
+		artist.setName(null);
+		fail("Exception not thrown");
 	}
 }
