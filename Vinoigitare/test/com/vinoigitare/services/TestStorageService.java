@@ -1,5 +1,6 @@
 package com.vinoigitare.services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
 
@@ -9,21 +10,22 @@ import com.ninosamac.storage.StorageService;
 
 public class TestStorageService implements StorageService {
 
-	private TreeMap<Object, Storable<?>> storage = new TreeMap<Object, Storable<?>>();
+	
+	private final TreeMap<String, Storable<?>> storage = new TreeMap<String, Storable<?>>();
 
 	public TestStorageService() {
 		// does nothing
 	}
 
+	
 	@Override
 	public void store(Storable<?> object) throws StorageException {
-		storage.put(object.getId(), object);
+		storage.put((String) object.getId(), object);
 	}
 
 	@Override
 	public void remove(Storable<?> object) throws StorageException {
 		storage.remove(object.getId());
-
 	}
 
 	@Override
@@ -40,13 +42,15 @@ public class TestStorageService implements StorageService {
 	@Override
 	public Collection<?> loadAll(Class<? extends Storable<?>> clazz)
 			throws StorageException {
-		return storage.values();
+		// TODO: strorage.values() is NOT serializable!
+		return new ArrayList<Storable<?>>(storage.values());
 	}
 
 	@Override
 	public Collection<?> listIds(Class<? extends Storable<?>> clazz)
 			throws StorageException {
-		return storage.keySet();
+		// TODO: strorage.keySet() is NOT serializable!
+		return new ArrayList<String>(storage.keySet());
 	}
 
 }
