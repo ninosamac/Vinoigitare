@@ -1,6 +1,5 @@
 package com.vinoigitare.services;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.TreeMap;
 
@@ -10,7 +9,7 @@ import com.ninosamac.storage.StorageService;
 
 public class TestStorageService implements StorageService {
 
-	private TreeMap<Serializable, Storable<?>> storage = new TreeMap<Serializable, Storable<?>>();
+	private TreeMap<Object, Storable<?>> storage = new TreeMap<Object, Storable<?>>();
 
 	public TestStorageService() {
 		// does nothing
@@ -18,7 +17,7 @@ public class TestStorageService implements StorageService {
 
 	@Override
 	public void store(Storable<?> object) throws StorageException {
-		storage.put((Serializable) object.getId(), object);
+		storage.put(object.getId(), object);
 	}
 
 	@Override
