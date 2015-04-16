@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vinoigitare_FileStorage
+Bundle-SymbolicName: Vinoigitare_XMLFileStorage
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Aristotel
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: com.ninosamac.storage,
+ com.ninosamac.storage.file,
+ com.ninosamac.storage.file.util,
+ com.ninosamac.storage.xml,
+ com.vinoigitare.model,
+ com.vinoigitare.services
+Export-Package: com.vinoigitare.xmlfilestorage
