@@ -27,8 +27,13 @@ public class Artist implements Serializable, Comparable<Artist>,
 		id = "unknown";
 	}
 
+	
 	public String getName() {
 		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
@@ -43,8 +48,7 @@ public class Artist implements Serializable, Comparable<Artist>,
 
 	@Override
 	public void setId(String id) {
-		throw new UnsupportedOperationException(
-				"id can not be set. See constructor for details.");
+		this.id = id;
 	}
 
 	@Override
