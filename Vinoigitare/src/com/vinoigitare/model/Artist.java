@@ -2,13 +2,17 @@ package com.vinoigitare.model;
 
 import java.io.Serializable;
 
-public class Artist implements Serializable, Comparable<Artist> {
+import com.ninosamac.storage.Storable;
+
+public class Artist implements Serializable, Comparable<Artist>,
+		Storable<String> {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	private final String name;
+	private String id;
 
 	public Artist(String name) {
 		super();
@@ -22,6 +26,16 @@ public class Artist implements Serializable, Comparable<Artist> {
 	@Override
 	public int compareTo(Artist o) {
 		return name.compareTo(o.getName());
+	}
+
+	@Override
+	public String getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }

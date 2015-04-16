@@ -51,7 +51,6 @@ public class SongTree extends Tree {
 
 			@Override
 			public void itemClick(ItemClickEvent event) {
-				Item item = event.getItem();
 				Object itemId = event.getItemId();
 
 				if (itemId instanceof Song) {

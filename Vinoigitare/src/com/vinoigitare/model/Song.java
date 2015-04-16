@@ -2,7 +2,9 @@ package com.vinoigitare.model;
 
 import java.io.Serializable;
 
-public class Song implements Serializable, Comparable<Song> {
+import com.ninosamac.storage.Storable;
+
+public class Song implements Serializable, Comparable<Song>, Storable<String> {
 
 	/**
 	 * 
@@ -11,14 +13,14 @@ public class Song implements Serializable, Comparable<Song> {
 	private final Artist artist;
 	private final String title;
 	private final String chords;
-	private String key;
+	private String id;
 
 	public Song(Artist artist, String title, String chords) {
 		super();
 		this.artist = artist;
 		this.title = title;
 		this.chords = chords;
-		key = artist.getName() + " - " + title;
+		id = artist + " - " + title;
 	}
 
 	public Artist getArtist() {
@@ -33,14 +35,20 @@ public class Song implements Serializable, Comparable<Song> {
 		return chords;
 	}
 
-	public String getKey() {
-		return key;
+	@Override
+	public int compareTo(Song o) {
+		return id.compareTo(o.getId());
 	}
 
 	@Override
-	public int compareTo(Song o) {
-		return key.compareTo(o.getKey());
+	public String getId() {
+		return id;
 	}
 
-	
+	@Override
+	public void setId(String id) {
+		throw new UnsupportedOperationException(
+				"Setting id for Song is not supported. See the class constructor.");
+	}
+
 }
