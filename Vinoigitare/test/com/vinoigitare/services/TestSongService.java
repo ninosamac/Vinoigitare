@@ -2,13 +2,14 @@ package com.vinoigitare.services;
 
 import java.util.Collection;
 import java.util.Set;
-import java.util.TreeMap;
 
+import com.ninosamac.storage.StorageException;
+import com.ninosamac.storage.StorageService;
 import com.vinoigitare.model.Song;
 
 public class TestSongService implements DataService<Song> {
 
-	private TreeMap<String, Song> storage = new TreeMap<String, Song>();
+	private StorageService storage = new TestStorageService();
 
 	public TestSongService() {
 		init();
@@ -25,40 +26,65 @@ public class TestSongService implements DataService<Song> {
 			store(data.getDivljeJagode_JedinaMoja());
 			store(data.getDivljeJagode_KrivoJeMore());
 		} catch (DataServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 	}
-
+	
 	@Override
 	public void store(Song song) throws DataServiceException {
-		storage.put(song.getId(), song);
+		try {
+			storage.store(song);
+		} catch (StorageException e) {
+			throw new DataServiceException(e.getMessage(), e);
+		}
 	}
 
 	@Override
 	public void remove(Song song) throws DataServiceException {
-		storage.remove(song);
+		try {
+			storage.remove(song);
+		} catch (StorageException e) {
+			throw new DataServiceException(e.getMessage(), e);
+		}
 	}
 
 	@Override
 	public boolean exists(Song song) throws DataServiceException {
-		return storage.containsKey(song.getId());
+		try {
+			return storage.exists(song);
+		} catch (StorageException e) {
+			throw new DataServiceException(e.getMessage(), e);
+		}
 	}
 
 	@Override
 	public Song load(Object id) throws DataServiceException {
-		return storage.get(id);
+		try {
+			return (Song) storage.load(Song.class, id);
+		} catch (StorageException e) {
+			throw new DataServiceException(e.getMessage(), e);
+		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Song> loadAll() throws DataServiceException {
-		return storage.values();
+		try {
+			return (Collection<Song>) storage.loadAll(Song.class);
+		} catch (StorageException e) {
+			throw new DataServiceException(e.getMessage(), e);
+		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Set<String> listIds() throws DataServiceException {
-		return storage.keySet();
+		try {
+			return (Set<String>) storage.listIds(Song.class);
+		} catch (StorageException e) {
+			throw new DataServiceException(e.getMessage(), e);
+		}
 	}
 
 }
