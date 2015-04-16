@@ -9,7 +9,6 @@ import com.ninosamac.storage.StorageException;
 import com.ninosamac.storage.StorageService;
 
 public class TestStorageService implements StorageService {
-
 	
 	private final TreeMap<String, Storable<?>> storage = new TreeMap<String, Storable<?>>();
 

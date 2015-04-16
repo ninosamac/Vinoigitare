@@ -89,7 +89,7 @@ public class Artist implements Serializable, Comparable<Artist>,
 
 	@Override
 	public String toString() {
-		return "Artist [name=" + name + "]";
+		return "[" + id + "]";
 	}
 
 }

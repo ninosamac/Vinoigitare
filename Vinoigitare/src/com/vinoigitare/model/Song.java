@@ -126,4 +126,9 @@ public class Song implements Serializable, Comparable<Song>, Storable<String> {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "[" + id + "]";
+	}
+
 }
