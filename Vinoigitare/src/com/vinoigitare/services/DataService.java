@@ -19,7 +19,7 @@ public interface DataService<T> {
 	 * Removes object from data store.
 	 * 
 	 * @param object
-	 *            reference to object to be removed
+	 *            object to be removed
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
