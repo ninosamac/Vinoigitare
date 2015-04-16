@@ -3,7 +3,8 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Vinoigitare
 Bundle-SymbolicName: Vinoigitare
 Bundle-Version: 1.0.0.qualifier
-Export-Package: com.vinoigitare.model
+Export-Package: com.vinoigitare.model,
+ com.vinoigitare.services
 Service-Component: OSGI-INF/component.xml
 Import-Package: com.ninosamac.storage,
  com.vaadin.data;version="7.4.3",
