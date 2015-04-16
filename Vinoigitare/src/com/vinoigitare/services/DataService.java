@@ -1,5 +1,6 @@
 package com.vinoigitare.services;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface DataService<T> {
@@ -56,7 +57,7 @@ public interface DataService<T> {
 	T load(Object id) throws DataServiceException;
 
 	/**
-	 * Lists all stored objects of the type <code>T</code>. Note: if there
+	 * Returns all stored objects of the type <code>T</code>. Note: if there
 	 * are many objects in the datastore, this method might run slow. In such
 	 * cases, consider using {@link #listIds(Class)} and lazy load.
 	 * 
@@ -66,15 +67,15 @@ public interface DataService<T> {
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
-	List<T> loadAll() throws DataServiceException;
+	Collection<T> loadAll() throws DataServiceException;
 
 	/**
-	 * Lists ids of all stored objects of the type <code>T</code>.
+	 * Returns ids of all stored objects of the type <code>T</code>.
 	 * 
 	 * @return list of ids of all stored objects of the type <code>T</code>
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
-	List<?> listIds() throws DataServiceException;
+	Collection<?> listIds() throws DataServiceException;
 
 }
