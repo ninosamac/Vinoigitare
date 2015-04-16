@@ -9,25 +9,26 @@ import com.vinoigitare.model.Song;
 public class TestSongService implements DataService<Song> {
 
 	private TreeMap<String, Song> storage = new TreeMap<String, Song>();
-	
-	public TestSongService(){				
+
+	public TestSongService() {
 		init();
-		
 	}
 
 	private void init() {
 		TestSongServiceData data = new TestSongServiceData();
-		
+
 		try {
 			store(data.getDalmacijaUMomOku());
 			store(data.getItsAKindOfMagic());
 			store(data.getSamoJedanDanZivota());
 			store(data.getSviPjevajuJaNe»ujem());
+			store(data.getJedinaMoja());
+			store(data.getKrivoJeMore());
 		} catch (DataServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override

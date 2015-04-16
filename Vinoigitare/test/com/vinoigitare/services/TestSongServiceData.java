@@ -213,4 +213,110 @@ public class TestSongServiceData {
 		return song;
 	}
 
+	public Song getKrivoJeMore(){
+		Artist artist = new Artist("Divlje jagode");
+		String title = "Krivo je more";		
+		String chords="G             Am\n" + 
+				"Ti, ti si ga upoznala\n" + 
+				"  C             G\n" + 
+				"jedne ljetnje veceri\n" + 
+				"G           Am\n" + 
+				"On, on te poljubio\n" + 
+				"  C         G\n" + 
+				"dok more se pjenilo\n" + 
+				"***\n" + 
+				"Em           D\n" + 
+				"I ti si se zaljubila\n" + 
+				"  Em               D\n" + 
+				"mada nisi htjela to\n" + 
+				"C         G\n" + 
+				"Krivo je more.\n" + 
+				"\n" + 
+				"*** :\n" + 
+				"\n" + 
+				"    D|-------------------------------\n" + 
+				"    A|-----5--7-------------------5--\n" + 
+				"    E|--7----------------------------\n" + 
+				"               ... i ti si se zaljubila..\n" + 
+				"\n" + 
+				"\n" + 
+				"    D|--4h5p4--------------------------\n" + 
+				"    A|---------5-7------------------5--\n" + 
+				"    E|---------------------------------\n" + 
+				"               ... mada nisi htjela to...\n" + 
+				"\n" + 
+				"    D|--4h5p4--------------------\n" + 
+				"    A|---------5-3----------(10)-\n" + 
+				"    E|---------------------------\n" + 
+				"               ... krivo je more..\n" + 
+				"\n" + 
+				"Znaj, ljeto je varljivo\n" + 
+				"a srce ti zavodljivo\n" + 
+				"Kuci kad si dosla ti\n" + 
+				"znala si da si u zabludi\n" + 
+				"A to vece uz mora sum\n" + 
+				"od srece sva si blistala\n" + 
+				"Krivo je more.\n" + 
+				"\n" + 
+				"Znaj, ljeto je varljivo\n" + 
+				"a srce ti je zavodljivo\n" + 
+				"Kuci kad si dosla ti,\n" + 
+				"znala si da si u zabludi\n" + 
+				"A to vece uz mora sum\n" + 
+				"od srece sva si blistala\n" + 
+				"Krivo je more.\n" + 
+				"\n" + 
+				"SOLO:\n" + 
+				"       G D Em C G D\n" + 
+				"       H H7 Em D C D\n" + 
+				"\n" + 
+				"E|-------------------------------7-8----8-7----7----\n" + 
+				"B|--10b12--10b12r10--8p7h8----10-----------8----10--\n" + 
+				"G|------------------------------------------7-------\n" + 
+				"D|--------------------------------------------------\n" + 
+				"A|--------------------------------------------------\n" + 
+				"E|--------------------------------------------------\n" + 
+				"\n" + 
+				"E|--7h8p7-------------------------------------------\n" + 
+				"B|---------7-7---10p7-8---7-------------------------\n" + 
+				"G|----------------------------9----7-7---5-4-2--(0)-\n" + 
+				"D|--------------------------------------------------\n" + 
+				"A|--------------------------------------------------\n" + 
+				"E|--------------------------------------------------";
+		return new Song(artist, title, chords);
+	}
+
+	public Song getJedinaMoja(){
+		Artist artist = new Artist("Divlje jagode");
+		String title = "Jedina moja";		
+		String chords="Em              Am\n" + 
+				"Pogledaj u moje oci\n" + 
+				"D                    Em\n" + 
+				"Zasto skrivas pogled taj\n" + 
+				"Em              Am  C\n" + 
+				"Pogledaj u moje lice\n" + 
+				"D                Em\n" + 
+				"I pokazi osmijeh svoj.\n" + 
+				"\n" + 
+				"\n" + 
+				"C                 Em\n" + 
+				"Djevojko u sutonu tihom\n" + 
+				"D      C            G\n" + 
+				"Pokraj rijeke sto koracas\n" + 
+				"Am       C              Em\n" + 
+				"S tuznom sjenom na licu svom\n" + 
+				"C                 D                 Em\n" + 
+				"I kosom njeznom i kosom plavom kao lan.\n" + 
+				"\n" + 
+				"\n" + 
+				"G                Am\n" + 
+				"Jedina moja tebi sviram ja\n" + 
+				"D                Em\n" + 
+				"Jedina moja tebi pjevam ja\n" + 
+				"G                Am\n" + 
+				"Jedina moja tebi sviram ja\n" + 
+				"D                Em\n" + 
+				"Jedina moja tebi pjevam ja.";
+		return new Song(artist, title, chords);
+	}
 }
