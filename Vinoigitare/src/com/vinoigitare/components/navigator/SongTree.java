@@ -4,12 +4,9 @@ import java.util.Collection;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import com.vaadin.data.Item;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Tree;
-import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.eventbus.SongSelected;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.SongSelected;
 import com.vinoigitare.model.Artist;
