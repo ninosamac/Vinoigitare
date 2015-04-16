@@ -5,11 +5,7 @@ import com.vinoigitare.model.Song;
 
 public class TestSongServiceData {
 
-	public void populateTestSongs() {
-
-	}
-
-	public Song getDalmacijaUMomOku() {
+	public Song getMisoKovac_DalmacijaUMomOku() {
 		Song song = new Song();
 
 		Artist misoKovac = new Artist("Mišo Kovaè");
@@ -39,7 +35,7 @@ public class TestSongServiceData {
 		return song;
 	}
 
-	public Song getSamoJedanDanZivota() {
+	public Song getMisoKovac_SamoJedanDanZivota() {
 		Song song = new Song();
 
 		Artist misoKovac = new Artist("Mišo Kovaè");
@@ -77,7 +73,7 @@ public class TestSongServiceData {
 		return song;
 	}
 
-	public Song getSviPjevajuJaNeÈujem() {
+	public Song getMisoKovac_SviPjevajuJaNeCujem() {
 		Song song = new Song();
 
 		Artist misoKovac = new Artist("Mišo Kovaè");
@@ -99,7 +95,7 @@ public class TestSongServiceData {
 		return song;
 	}
 
-	public Song getItsAKindOfMagic() {
+	public Song getQueen_ItsAKindOfMagic() {
 		Song song = new Song();
 
 		Artist artist = new Artist("QUEEN");
@@ -152,7 +148,7 @@ public class TestSongServiceData {
 		return song;
 	}
 
-	public Song getKrivoJeMore() {
+	public Song getDivljeJagode_KrivoJeMore() {
 		Artist artist = new Artist("Divlje jagode");
 		String title = "Krivo je more";
 		String chords = "G             Am\n" + "Ti, ti si ga upoznala\n"
@@ -199,7 +195,7 @@ public class TestSongServiceData {
 		return new Song(artist, title, chords);
 	}
 
-	public Song getJedinaMoja() {
+	public Song getDivljeJagode_JedinaMoja() {
 		Artist artist = new Artist("Divlje jagode");
 		String title = "Jedina moja";
 		String chords = "Em              Am\n" + "Pogledaj u moje oci\n"

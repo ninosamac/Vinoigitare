@@ -18,12 +18,12 @@ public class TestSongService implements DataService<Song> {
 		TestSongServiceData data = new TestSongServiceData();
 
 		try {
-			store(data.getDalmacijaUMomOku());
-			store(data.getItsAKindOfMagic());
-			store(data.getSamoJedanDanZivota());
-			store(data.getSviPjevajuJaNe»ujem());
-			store(data.getJedinaMoja());
-			store(data.getKrivoJeMore());
+			store(data.getMisoKovac_DalmacijaUMomOku());
+			store(data.getQueen_ItsAKindOfMagic());
+			store(data.getMisoKovac_SamoJedanDanZivota());
+			store(data.getMisoKovac_SviPjevajuJaNeCujem());
+			store(data.getDivljeJagode_JedinaMoja());
+			store(data.getDivljeJagode_KrivoJeMore());
 		} catch (DataServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
