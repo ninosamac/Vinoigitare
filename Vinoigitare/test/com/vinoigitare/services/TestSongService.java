@@ -15,7 +15,7 @@ public class TestSongService implements DataService<Song> {
 	}
 
 	private void init() {
-		TestSongServiceData data = new TestSongServiceData();
+		TestStorageData data = new TestStorageData();
 
 		try {
 			store(data.getMisoKovac_DalmacijaUMomOku());

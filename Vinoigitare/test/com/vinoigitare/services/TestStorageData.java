@@ -3,7 +3,7 @@ package com.vinoigitare.services;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
-public class TestSongServiceData {
+public class TestStorageData {
 
 	public Song getMisoKovac_DalmacijaUMomOku() {
 		Song song = new Song();
