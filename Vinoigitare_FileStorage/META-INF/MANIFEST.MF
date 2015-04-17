@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Vinoigitare_FileStorage
-Bundle-SymbolicName: Vinoigitare_XMLFileStorage
+Bundle-SymbolicName: Vinoigitare_FileStorage
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Aristotel
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
