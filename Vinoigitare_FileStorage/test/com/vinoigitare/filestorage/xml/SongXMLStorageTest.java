@@ -1,4 +1,4 @@
-package com.vinoigitare.xmlfilestorage;
+package com.vinoigitare.filestorage.xml;
 
 import static org.testng.Assert.assertEquals;
 
@@ -6,39 +6,40 @@ import java.util.Collection;
 
 import org.testng.annotations.Test;
 
+import com.vinoigitare.filestorage.xml.SongXMLStorage;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.DataServiceException;
 
-public class SongServiceTest {
+public class SongXMLStorageTest {
 	private static final String testFolder = System.getProperty("user.home")
 			+ "/" + "Vinoigitare";
 
 	@Test(groups = "io")
 	public void testStoreAndLoadSong() throws DataServiceException {
-		SongService service = new SongService(testFolder);
+		SongXMLStorage storage = new SongXMLStorage(testFolder);
 
 		Song song = getTestSong();
-		if (service.exists(song)) {
-			service.remove(song);
+		if (storage.exists(song)) {
+			storage.remove(song);
 		}
-		assertEquals(service.exists(song), false);
+		assertEquals(storage.exists(song), false);
 		
-		Collection<?> ids = service.listIds();
+		Collection<?> ids = storage.listIds();
 		assertEquals(ids.contains(song.getId()), false);
 		
-		service.store(song);		
-		assertEquals(service.exists(song), true);
+		storage.store(song);		
+		assertEquals(storage.exists(song), true);
 		
-		ids = service.listIds();
+		ids = storage.listIds();
 		assertEquals(ids.contains(song.getId()), true);
 		
 		Song song1 = null;
-		song1 = service.load(song.getId());
+		song1 = storage.load(song.getId());
 		assertEquals(song, song1);
 
 		// clean up afterwards.
-		service.remove(song);
+		storage.remove(song);
 
 	}
 
