@@ -8,11 +8,11 @@ import com.vinoigitare.model.Song;
 import com.vinoigitare.services.DataService;
 import com.vinoigitare.services.DataServiceException;
 
-public class SongService implements DataService<Song> {
+public class SongXMLStorage implements DataService<Song> {
 
 	private FileXMLStorage storage;
 
-	public SongService(String folder) {
+	public SongXMLStorage(String folder) {
 		storage = new FileXMLStorage(folder);
 	}
 
