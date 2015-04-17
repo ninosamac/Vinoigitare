@@ -7,28 +7,28 @@ import com.vinoigitare.model.Song;
 import com.vinoigitare.services.DataService;
 import com.vinoigitare.services.DataServiceException;
 
-public class SongService implements DataService<Song>{
+public class SongTextFileStorage implements DataService<Song>{
 
 	private FolderUtil storage;
 	
-	public SongService(String folder){
+	public SongTextFileStorage(String folder){
 		storage = new FolderUtil(folder);
 	}
 
 	@Override
-	public void store(Song object) throws DataServiceException {
+	public void store(Song song) throws DataServiceException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void remove(Song object) throws DataServiceException {
+	public void remove(Song song) throws DataServiceException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public boolean exists(Song object) throws DataServiceException {
+	public boolean exists(Song song) throws DataServiceException {
 		// TODO Auto-generated method stub
 		return false;
 	}

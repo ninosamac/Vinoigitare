@@ -6,18 +6,18 @@ import java.util.Collection;
 
 import org.testng.annotations.Test;
 
-import com.vinoigitare.filestorage.xml.SongXMLStorage;
+import com.vinoigitare.filestorage.xml.SongXMLFileStorage;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.DataServiceException;
 
-public class SongXMLStorageTest {
+public class SongXMLFileStorageTest {
 	private static final String testFolder = System.getProperty("user.home")
 			+ "/" + "Vinoigitare";
 
 	@Test(groups = "io")
 	public void testStoreAndLoadSong() throws DataServiceException {
-		SongXMLStorage storage = new SongXMLStorage(testFolder);
+		SongXMLFileStorage storage = new SongXMLFileStorage(testFolder);
 
 		Song song = getTestSong();
 		if (storage.exists(song)) {
