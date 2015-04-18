@@ -91,8 +91,9 @@ public class SongTree extends Tree {
 		for (Artist artist : artists) {
 			String name = artist.getName();
 			setItemCaption(artist, name);
-			addItem(artist);
+			addItem(artist);			
 			setChildrenAllowed(artist, true);
+			log.debug("Added Artist: "+artist);
 
 			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
 			for (Song song : songsByArtist) {
@@ -101,6 +102,7 @@ public class SongTree extends Tree {
 				addItem(song);
 				setParent(song, artist);
 				setChildrenAllowed(song, false);
+				log.debug("Added Song: "+song);
 			}
 		}
 	}
