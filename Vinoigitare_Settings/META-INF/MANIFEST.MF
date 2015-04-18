@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vinoigitare_Settings
+Bundle-SymbolicName: Vinoigitare_Settings
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Aristotel
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: com.vinoigitare.settings
+Import-Package: com.vinoigitare.services.api,
+ org.apache.commons.logging
