@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vinoigitare_ServicesAPI
+Bundle-SymbolicName: Vinoigitare_ServicesAPI
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Aristotel
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: com.vinoigitare.services.api

@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import com.vinoigitare.filestorage.xml.SongXMLFileStorage;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.DataServiceException;
+import com.vinoigitare.services.api.DataServiceException;
 
 public class SongXMLFileStorageTest {
 	private static final String testFolder = System.getProperty("user.home")

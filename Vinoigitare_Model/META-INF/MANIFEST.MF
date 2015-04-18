@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vinoigitare_Model
+Bundle-SymbolicName: Vinoigitare_Model
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Aristotel
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: com.vinoigitare.model
+Import-Package: com.ninosamac.storage

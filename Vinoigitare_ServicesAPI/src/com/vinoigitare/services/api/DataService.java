@@ -1,4 +1,4 @@
-package com.vinoigitare.services;
+package com.vinoigitare.services.api;
 
 import java.util.Collection;
 

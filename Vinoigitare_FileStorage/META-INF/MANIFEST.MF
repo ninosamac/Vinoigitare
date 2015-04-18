@@ -10,5 +10,6 @@ Import-Package: com.ninosamac.storage,
  com.ninosamac.storage.file.util,
  com.ninosamac.storage.xml,
  com.vinoigitare.model,
- com.vinoigitare.services
-Export-Package: com.vinoigitare.filestorage.xml
+ com.vinoigitare.services.api
+Export-Package: com.vinoigitare.filestorage.text,
+ com.vinoigitare.filestorage.xml

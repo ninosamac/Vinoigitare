@@ -2,7 +2,7 @@ package com.vinoigitare;
 
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.DataService;
+import com.vinoigitare.services.api.DataService;
 
 public interface Vinoigitare {
 

@@ -1,4 +1,4 @@
-package com.vinoigitare.services;
+package com.vinoigitare.mockservices;
 
 import java.util.ArrayList;
 import java.util.Collection;

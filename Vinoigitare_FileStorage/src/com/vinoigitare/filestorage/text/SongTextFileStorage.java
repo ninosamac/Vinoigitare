@@ -3,14 +3,13 @@ package com.vinoigitare.filestorage.text;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import com.ninosamac.storage.file.util.FolderUtil;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.DataService;
-import com.vinoigitare.services.DataServiceException;
+import com.vinoigitare.services.api.DataService;
+import com.vinoigitare.services.api.DataServiceException;
 
 public class SongTextFileStorage implements DataService<Song> {
 
@@ -69,7 +68,7 @@ public class SongTextFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public Collection<Song> loadAll() throws DataServiceException {
+	public List<Song> loadAll() throws DataServiceException {
 		List<String> fileNames = util.listFileNames();
 		for(String fileName:fileNames){
 			if(!fileName.endsWith(FILE_EXTENSION)){
@@ -85,7 +84,7 @@ public class SongTextFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public Collection<?> listIds() throws DataServiceException {
+	public List<?> listIds() throws DataServiceException {
 		List<String> fileNames = util.listFileNames();
 		for(String fileName:fileNames){
 			if(!fileName.endsWith(FILE_EXTENSION)){

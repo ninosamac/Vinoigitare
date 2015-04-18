@@ -1,4 +1,4 @@
-package com.vinoigitare.services;
+package com.vinoigitare.mockservices;
 
 import java.util.Collection;
 import java.util.Set;
@@ -6,6 +6,8 @@ import java.util.Set;
 import com.ninosamac.storage.StorageException;
 import com.ninosamac.storage.StorageService;
 import com.vinoigitare.model.Song;
+import com.vinoigitare.services.api.DataService;
+import com.vinoigitare.services.api.DataServiceException;
 
 public class TestSongService implements DataService<Song> {
 

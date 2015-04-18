@@ -4,6 +4,9 @@ import java.util.Collection;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Tree;
@@ -18,8 +21,7 @@ public class SongTree extends Tree {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	// private final static Log log =
-	// LogFactory.getLog(SongTree.class.getName());
+	private final static Log log = LogFactory.getLog(SongTree.class.getName());
 
 	private Collection<Song> songs;
 	private TreeMap<Artist, TreeSet<Song>> songsByArtists = new TreeMap<Artist, TreeSet<Song>>();

@@ -1,4 +1,4 @@
-package com.vinoigitare.services;
+package com.vinoigitare.services.api;
 
 @SuppressWarnings("serial")
 public class DataServiceException extends Exception {

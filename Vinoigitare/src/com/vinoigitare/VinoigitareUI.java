@@ -9,9 +9,10 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vinoigitare.components.MainLayout;
 import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.mockservices.TestSongService;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.DataService;
-import com.vinoigitare.services.TestSongService;
+import com.vinoigitare.services.SongService;
+import com.vinoigitare.services.api.DataService;
 
 @SuppressWarnings("serial")
 @Theme("vinoigitare")
@@ -23,7 +24,8 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	}
 
 	private static final EventBus eventBus = new EventBus();
-	private DataService<Song> songService = new TestSongService();
+	//private DataService<Song> songService = new TestSongService();
+	private DataService<Song> songService = new SongService();
 
 	@Override
 	protected void init(VaadinRequest request) {

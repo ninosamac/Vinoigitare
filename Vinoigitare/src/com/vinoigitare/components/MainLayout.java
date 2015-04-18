@@ -13,8 +13,8 @@ import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.SongSelected;
 import com.vinoigitare.eventbus.SongSelectedHandler;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.DataService;
-import com.vinoigitare.services.DataServiceException;
+import com.vinoigitare.services.api.DataService;
+import com.vinoigitare.services.api.DataServiceException;
 
 @SuppressWarnings("serial")
 public class MainLayout extends VerticalLayout implements SongSelectedHandler {

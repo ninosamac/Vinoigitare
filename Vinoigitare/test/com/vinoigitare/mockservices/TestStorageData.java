@@ -1,4 +1,4 @@
-package com.vinoigitare.services;
+package com.vinoigitare.mockservices;
 
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
