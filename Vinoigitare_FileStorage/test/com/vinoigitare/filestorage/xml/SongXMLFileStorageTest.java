@@ -13,7 +13,7 @@ import com.vinoigitare.services.DataServiceException;
 
 public class SongXMLFileStorageTest {
 	private static final String testFolder = System.getProperty("user.home")
-			+ "/" + "Vinoigitare";
+			+ "/" + "Vinoigitare/Songs";
 
 	@Test(groups = "io")
 	public void testStoreAndLoadSong() throws DataServiceException {
