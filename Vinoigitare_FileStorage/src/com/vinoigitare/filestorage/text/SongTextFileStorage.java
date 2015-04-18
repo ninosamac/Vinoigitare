@@ -70,14 +70,15 @@ public class SongTextFileStorage implements DataService<Song> {
 	@Override
 	public List<Song> loadAll() throws DataServiceException {
 		List<String> fileNames = util.listFileNames();
-		for(String fileName:fileNames){
-			if(!fileName.endsWith(FILE_EXTENSION)){
-				fileNames.remove(fileName);
+		ArrayList<String> ids = new ArrayList<String>();
+		for (String fileName : fileNames) {
+			if (fileName.endsWith(FILE_EXTENSION)) {
+				ids.add(fileName.replace(FILE_EXTENSION, ""));
 			}
 		}
 		ArrayList<Song> songs = new ArrayList<Song>();
-		for (String fileName : fileNames) {
-			Song song = load(fileName);
+		for (String id : ids) {
+			Song song = load(id);
 			songs.add(song);
 		}
 		return songs;
@@ -86,8 +87,8 @@ public class SongTextFileStorage implements DataService<Song> {
 	@Override
 	public List<?> listIds() throws DataServiceException {
 		List<String> fileNames = util.listFileNames();
-		for(String fileName:fileNames){
-			if(!fileName.endsWith(FILE_EXTENSION)){
+		for (String fileName : fileNames) {
+			if (!fileName.endsWith(FILE_EXTENSION)) {
 				fileNames.remove(fileName);
 			}
 		}
