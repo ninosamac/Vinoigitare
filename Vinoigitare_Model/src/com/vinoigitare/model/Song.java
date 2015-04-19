@@ -2,9 +2,10 @@ package com.vinoigitare.model;
 
 import java.io.Serializable;
 
+import com.ninosamac.storage.Identifiable;
 import com.ninosamac.storage.Storable;
 
-public class Song implements Serializable, Comparable<Song>, Storable<String> {
+public class Song implements Serializable, Comparable<Song>, Storable<String>, Identifiable<String> {
 
 	private static final String ARTIST_UNKNOWN = "unknown";
 	/**
