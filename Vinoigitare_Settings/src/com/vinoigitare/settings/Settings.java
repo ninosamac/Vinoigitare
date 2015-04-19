@@ -30,7 +30,7 @@ public class Settings implements SettingsService {
 	private Properties settings;
 
 	public Settings() {
-		String vinoigitareFolder = System.getProperty("VINOIGITARE_HOME");
+		String vinoigitareFolder = System.getenv("VINOIGITARE_HOME");
 	//	String vinoigitareFolder = Constants.VINOIGITARE_HOME;
 		try {
 			if (vinoigitareFolder == null || vinoigitareFolder.trim().isEmpty()) {
