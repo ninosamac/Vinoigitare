@@ -2,6 +2,7 @@ package com.vinoigitare.components.songpanel;
 
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.model.Song;
 
@@ -27,7 +28,8 @@ public class SongPanel extends VerticalLayout {
 	protected void init() {
 
 		setSizeFull();
-		// setMargin(true);
+		setMargin(true);
+		
 
 		Label title = new Label(song.getTitle());
 		title.addStyleName("song-title");
@@ -40,11 +42,12 @@ public class SongPanel extends VerticalLayout {
 		Label chords = new Label();
 		chords.setContentMode(ContentMode.PREFORMATTED);
 		chords.addStyleName("song-chords");
-		chords.setValue(song.getChords());
+		chords.setValue(song.getChords());		
 		addComponent(chords);
 
 		setExpandRatio(chords, 1.0f);
 
+		
 	}
 
 }

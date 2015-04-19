@@ -27,7 +27,7 @@ public class MainLayout extends VerticalLayout implements SongSelectedHandler {
 
 	public MainLayout(Vinoigitare vinoigitare) {
 
-		setSizeFull();
+		setSizeUndefined();
 
 		this.eventBus = vinoigitare.getEventBus();
 		songService = vinoigitare.getSongService();
