@@ -21,18 +21,18 @@ public interface SettingsService {
 
 	/**
 	 * 
-	 * @param sectionName
+	 * @param prefix
 	 * @return Properties with the given prefix
 	 */
-	Properties getSection(String sectionName);
+	Properties getValues(String prefix);
 
 	/**
 	 * 
-	 * @param sectionName
+	 * @param prefix
 	 * @param noPrefix
 	 * @return Properties with the given name, but shorthanded if noPrefix is
 	 *         set to true.
 	 */
-	Properties getSection(String sectionName, boolean noPrefix);
+	Properties getValues(String prefix, boolean noPrefix);
 
 }

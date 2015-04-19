@@ -16,7 +16,7 @@ public class SettingsTest {
   public void testSettings() {
 	  Settings settings = new Settings();
 	  log.info("Found settings for Vinoigitare:");
-	  Properties properties = settings.getSection("SONGS");
+	  Properties properties = settings.getValues("SONGS");
 	  assertFalse(properties.isEmpty());
 	  System.out.println(properties);
   }

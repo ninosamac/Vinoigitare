@@ -3,7 +3,7 @@ package com.vinoigitare.filestorage.xml;
 import java.util.Collection;
 
 import com.ninosamac.storage.StorageException;
-import com.ninosamac.storage.file.FileXMLStorage;
+import com.ninosamac.storage.file.xml.FileXMLStorage;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;

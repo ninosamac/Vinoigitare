@@ -30,8 +30,8 @@ public class Settings implements SettingsService {
 	private Properties settings;
 
 	public Settings() {
-	//	String vinoigitareFolder = System.getProperty("VINOIGITARE_HOME");
-		String vinoigitareFolder = Constants.VINOIGITARE_HOME;
+		String vinoigitareFolder = System.getProperty("VINOIGITARE_HOME");
+	//	String vinoigitareFolder = Constants.VINOIGITARE_HOME;
 		try {
 			if (vinoigitareFolder == null || vinoigitareFolder.trim().isEmpty()) {
 				log.error("System property VINOIGITARE_HOME has not been set.");
@@ -53,14 +53,6 @@ public class Settings implements SettingsService {
 	}
 
 	/**
-	 * Activation method for service - automatically invoked from OSGI service
-	 * registry.
-	 */
-	public void activate() {
-
-	}
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -72,22 +64,22 @@ public class Settings implements SettingsService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Properties getSection(String sectionName) {
-		return getSection(sectionName, false);
+	public Properties getValues(String prefix) {
+		return getValues(prefix, false);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Properties getSection(String sectionName, boolean noPrefix) {
+	public Properties getValues(String prefix, boolean noPrefix) {
 		Properties result = new Properties();
 		Set<String> allKeys = settings.stringPropertyNames();
 		for (String key : allKeys) {
-			if (key.startsWith(sectionName)) {
+			if (key.startsWith(prefix)) {
 				String key2 = key;
 				if (noPrefix) {
-					key2 = key.substring(sectionName.length() + 1);
+					key2 = key.substring(prefix.length() + 1);
 				}
 				result.put(key2, settings.get(key));
 			}

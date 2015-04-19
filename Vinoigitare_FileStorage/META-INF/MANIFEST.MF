@@ -8,7 +8,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: com.ninosamac.storage,
  com.ninosamac.storage.file,
  com.ninosamac.storage.file.util,
- com.ninosamac.storage.xml,
+ com.ninosamac.storage.file.xml,
  com.vinoigitare.model,
  com.vinoigitare.services.api
 Export-Package: com.vinoigitare.filestorage.text,
