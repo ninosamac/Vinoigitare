@@ -40,7 +40,7 @@ public class MainLayout extends VerticalLayout implements SongSelectedHandler {
 			e.printStackTrace();
 		}
 
-		songTree = new SongTree(eventBus, testSongs);
+		songTree = new SongTree(vinoigitare, testSongs);
 
 		Song song = SongPanelTestData.generate();
 		songPanel = new SongPanel(song);

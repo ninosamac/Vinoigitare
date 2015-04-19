@@ -10,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.ui.Tree;
+import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.SongSelected;
 import com.vinoigitare.model.Artist;
@@ -27,9 +28,9 @@ public class SongTree extends Tree {
 	private TreeMap<Artist, TreeSet<Song>> songsByArtists = new TreeMap<Artist, TreeSet<Song>>();
 	private EventBus eventBus;
 
-	public SongTree(EventBus eventBus, Collection<Song> songs) {
+	public SongTree(Vinoigitare vinoigitare, Collection<Song> songs) {
 		super();
-		this.eventBus = eventBus;
+		this.eventBus = vinoigitare.getEventBus();
 		this.songs = songs;
 	}
 
