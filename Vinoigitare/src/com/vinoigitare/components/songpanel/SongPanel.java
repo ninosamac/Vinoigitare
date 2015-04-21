@@ -27,8 +27,9 @@ public class SongPanel extends VerticalLayout {
 
 	protected void init() {
 
-		setSizeFull();		
-
+		setSizeFull();
+		setMargin(true);
+		
 		Label title = new Label(song.getTitle());		
 		title.addStyleName("song-title");
 		addComponent(title);
