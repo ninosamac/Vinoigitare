@@ -1,5 +1,6 @@
 /ComponentTree/
 /Target/
+*/test-output/
 @dot
 *.log
 *.class
