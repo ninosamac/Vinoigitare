@@ -10,14 +10,15 @@ import com.vinoigitare.components.navigator.SongTree;
 import com.vinoigitare.components.songpanel.SongPanelTestData;
 import com.vinoigitare.components.songviewer.SongViewer;
 import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.eventbus.SongSelected;
-import com.vinoigitare.eventbus.SongSelectedHandler;
+import com.vinoigitare.eventbus.EventHandler;
+import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
 @SuppressWarnings("serial")
-public class MainLayout extends VerticalLayout implements SongSelectedHandler {
+public class MainLayout extends VerticalLayout implements
+		EventHandler<SongSelected> {
 
 	private SongTree songTree;
 	private SongViewer songViewer;

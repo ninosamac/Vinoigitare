@@ -8,27 +8,23 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-@SuppressWarnings("serial")
-public class EventBus implements Serializable, SongSelectedHandler {
+@SuppressWarnings({ "serial", "rawtypes", })
+public class EventBus implements Serializable, EventHandler<Event> {
 
-	private static final Log log = LogFactory.getLog(EventBus.class
-			.getName());
+	private static final Log log = LogFactory.getLog(EventBus.class.getName());
 
 	/**
 	 * Collection of event handlers grouped by event type.
 	 */
-	@SuppressWarnings("rawtypes")
 	private Hashtable<Class<?>, List<EventHandler>> eventHandlers;
 
 	/**
 	 * Default constructor.
 	 */
-	@SuppressWarnings("rawtypes")
 	public EventBus() {
 		eventHandlers = new Hashtable<Class<?>, List<EventHandler>>();
 	}
 
-	@SuppressWarnings("rawtypes")
 	public void registerForEvents(Class<?> eventType,
 			EventHandler<?> eventHandler) {
 		log.info("register eventHandler " + eventHandler + " for " + eventType);
@@ -60,7 +56,7 @@ public class EventBus implements Serializable, SongSelectedHandler {
 	 * @param event
 	 *            event to be sent to listeners
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "unchecked" })
 	protected final void fireEvent(Event<?> event) {
 		// log.trace("fire " + event + " to eventhandlers");
 		// Synchronized to disable changing of event handlers list while sending
@@ -83,7 +79,7 @@ public class EventBus implements Serializable, SongSelectedHandler {
 	}
 
 	@Override
-	public void onEvent(SongSelected event) {
+	public void onEvent(Event event) {
 		fireEvent(event);
 	}
 
