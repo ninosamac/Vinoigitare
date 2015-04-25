@@ -5,7 +5,7 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.shared.MouseEventDetails.MouseButton;
 import com.vaadin.ui.Notification;
 import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.eventbus.SongSelected;
+import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 

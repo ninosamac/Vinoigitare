@@ -1,5 +1,6 @@
-package com.vinoigitare.eventbus;
+package com.vinoigitare.events;
 
+import com.vinoigitare.eventbus.Event;
 import com.vinoigitare.model.Song;
 
 @SuppressWarnings("rawtypes")

@@ -7,27 +7,27 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window;
 import com.vinoigitare.components.songeditor.EditWindow;
-import com.vinoigitare.eventbus.SongSelected;
-import com.vinoigitare.eventbus.SongSelectedHandler;
+import com.vinoigitare.eventbus.EventHandler;
+import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Song;
 
 @SuppressWarnings("serial")
-public class ToolsPanel extends Panel implements SongSelectedHandler {
+public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 
 	private Song song;
 
 	public ToolsPanel(Song song) {
 		this.song = song;
-		
+
 		final HorizontalLayout layout = new HorizontalLayout();
 		layout.setWidth(100, Unit.PERCENTAGE);
 		layout.addStyleName("toolspanel");
-		
+
 		final Button editButton = new Button("Edit");
 		ClickListener editButtonClickListener = getEditButtonClickListener();
 		editButton.addClickListener(editButtonClickListener);
 		layout.addComponent(editButton);
-		
+
 		setContent(layout);
 	}
 

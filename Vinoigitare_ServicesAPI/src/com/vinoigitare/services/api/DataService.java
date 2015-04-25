@@ -62,7 +62,7 @@ public interface DataService<T> {
 	 * 
 	 * @param T
 	 *            class type of objects to load
-	 * @return list of all objects of the type <code>T</code>
+	 * @return all objects of the type <code>T</code>
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
@@ -71,7 +71,7 @@ public interface DataService<T> {
 	/**
 	 * Returns ids of all stored objects of the type <code>T</code>.
 	 * 
-	 * @return list of ids of all stored objects of the type <code>T</code>
+	 * @return ids of all stored objects of the type <code>T</code>
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
