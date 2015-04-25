@@ -6,7 +6,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.model.Song;
 
-public class SongPanel extends Panel {
+public class SongViewer extends Panel {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class SongPanel extends Panel {
 	private static final long serialVersionUID = 7128198025964496737L;
 	private Song song;
 
-	public SongPanel(Song song) {
+	public SongViewer(Song song) {
 		super();
 		this.song = song;
 	}
