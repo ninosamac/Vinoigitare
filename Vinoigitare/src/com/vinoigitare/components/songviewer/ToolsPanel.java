@@ -6,6 +6,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window;
+import com.vinoigitare.components.songeditor.EditWindow;
 import com.vinoigitare.eventbus.SongSelected;
 import com.vinoigitare.eventbus.SongSelectedHandler;
 import com.vinoigitare.model.Song;

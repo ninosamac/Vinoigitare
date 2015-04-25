@@ -33,15 +33,15 @@ public class MainLayout extends VerticalLayout implements SongSelectedHandler {
 		this.eventBus = vinoigitare.getEventBus();
 		songService = vinoigitare.getSongService();
 
-		Collection<Song> testSongs = new ArrayList<Song>();
+		Collection<Song> songs = new ArrayList<Song>();
 		try {
-			testSongs = songService.loadAll();
+			songs = songService.loadAll();
 		} catch (DataServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		songTree = new SongTree(vinoigitare, testSongs);
+		songTree = new SongTree(vinoigitare, songs);
 
 		Song song = SongPanelTestData.generate();
 		songViewer = new SongViewer(song);
