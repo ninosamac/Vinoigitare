@@ -12,7 +12,6 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vinoigitare.Vinoigitare;
-import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;

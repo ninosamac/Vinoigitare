@@ -35,7 +35,7 @@ public class SongService implements DataService<Song> {
 	}
 
 	@Override
-	public Song load(Object id) throws DataServiceException {
+	public Song load(Comparable<?> id) throws DataServiceException {
 		log.debug("Loading: "+id.toString());
 		return storage.load(id);
 	}

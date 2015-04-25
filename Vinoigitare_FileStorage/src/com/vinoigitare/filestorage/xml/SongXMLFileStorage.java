@@ -44,7 +44,7 @@ public class SongXMLFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public Song load(Object id) throws DataServiceException {
+	public Song load(Comparable<?> id) throws DataServiceException {
 		try {
 			return (Song) storage.load(Song.class, id);
 		} catch (StorageException e) {

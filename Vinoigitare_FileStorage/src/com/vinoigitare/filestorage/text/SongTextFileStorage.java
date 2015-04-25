@@ -50,7 +50,7 @@ public class SongTextFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public Song load(Object id) throws DataServiceException {
+	public Song load(Comparable<?> id) throws DataServiceException {
 		String fileName = id.toString() + FILE_EXTENSION;
 		String chords = null;
 		try {
