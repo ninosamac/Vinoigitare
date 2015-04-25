@@ -6,7 +6,7 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.model.Song;
 
-public class SongPanel extends Panel {
+public class SongDisplay extends Panel {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class SongPanel extends Panel {
 	private static final long serialVersionUID = 7128198025964496737L;
 	private Song song;
 
-	public SongPanel(Song song) {
+	public SongDisplay(Song song) {
 		super();
 		this.song = song;
 	}
@@ -26,19 +26,24 @@ public class SongPanel extends Panel {
 	}
 
 	protected void init() {
-
 		VerticalLayout layout = new VerticalLayout();
 		layout.setSizeFull();
 
-		layout.setMargin(true);
+		Label title = new Label(song.getTitle());
+		title.addStyleName("song-title");
+		layout.addComponent(title);
 
-		ToolsPanel toolsPanel = new ToolsPanel(song);
-		layout.addComponent(toolsPanel);
+		Label artist = new Label(song.getArtist().getName());
+		artist.addStyleName("song-artist");
+		layout.addComponent(artist);
 
-		SongDisplay songDisplay = new SongDisplay(song);
-		layout.addComponent(songDisplay);
+		Label chords = new Label();
+		chords.setContentMode(ContentMode.PREFORMATTED);
+		chords.addStyleName("song-chords");
+		chords.setValue(song.getChords());
+		layout.addComponent(chords);
 
-		layout.setExpandRatio(songDisplay, 1.0f);
+		layout.setExpandRatio(chords, 1.0f);
 		setContent(layout);
 
 	}
