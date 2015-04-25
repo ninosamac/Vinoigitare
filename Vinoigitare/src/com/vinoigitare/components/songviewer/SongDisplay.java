@@ -1,4 +1,4 @@
-package com.vinoigitare.components.songpanel;
+package com.vinoigitare.components.songviewer;
 
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Label;

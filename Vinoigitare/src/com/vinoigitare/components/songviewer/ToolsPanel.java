@@ -1,4 +1,4 @@
-package com.vinoigitare.components.songpanel;
+package com.vinoigitare.components.songviewer;
 
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;

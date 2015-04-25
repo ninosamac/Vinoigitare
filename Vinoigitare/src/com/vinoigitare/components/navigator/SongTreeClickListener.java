@@ -9,6 +9,7 @@ import com.vinoigitare.eventbus.SongSelected;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
+@SuppressWarnings("serial")
 public class SongTreeClickListener implements ItemClickListener {
 
 	private EventBus eventBus;

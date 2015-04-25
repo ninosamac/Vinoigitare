@@ -1,4 +1,4 @@
-package com.vinoigitare.components.songpanel;
+package com.vinoigitare.components.songviewer;
 
 import com.vaadin.ui.Window;
 import com.vinoigitare.components.songeditor.SongEditor;
