@@ -8,8 +8,7 @@ import com.vinoigitare.model.Song;
 public class EditWindow extends Window {
 
 	public EditWindow(Song song) {
-
-		setSizeFull();
+		
 		center();
 		setCaption("Edit: "+song.getId());
 		SongEditor songEditor = new SongEditor(song);

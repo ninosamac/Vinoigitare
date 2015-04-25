@@ -53,7 +53,7 @@ public interface DataService<T> {
 	 *             if any error occurs
 	 */
 
-	T load(Object id) throws DataServiceException;
+	T load(Comparable<?> id) throws DataServiceException;
 
 	/**
 	 * Returns all stored objects of the type <code>T</code>. Note: if there are

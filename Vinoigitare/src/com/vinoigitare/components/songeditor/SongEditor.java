@@ -11,7 +11,11 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
+import com.vinoigitare.Vinoigitare;
+import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
+import com.vinoigitare.services.api.DataService;
 
 @SuppressWarnings("serial")
 public class SongEditor extends Panel {
@@ -40,23 +44,12 @@ public class SongEditor extends Panel {
 		form.addComponent(chordsArea);
 
 		form.addComponent(getButtonOk());
+		form.addComponent(getButtonCancel());
 
 		setContent(form);
 
 	}
 
-	private PropertysetItem getItemFromSong(Song song) {
-		PropertysetItem songItem = new PropertysetItem();
-		songItem.addItemProperty("artist", new ObjectProperty<String>(song
-				.getArtist().getName()));
-		songItem.addItemProperty("title",
-				new ObjectProperty<String>(song.getTitle()));
-		songItem.addItemProperty("chords",
-				new ObjectProperty<String>(song.getChords()));
-		return songItem;
-	}
-
-	@SuppressWarnings("serial")
 	private TextField getArtistTextField(PropertysetItem songItem) {
 		TextField field = new TextField("Artist",
 				songItem.getItemProperty("artist"));
@@ -77,7 +70,6 @@ public class SongEditor extends Panel {
 		return field;
 	}
 
-	@SuppressWarnings("serial")
 	private TextField getTitleTextField(PropertysetItem songItem) {
 		TextField field = new TextField("Title",
 				songItem.getItemProperty("title"));
@@ -97,7 +89,6 @@ public class SongEditor extends Panel {
 		return field;
 	}
 
-	@SuppressWarnings("serial")
 	private TextArea getChordsTextArea(PropertysetItem songItem) {
 		TextArea chordsTextArea = new TextArea("Chords",
 				songItem.getItemProperty("chords"));
@@ -106,7 +97,6 @@ public class SongEditor extends Panel {
 		return chordsTextArea;
 	}
 
-	@SuppressWarnings("serial")
 	private Button getButtonOk() {
 		Button button = new Button("OK");
 
@@ -117,19 +107,28 @@ public class SongEditor extends Panel {
 				try {
 					artistField.validate();
 					titleField.validate();
-					Notification.show("Thanks!");
+					chordsArea.validate();
+
+					song = getSongFromItem(songItem);
+					Vinoigitare vinoigitare = (Vinoigitare) getUI();
+					DataService<Song> songService = vinoigitare
+							.getSongService();
+
+					songService.store(song);
+
+					Notification.show("Song stored: " + song.getId());
 				} catch (Exception e) {
 					Notification.show("You fail!");
 				}
 
 			}
+
 		};
 
 		button.addClickListener(clickListener);
 		return button;
 	}
 
-	@SuppressWarnings("serial")
 	private Button getButtonCancel() {
 		Button button = new Button("Cancel");
 
@@ -138,8 +137,12 @@ public class SongEditor extends Panel {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				try {
-
-					Notification.show("Thanks!");
+					songItem = getItemFromSong(song);
+					titleField.markAsDirty();
+					artistField.markAsDirty();
+					chordsArea.markAsDirty();
+					
+					Notification.show("Song edit cancelled.");
 				} catch (Exception e) {
 					Notification.show("You fail!");
 				}
@@ -151,4 +154,29 @@ public class SongEditor extends Panel {
 		return button;
 	}
 
+	private PropertysetItem getItemFromSong(Song song) {
+		PropertysetItem songItem = new PropertysetItem();
+		songItem.addItemProperty("artist", new ObjectProperty<String>(song
+				.getArtist().getName()));
+		songItem.addItemProperty("title",
+				new ObjectProperty<String>(song.getTitle()));
+		songItem.addItemProperty("chords",
+				new ObjectProperty<String>(song.getChords()));
+		return songItem;
+	}
+
+	private Song getSongFromItem(PropertysetItem item) {
+		Song song = new Song();
+
+		Artist artist = new Artist((String) songItem.getItemProperty("artist")
+				.getValue());
+		String title = (String) songItem.getItemProperty("title").getValue();
+		String chords = (String) songItem.getItemProperty("chords").getValue();
+
+		song.setArtist(artist);
+		song.setTitle(title);
+		song.setChords(chords);
+		return song;
+
+	}
 }
