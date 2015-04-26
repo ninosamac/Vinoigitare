@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.ninosamac.storage.file.util.FolderUtil;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
@@ -13,11 +16,15 @@ import com.vinoigitare.services.api.DataServiceException;
 
 public class SongTextFileStorage implements DataService<Song> {
 
+	private static final Log log = LogFactory.getLog(SongTextFileStorage.class
+			.getName());
+
 	private static final String FILE_EXTENSION = ".txt";
 	private FolderUtil util;
 
 	public SongTextFileStorage(String folder) {
 		util = new FolderUtil(folder);
+		log.info("SongTextFileStorage created for folder: " + folder);
 	}
 
 	@Override
@@ -26,6 +33,7 @@ public class SongTextFileStorage implements DataService<Song> {
 		String content = song.getChords();
 		try {
 			util.storeTextual(fileName, content);
+			log.trace("Stored song file: "+fileName );
 		} catch (IOException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
@@ -37,6 +45,7 @@ public class SongTextFileStorage implements DataService<Song> {
 		String fileName = song.getId() + FILE_EXTENSION;
 		try {
 			util.removeFile(fileName);
+			log.trace("Removed song file: "+fileName);
 		} catch (FileNotFoundException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
@@ -55,6 +64,7 @@ public class SongTextFileStorage implements DataService<Song> {
 		String chords = null;
 		try {
 			chords = util.loadTextual(fileName);
+			log.trace("Loaded song from file: "+fileName);
 		} catch (IOException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
