@@ -31,7 +31,6 @@ public class Settings implements SettingsService {
 
 	public Settings() {
 		String vinoigitareFolder = System.getenv("VINOIGITARE_HOME");
-	//	String vinoigitareFolder = Constants.VINOIGITARE_HOME;
 		try {
 			if (vinoigitareFolder == null || vinoigitareFolder.trim().isEmpty()) {
 				log.error("System property VINOIGITARE_HOME has not been set.");

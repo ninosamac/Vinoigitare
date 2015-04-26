@@ -4,14 +4,14 @@ import java.util.Collection;
 import java.util.Set;
 
 import com.ninosamac.storage.StorageException;
-import com.ninosamac.storage.StorageService;
+import com.ninosamac.storage.Storage;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
 public class TestSongService implements DataService<Song> {
 
-	private StorageService storage = new TestStorageService();
+	private Storage storage = new TestStorageService();
 
 	public TestSongService() {
 		init();
@@ -61,7 +61,7 @@ public class TestSongService implements DataService<Song> {
 	}
 
 	@Override
-	public Song load(Object id) throws DataServiceException {
+	public Song load(Comparable<?> id) throws DataServiceException {
 		try {
 			return (Song) storage.load(Song.class, id);
 		} catch (StorageException e) {

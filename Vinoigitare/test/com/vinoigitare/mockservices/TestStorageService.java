@@ -6,9 +6,9 @@ import java.util.TreeMap;
 
 import com.ninosamac.storage.Storable;
 import com.ninosamac.storage.StorageException;
-import com.ninosamac.storage.StorageService;
+import com.ninosamac.storage.Storage;
 
-public class TestStorageService implements StorageService {
+public class TestStorageService implements Storage {
 	
 	private final TreeMap<String, Storable<?>> storage = new TreeMap<String, Storable<?>>();
 
@@ -33,7 +33,7 @@ public class TestStorageService implements StorageService {
 	}
 
 	@Override
-	public Storable<?> load(Class<? extends Storable<?>> clazz, Object id)
+	public Storable<?> load(Class<? extends Storable<?>> clazz, Comparable<?> id)
 			throws StorageException {
 		return storage.get(id);
 	}

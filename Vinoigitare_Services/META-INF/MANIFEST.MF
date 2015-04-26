@@ -5,7 +5,8 @@ Bundle-SymbolicName: Vinoigitare_Services
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Aristotel
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: com.vinoigitare.filestorage.text,
+Import-Package: com.ninosamac.storage,
+ com.vinoigitare.filestorage.text,
  com.vinoigitare.model,
  com.vinoigitare.services.api,
  org.apache.commons.logging;version="1.2.0"
