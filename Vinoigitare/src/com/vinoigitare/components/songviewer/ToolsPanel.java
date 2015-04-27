@@ -6,6 +6,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window;
+import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.songeditor.EditWindow;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongSelected;
@@ -36,7 +37,8 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				Window editWindow = new EditWindow(song);
+				Vinoigitare vinoigitare = (Vinoigitare) event.getComponent().getUI();
+				Window editWindow = new EditWindow(vinoigitare, song);
 				getUI().addWindow(editWindow);
 
 			}
