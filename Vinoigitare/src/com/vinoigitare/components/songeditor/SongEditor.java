@@ -1,5 +1,8 @@
 package com.vinoigitare.components.songeditor;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.vaadin.data.Validator;
 import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.data.util.PropertysetItem;
@@ -14,6 +17,7 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
+import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
@@ -27,6 +31,9 @@ public class SongEditor extends VerticalLayout {
 	private TextField artistField;
 	private TextField titleField;
 	private TextArea chordsArea;
+
+	private final static Log log = LogFactory
+			.getLog(SongEditor.class.getName());
 
 	public SongEditor(Song song) {
 		this.song = song;
@@ -104,7 +111,7 @@ public class SongEditor extends VerticalLayout {
 		chordsTextArea.setRequired(true);
 		chordsTextArea.setWidth("80em");
 		chordsTextArea.setHeight(25f, Unit.EX);
-		
+
 		chordsTextArea.addStyleName("song-chords");
 
 		return chordsTextArea;
@@ -150,13 +157,12 @@ public class SongEditor extends VerticalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				try {
-					
-					songItem = getItemFromSong(song);
-					titleField.markAsDirty();
-					artistField.markAsDirty();
-					chordsArea.markAsDirty();
 
-					Notification.show("Song edit cancelled.");
+					Vinoigitare vinoigitare = (Vinoigitare) getUI();
+					EventBus eventBus = vinoigitare.getEventBus();
+					eventBus.onEvent(new SongEditCanceledEvent(song));
+
+					log.trace("Song edit cancelled: " + song);
 				} catch (Exception e) {
 					Notification.show("You fail!");
 				}
