@@ -26,6 +26,9 @@ public class SongDisplay extends Panel {
 	}
 
 	protected void init() {
+		
+		addStyleName("songpanel");
+		
 		VerticalLayout layout = new VerticalLayout();
 		layout.setSizeFull();
 

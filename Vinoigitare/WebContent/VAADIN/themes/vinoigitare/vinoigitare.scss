@@ -3,7 +3,7 @@
 // Defines the plaintext font size, weight and family. Font size affects general component sizing.
 //$v-font-size: 16px;
 //$v-font-weight: 300;
-//$v-font-family: "Open Sans", sans-serif;
+$v-font-family: Arial, Helvetica, sans-serif;
 
 // Defines the border used by all components.
 //$v-border: 1px solid (v-shade 0.7);
@@ -36,18 +36,23 @@
 
 }
 
+/* .vinoigitare {	 */
+/*  font-family: Arial, Helvetica, sans-serif;	 */
+/*  font-size: 16px; */
+/*  border-width: 0px; */
+/* } */
    
 .song-title {
  font-family: Arial, Helvetica, sans-serif;
  text-align: center; 
- font-size:200%;
+ font-size: 200%;
  color: red;
 } 
 
 .song-artist {
  font-family: Arial, Helvetica, sans-serif;
  text-align: center;
- font-size:150%; 
+ font-size: 150%; 
 }
 
 .song-chords {

@@ -32,6 +32,7 @@ public class SongEditor extends VerticalLayout {
 		this.song = song;
 
 		songItem = getItemFromSong(song);
+		setMargin(true);
 
 		Panel formPanel = new Panel();
 		formPanel.addStyleName("songeditor");
@@ -149,6 +150,7 @@ public class SongEditor extends VerticalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				try {
+					
 					songItem = getItemFromSong(song);
 					titleField.markAsDirty();
 					artistField.markAsDirty();
