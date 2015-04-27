@@ -10,7 +10,6 @@ public class EditWindow extends Window {
 		
 		setSizeFull();
 		center();
-		setCaption("Edit: "+song.getId());
 		SongEditor songEditor = new SongEditor(song);
 		setContent(songEditor);
 

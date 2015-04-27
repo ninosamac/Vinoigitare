@@ -7,17 +7,19 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 
 @SuppressWarnings("serial")
-public class SongEditor extends Panel {
+public class SongEditor extends VerticalLayout {
 
 	private static final String REGEX_VALID_INPUT = "[[A-Z][0-9][ÈÆŽŠÐèæžšð]].*";
 	private Song song;
@@ -31,6 +33,9 @@ public class SongEditor extends Panel {
 
 		songItem = getItemFromSong(song);
 
+		Panel formPanel = new Panel();
+		formPanel.addStyleName("songeditor");
+
 		FormLayout form = new FormLayout();
 
 		artistField = getArtistTextField(songItem);
@@ -42,10 +47,14 @@ public class SongEditor extends Panel {
 		chordsArea = getChordsTextArea(songItem);
 		form.addComponent(chordsArea);
 
-		form.addComponent(getButtonOk());
-		form.addComponent(getButtonCancel());
+		formPanel.setContent(form);
 
-		setContent(form);
+		HorizontalLayout buttons = new HorizontalLayout();
+		buttons.addComponent(getButtonOk());
+		buttons.addComponent(getButtonCancel());
+
+		addComponent(formPanel);
+		addComponent(buttons);
 
 	}
 
@@ -92,6 +101,10 @@ public class SongEditor extends Panel {
 		TextArea chordsTextArea = new TextArea("Chords",
 				songItem.getItemProperty("chords"));
 		chordsTextArea.setRequired(true);
+		chordsTextArea.setWidth("80em");
+		chordsTextArea.setHeight(25f, Unit.EX);
+		
+		chordsTextArea.addStyleName("song-chords");
 
 		return chordsTextArea;
 	}
@@ -140,7 +153,7 @@ public class SongEditor extends Panel {
 					titleField.markAsDirty();
 					artistField.markAsDirty();
 					chordsArea.markAsDirty();
-					
+
 					Notification.show("Song edit cancelled.");
 				} catch (Exception e) {
 					Notification.show("You fail!");
