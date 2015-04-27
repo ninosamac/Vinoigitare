@@ -46,13 +46,13 @@ public class SongEditor extends VerticalLayout {
 
 		FormLayout form = new FormLayout();
 
-		artistField = getArtistTextField(songItem);
+		artistField = getArtistTextField(songItem);		
 		form.addComponent(artistField);
 
-		titleField = getTitleTextField(songItem);
+		titleField = getTitleTextField(songItem);		
 		form.addComponent(titleField);
 
-		chordsArea = getChordsTextArea(songItem);
+		chordsArea = getChordsTextArea(songItem);		
 		form.addComponent(chordsArea);
 
 		formPanel.setContent(form);
@@ -129,14 +129,13 @@ public class SongEditor extends VerticalLayout {
 					titleField.validate();
 					chordsArea.validate();
 
+					Song previousVersion = new Song(song.getArtist(), song.getTitle(), song.getChords());					
 					song = getSongFromItem(songItem);
+					
 					Vinoigitare vinoigitare = (Vinoigitare) getUI();
-					DataService<Song> songService = vinoigitare
-							.getSongService();
+					EventBus eventBus = vinoigitare.getEventBus();
+					eventBus.onEvent(new SongEdited(previousVersion, song));
 
-					songService.store(song);
-
-					Notification.show("Song stored: " + song.getId());
 				} catch (Exception e) {
 					Notification.show("You fail!");
 				}
