@@ -16,11 +16,11 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataService;
 
 @SuppressWarnings("serial")
 public class SongEditor extends VerticalLayout {
@@ -31,6 +31,7 @@ public class SongEditor extends VerticalLayout {
 	private TextField artistField;
 	private TextField titleField;
 	private TextArea chordsArea;
+	private Window window;
 
 	private final static Log log = LogFactory
 			.getLog(SongEditor.class.getName());
@@ -46,13 +47,13 @@ public class SongEditor extends VerticalLayout {
 
 		FormLayout form = new FormLayout();
 
-		artistField = getArtistTextField(songItem);		
+		artistField = getArtistTextField(songItem);
 		form.addComponent(artistField);
 
-		titleField = getTitleTextField(songItem);		
+		titleField = getTitleTextField(songItem);
 		form.addComponent(titleField);
 
-		chordsArea = getChordsTextArea(songItem);		
+		chordsArea = getChordsTextArea(songItem);
 		form.addComponent(chordsArea);
 
 		formPanel.setContent(form);
@@ -129,15 +130,18 @@ public class SongEditor extends VerticalLayout {
 					titleField.validate();
 					chordsArea.validate();
 
-					Song previousVersion = new Song(song.getArtist(), song.getTitle(), song.getChords());					
+					Song previousVersion = new Song(song.getArtist(),
+							song.getTitle(), song.getChords());
 					song = getSongFromItem(songItem);
-					
+
 					Vinoigitare vinoigitare = (Vinoigitare) getUI();
 					EventBus eventBus = vinoigitare.getEventBus();
 					eventBus.onEvent(new SongEdited(previousVersion, song));
+					Notification.show("Song updated: " + song);
 
 				} catch (Exception e) {
-					Notification.show("You fail!");
+					Notification.show(e.getMessage());
+					e.printStackTrace();
 				}
 
 			}
@@ -156,14 +160,11 @@ public class SongEditor extends VerticalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				try {
-
-					Vinoigitare vinoigitare = (Vinoigitare) getUI();
-					EventBus eventBus = vinoigitare.getEventBus();
-					eventBus.onEvent(new SongEditCanceledEvent(song));
-
+					window.close();
 					log.trace("Song edit cancelled: " + song);
 				} catch (Exception e) {
-					Notification.show("You fail!");
+					Notification.show(e.getMessage());
+					e.printStackTrace();
 				}
 
 			}
@@ -197,5 +198,9 @@ public class SongEditor extends VerticalLayout {
 		song.setChords(chords);
 		return song;
 
+	}
+
+	public void setWindow(Window window) {
+		this.window = window;
 	}
 }

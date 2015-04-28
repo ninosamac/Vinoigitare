@@ -6,7 +6,6 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window;
-import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.songeditor.EditWindow;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongSelected;
@@ -24,32 +23,31 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 		layout.setWidth(100, Unit.PERCENTAGE);
 		layout.addStyleName("toolspanel");
 
-		final Button editButton = new Button("Edit");
-		ClickListener editButtonClickListener = getEditButtonClickListener();
-		editButton.addClickListener(editButtonClickListener);
+		final Button editButton = getEditButon();
 		layout.addComponent(editButton);
 
 		setContent(layout);
 	}
 
-	private ClickListener getEditButtonClickListener() {
-		return new ClickListener() {
+	private Button getEditButon() {
+		Button button = new Button("Edit");
+		ClickListener listener = new ClickListener() {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				Vinoigitare vinoigitare = (Vinoigitare) event.getComponent().getUI();
-				Window editWindow = new EditWindow(vinoigitare, song);
+				Window editWindow = new EditWindow(song);
 				getUI().addWindow(editWindow);
-
 			}
 
 		};
+
+		button.addClickListener(listener);
+		return button;
 	}
 
 	@Override
 	public void onEvent(SongSelected event) {
 		this.song = event.getSong();
-
 	}
 
 }

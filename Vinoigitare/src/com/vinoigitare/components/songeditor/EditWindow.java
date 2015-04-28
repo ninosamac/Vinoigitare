@@ -1,30 +1,19 @@
 package com.vinoigitare.components.songeditor;
 
 import com.vaadin.ui.Window;
-import com.vinoigitare.Vinoigitare;
-import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.model.Song;
 
 @SuppressWarnings("serial")
-public class EditWindow extends Window implements
-		EventHandler<SongEditCanceledEvent> {
+public class EditWindow extends Window  {
 
-	public EditWindow(Vinoigitare vinoigitare, Song song) {
+	public EditWindow(Song song) {
 		
-		EventBus eventBus = vinoigitare.getEventBus();
-		eventBus.registerForEvents(SongEditCanceledEvent.class, this);
-
 		setSizeFull();
 		center();
 		SongEditor songEditor = new SongEditor(song);
+		songEditor.setWindow(this);
 		setContent(songEditor);
 
-	}
-
-	@Override
-	public void onEvent(SongEditCanceledEvent event) {
-		this.close();
 	}
 
 }
