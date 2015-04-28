@@ -41,14 +41,14 @@ public class TestStorageService implements Storage {
 	@Override
 	public Collection<?> loadAll(Class<? extends Storable<?>> clazz)
 			throws StorageException {
-		// TODO: strorage.values() is NOT serializable!
+		// because strorage.values() is NOT Serializable!
 		return new ArrayList<Storable<?>>(storage.values());
 	}
 
 	@Override
 	public Collection<?> listIds(Class<? extends Storable<?>> clazz)
 			throws StorageException {
-		// TODO: strorage.keySet() is NOT serializable!
+		// because strorage.keySet() is NOT Serializable!
 		return new ArrayList<String>(storage.keySet());
 	}
 

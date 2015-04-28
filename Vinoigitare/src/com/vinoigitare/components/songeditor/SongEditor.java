@@ -136,7 +136,7 @@ public class SongEditor extends VerticalLayout {
 
 					Vinoigitare vinoigitare = (Vinoigitare) getUI();
 					EventBus eventBus = vinoigitare.getEventBus();
-					eventBus.onEvent(new SongEdited(previousVersion, song));
+					eventBus.onEvent(new SongUpdated(previousVersion, song));
 					Notification.show("Song updated: " + song);
 
 				} catch (Exception e) {

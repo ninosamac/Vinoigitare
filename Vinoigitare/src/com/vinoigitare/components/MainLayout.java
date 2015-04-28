@@ -7,7 +7,7 @@ import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.navigator.SongTree;
-import com.vinoigitare.components.songeditor.SongEdited;
+import com.vinoigitare.components.songeditor.SongUpdated;
 import com.vinoigitare.components.songpanel.SongPanelTestData;
 import com.vinoigitare.components.songviewer.SongViewer;
 import com.vinoigitare.eventbus.EventBus;
@@ -52,15 +52,15 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		addComponent(panel);
 
 		eventBus.registerForEvents(SongSelected.class, this);
-		eventBus.registerForEvents(SongEdited.class, this);
+		eventBus.registerForEvents(SongUpdated.class, this);
 	}
 
 	@Override
 	public void onEvent(com.vinoigitare.eventbus.Event event) {
 		if (event.getType().equals(SongSelected.class)) {
 			onSongSelected((SongSelected) event);
-		} else if (event.getType().equals(SongEdited.class)) {
-			onSongEdited((SongEdited) event);
+		} else if (event.getType().equals(SongUpdated.class)) {
+			onSongUpdated((SongUpdated) event);
 		}
 
 	}
@@ -72,7 +72,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		panel.setSecondComponent(songViewer);
 	}
 
-	private void onSongEdited(SongEdited event) {
+	private void onSongUpdated(SongUpdated event) {
 		Vinoigitare vinoigitare = (Vinoigitare) this.getUI();
 		DataService<Song> songService = vinoigitare.getSongService();
 
