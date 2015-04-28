@@ -19,6 +19,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.events.SongUpdated;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 

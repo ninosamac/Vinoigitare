@@ -6,8 +6,10 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window;
+import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.songeditor.EditWindow;
 import com.vinoigitare.eventbus.EventHandler;
+import com.vinoigitare.events.SongRemoved;
 import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Song;
 
@@ -37,6 +39,23 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 			public void buttonClick(ClickEvent event) {
 				Window editWindow = new EditWindow(song);
 				getUI().addWindow(editWindow);
+			}
+
+		};
+
+		button.addClickListener(listener);
+		return button;
+	}
+
+	private Button getRemoveButon() {
+		Button button = new Button("Remove");
+		ClickListener listener = new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				Vinoigitare vinoigitare = (Vinoigitare) getUI();
+				SongRemoved songRemovedEvent = new SongRemoved(song);
+				vinoigitare.getEventBus().onEvent(songRemovedEvent);
 			}
 
 		};
