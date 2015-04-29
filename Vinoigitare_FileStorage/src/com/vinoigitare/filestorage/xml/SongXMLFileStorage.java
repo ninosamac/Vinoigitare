@@ -35,15 +35,6 @@ public class SongXMLFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public boolean exists(Song song) throws DataServiceException {
-		try {
-			return storage.exists(song);
-		} catch (StorageException e) {
-			throw new DataServiceException(e.getMessage(), e);
-		}
-	}
-
-	@Override
 	public Song load(Comparable<?> id) throws DataServiceException {
 		try {
 			return (Song) storage.load(Song.class, id);
@@ -66,6 +57,15 @@ public class SongXMLFileStorage implements DataService<Song> {
 	public Collection<?> listIds() throws DataServiceException {
 		try {
 			return storage.listIds(Song.class);
+		} catch (StorageException e) {
+			throw new DataServiceException(e.getMessage(), e);
+		}
+	}
+
+	@Override
+	public boolean contains(Comparable<?> id) throws DataServiceException {
+		try {
+			return storage.contains(Song.class, id);
 		} catch (StorageException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}

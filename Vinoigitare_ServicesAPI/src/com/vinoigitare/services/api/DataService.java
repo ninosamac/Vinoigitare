@@ -25,21 +25,18 @@ public interface DataService<T> {
 	 */
 	void remove(T object) throws DataServiceException;
 
+
 	/**
 	 * Checks if there is an object of the same class and the same id already in
 	 * the data store.
-	 * <p>
-	 * Note: this function does not check for equality. If you need to check if
-	 * the stored object is equal to <code>object</code>, get the stored object
-	 * by it's id and then compare the two objects.
 	 * 
-	 * @param object
+	 * @param id
 	 *            reference to object for which to check
 	 * @return <code>true</code> if stored, <code>false</code> if not
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
-	boolean exists(T object) throws DataServiceException;
+	boolean contains(Comparable<?> id) throws DataServiceException;
 
 	/**
 	 * Loads object of the given type and with the given id from data store.

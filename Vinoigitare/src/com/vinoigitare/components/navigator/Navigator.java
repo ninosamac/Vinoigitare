@@ -1,5 +1,6 @@
 package com.vinoigitare.components.navigator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.commons.logging.Log;
@@ -17,7 +18,6 @@ public class Navigator extends Panel {
 
 	private DataService<Song> songService;
 	private SongTree songTree;
-	private Collection<Song> songs;
 
 	private final static Log log = LogFactory.getLog(Navigator.class);
 
@@ -30,8 +30,10 @@ public class Navigator extends Panel {
 		songService = vinoigitare.getSongService();
 
 		setSizeFull();
+		
+		Collection<Song> songs = new ArrayList<Song>();
 		try {
-			songs = songService.loadAll();
+			songs  = songService.loadAll();
 		} catch (DataServiceException e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();

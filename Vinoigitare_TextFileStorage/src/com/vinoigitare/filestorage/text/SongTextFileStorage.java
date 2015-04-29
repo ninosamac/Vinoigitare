@@ -11,9 +11,10 @@ import org.apache.commons.logging.LogFactory;
 import com.ninosamac.storage.file.util.FolderUtil;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
+import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
-public class SongTextFileStorage {
+public class SongTextFileStorage implements DataService<Song>{
 
 	private static final Log log = LogFactory.getLog(SongTextFileStorage.class
 			.getName());
@@ -47,11 +48,6 @@ public class SongTextFileStorage {
 			throw new DataServiceException(e.getMessage(), e);
 		}
 
-	}
-
-	public boolean exists(Song song) throws DataServiceException {
-		String fileName = song.getId() + FILE_EXTENSION;
-		return util.fileExists(fileName);
 	}
 
 	public Song load(Comparable<?> id) throws DataServiceException {
@@ -101,6 +97,12 @@ public class SongTextFileStorage {
 			ids.add(id);
 		}
 		return ids;
+	}
+
+	@Override
+	public boolean contains(Comparable<?> id) throws DataServiceException {
+		String fileName = id + FILE_EXTENSION;
+		return util.fileExists(fileName);	
 	}
 
 }

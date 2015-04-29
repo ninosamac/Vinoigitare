@@ -1,5 +1,6 @@
 package com.vinoigitare.filestorage.text;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.vinoigitare.eventbus.EventBus;
@@ -15,12 +16,13 @@ public class SongService implements DataService<Song> {
 
 	private SettingsService settings = Settings.getInstance();
 	private SongTextFileStorage storage;
+	private SongServiceCache cache;
 	private EventBus eventBus;
 
 	public SongService(EventBus eventBus) {
-
 		String folder = getSongsFolder();
 		storage = new SongTextFileStorage(folder);
+		cache = new SongServiceCache();
 		this.eventBus = eventBus;
 
 	}
@@ -44,6 +46,7 @@ public class SongService implements DataService<Song> {
 			throw new DataServiceException("Can not store: null");
 		}
 		storage.store(song);
+		cache.store(song);
 		eventBus.onEvent(new SongCreated(song));
 	}
 
@@ -53,33 +56,61 @@ public class SongService implements DataService<Song> {
 			throw new DataServiceException("Can not remove: null");
 		}
 		storage.remove(song);
+		cache.remove(song);
 		eventBus.onEvent(new SongRemoved(song));
 	}
 
-	@Override
-	public boolean exists(Song song) throws DataServiceException {
-		if (song == null) {
-			throw new DataServiceException("Invalid argument: null");
-		}
-		return storage.exists(song);
-	}
+	// @Override
+	// public boolean exists(Song song) throws DataServiceException {
+	// if (song == null) {
+	// throw new DataServiceException("Invalid argument: null");
+	// }
+	// return storage.exists(song);
+	// }
 
 	@Override
 	public Song load(Comparable<?> id) throws DataServiceException {
 		if (id == null) {
 			throw new DataServiceException("Invalid argument: null");
 		}
-		return storage.load(id);
+
+		if (cache.exists((String) id)) {
+			return cache.load(id);
+		}
+
+		Song song = storage.load(id);
+		cache.store(song);
+		return song;
+
 	}
 
 	@Override
 	public Collection<Song> loadAll() throws DataServiceException {
-		return storage.loadAll();
+
+		@SuppressWarnings("unchecked")
+		ArrayList<String> ids = (ArrayList<String>) storage.listIds();
+		ArrayList<Song> songs = new ArrayList<Song>();
+		for (String id : ids) {
+			Song song = null;
+			if (cache.exists(id)) {
+				song = cache.load(id);
+			} else {
+				song = storage.load(id);
+				cache.store(song);
+			}
+			songs.add(song);
+		}
+		return songs;
 	}
 
 	@Override
 	public Collection<?> listIds() throws DataServiceException {
 		return storage.listIds();
+	}
+
+	@Override
+	public boolean contains(Comparable<?> id) throws DataServiceException {
+		return storage.contains(id);
 	}
 
 }

@@ -20,16 +20,16 @@ public class SongXMLFileStorageTest {
 		SongXMLFileStorage storage = new SongXMLFileStorage(testFolder);
 
 		Song song = getTestSong();
-		if (storage.exists(song)) {
+		if (storage.contains(song)) {
 			storage.remove(song);
 		}
-		assertEquals(storage.exists(song), false);
+		assertEquals(storage.contains(song), false);
 		
 		Collection<?> ids = storage.listIds();
 		assertEquals(ids.contains(song.getId()), false);
 		
 		storage.store(song);		
-		assertEquals(storage.exists(song), true);
+		assertEquals(storage.contains(song), true);
 		
 		ids = storage.listIds();
 		assertEquals(ids.contains(song.getId()), true);
