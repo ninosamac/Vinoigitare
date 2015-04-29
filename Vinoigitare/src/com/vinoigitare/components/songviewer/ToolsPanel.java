@@ -33,6 +33,9 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 		final Button newButton = getNewButon();
 		buttons.addComponent(newButton);
 		
+		final Button removeButton = getRemoveButon();
+		buttons.addComponent(removeButton);
+		
 		final Button editButton = getEditButon();
 		buttons.addComponent(editButton);
 

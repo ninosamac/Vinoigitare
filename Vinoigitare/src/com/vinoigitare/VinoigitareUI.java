@@ -10,6 +10,7 @@ import com.vaadin.ui.UI;
 import com.vinoigitare.components.MainLayout;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.events.SongCreated;
+import com.vinoigitare.events.SongRemoved;
 import com.vinoigitare.events.SongUpdated;
 import com.vinoigitare.filestorage.text.SongService;
 import com.vinoigitare.model.Song;
@@ -33,6 +34,7 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 		songService = new SongService();
 		eventBus.registerForEvents(SongCreated.class, songService);
 		eventBus.registerForEvents(SongUpdated.class, songService);
+		eventBus.registerForEvents(SongRemoved.class, songService);
 		// songService = new TestSongService();
 	}
 
