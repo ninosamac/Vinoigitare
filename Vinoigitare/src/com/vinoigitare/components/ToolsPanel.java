@@ -1,4 +1,4 @@
-package com.vinoigitare.components.songviewer;
+package com.vinoigitare.components;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;

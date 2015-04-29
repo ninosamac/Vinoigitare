@@ -8,7 +8,6 @@ import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.navigator.Navigator;
 import com.vinoigitare.components.songpanel.SongPanelTestData;
 import com.vinoigitare.components.songviewer.SongViewer;
-import com.vinoigitare.components.songviewer.ToolsPanel;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongCreated;
