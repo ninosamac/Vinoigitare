@@ -6,15 +6,12 @@ import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.navigator.Navigator;
 import com.vinoigitare.components.songpanel.SongPanelTestData;
 import com.vinoigitare.components.songviewer.SongViewer;
-import com.vinoigitare.components.songviewer.ToolsPanel;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongCreated;
 import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.events.SongUpdated;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataService;
-import com.vinoigitare.services.api.DataServiceException;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class MainLayout extends VerticalLayout implements EventHandler {
@@ -23,7 +20,6 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 	private SongViewer songViewer;
 	private EventBus eventBus;
 	private HorizontalSplitPanel panel;
-	private DataService<Song> songService;
 
 	public MainLayout(Vinoigitare vinoigitare) {
 
@@ -86,31 +82,15 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 	}
 
 	private void onSongUpdated(SongUpdated event) {
-		Vinoigitare vinoigitare = (Vinoigitare) this.getUI();
-		DataService<Song> songService = vinoigitare.getSongService();
-
-		Song oldVersion = event.getOldVersion();
-		try {
-			songService.remove(oldVersion);			
-		} catch (DataServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Song newVersion = event.getNewVersion();
-		try {
-			songService.store(newVersion);
-		} catch (DataServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		
 		panel.removeComponent(songViewer);
+		Song newVersion = event.getNewVersion();
 		songViewer = new SongViewer(newVersion);
 		panel.setSecondComponent(songViewer);
 
 		panel.removeComponent(navigator);
 
+		Vinoigitare vinoigitare = (Vinoigitare) this.getUI();
 		navigator = new Navigator(vinoigitare);
 
 		panel.setFirstComponent(navigator);

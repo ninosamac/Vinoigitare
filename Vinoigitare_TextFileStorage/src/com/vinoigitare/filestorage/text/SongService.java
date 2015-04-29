@@ -10,7 +10,9 @@ import com.vinoigitare.settings.Settings;
 import com.vinoigitare.eventbus.Event;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongCreated;
+import com.vinoigitare.events.SongUpdated;
 
+@SuppressWarnings("rawtypes")
 public class SongService implements DataService<Song>, EventHandler {
 
 	private SettingsService settings = Settings.getInstance();
@@ -67,20 +69,34 @@ public class SongService implements DataService<Song>, EventHandler {
 		return storage.listIds();
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void onEvent(Event event) {
 		if (event.getType().equals(SongCreated.class)) {
-			SongCreated songCreated=(SongCreated)event;
-			try {
-				store(songCreated.getSong());
-			} catch (DataServiceException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			onSongCreated((SongCreated) event);
+		}
+		else if(event.getType().equals(SongUpdated.class)) {
+			onSongUpdated((SongUpdated) event);
 		}
 
+	}
+
+	private void onSongCreated(SongCreated event) {		
+		try {
+			store(event.getSong());
+		} catch (DataServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void onSongUpdated(SongUpdated event) {		
+		try {
+			remove(event.getOldVersion());
+			store(event.getNewVersion());
+		} catch (DataServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
