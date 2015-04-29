@@ -2,27 +2,26 @@ package com.vinoigitare.filestorage.text;
 
 import java.util.Collection;
 
-import com.vinoigitare.eventbus.Event;
-import com.vinoigitare.eventbus.EventHandler;
+import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.events.SongCreated;
 import com.vinoigitare.events.SongRemoved;
-import com.vinoigitare.events.SongUpdated;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 import com.vinoigitare.services.api.SettingsService;
 import com.vinoigitare.settings.Settings;
 
-@SuppressWarnings("rawtypes")
 public class SongService implements DataService<Song> {
 
 	private SettingsService settings = Settings.getInstance();
 	private SongTextFileStorage storage;
+	private EventBus eventBus;
 
-	public SongService() {
+	public SongService(EventBus eventBus) {
 
 		String folder = getSongsFolder();
 		storage = new SongTextFileStorage(folder);
+		this.eventBus = eventBus;
 
 	}
 
@@ -45,6 +44,7 @@ public class SongService implements DataService<Song> {
 			throw new DataServiceException("Can not store: null");
 		}
 		storage.store(song);
+		eventBus.onEvent(new SongCreated(song));
 	}
 
 	@Override
@@ -53,6 +53,7 @@ public class SongService implements DataService<Song> {
 			throw new DataServiceException("Can not remove: null");
 		}
 		storage.remove(song);
+		eventBus.onEvent(new SongRemoved(song));
 	}
 
 	@Override
