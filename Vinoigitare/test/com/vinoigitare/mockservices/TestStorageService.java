@@ -27,10 +27,6 @@ public class TestStorageService implements Storage {
 		storage.remove(object.getId());
 	}
 
-	@Override
-	public boolean exists(Storable<?> object) throws StorageException {
-		return storage.containsKey(object.getId());
-	}
 
 	@Override
 	public Storable<?> load(Class<? extends Storable<?>> clazz, Comparable<?> id)
@@ -50,6 +46,13 @@ public class TestStorageService implements Storage {
 			throws StorageException {
 		// because strorage.keySet() is NOT Serializable!
 		return new ArrayList<String>(storage.keySet());
+	}
+
+
+	@Override
+	public boolean contains(Class<? extends Storable<?>> clazz, Comparable<?> id)
+			throws StorageException {
+		return storage.containsKey(id);
 	}
 
 }

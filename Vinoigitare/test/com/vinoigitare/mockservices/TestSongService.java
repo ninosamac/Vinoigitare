@@ -52,9 +52,9 @@ public class TestSongService implements DataService<Song> {
 	}
 
 	@Override
-	public boolean exists(Song song) throws DataServiceException {
+	public boolean contains(Comparable<?> id) throws DataServiceException {
 		try {
-			return storage.exists(song);
+			return storage.contains(Song.class, id);
 		} catch (StorageException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
