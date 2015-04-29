@@ -9,7 +9,9 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vinoigitare.components.MainLayout;
 import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.filestorage.text.SongService;
 import com.vinoigitare.filestorage.text.SongTextFileStorage;
+import com.vinoigitare.mockservices.TestSongService;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.SettingsService;
@@ -25,11 +27,17 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	}
 
 	private static final EventBus eventBus = new EventBus();
-	private SettingsService settings = new Settings();
+	private SettingsService settings;
 	private DataService<Song> songService;
 
 	public VinoigitareUI() {
-		songService = createSongService();
+		songService = new SongService();
+		//songService = new TestSongService();
+	}
+	
+	
+	public void bindSettingsService(SettingsService service){
+		this.settings = service;
 	}
 
 	@Override
@@ -39,15 +47,6 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 		setContent(layout);
 	}
 
-	private DataService<Song> createSongService() {
-		String folder = getSongsFolder();
-		return new SongTextFileStorage(folder);
-	}
-
-	private String getSongsFolder() {
-		return System.getenv("VINOIGITARE_HOME") + "/"
-				+ settings.getValue("SONGS_FOLDER");
-	}
 
 	@Override
 	public EventBus getEventBus() {

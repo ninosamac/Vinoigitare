@@ -30,15 +30,6 @@ public class SongTree extends Tree {
 		super();
 		this.eventBus = vinoigitare.getEventBus();
 		this.songs = songs;
-	}
-
-	@Override
-	public void attach() {
-		super.attach();
-		init();
-	}
-
-	protected void init() {
 
 		setSizeFull();
 		setItemCaptionMode(ItemCaptionMode.EXPLICIT);
@@ -87,5 +78,6 @@ public class SongTree extends Tree {
 			}
 		}
 	}
+
 
 }

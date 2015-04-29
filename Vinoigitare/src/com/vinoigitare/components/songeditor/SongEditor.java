@@ -19,6 +19,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.events.SongCreated;
 import com.vinoigitare.events.SongUpdated;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
@@ -131,17 +132,15 @@ public class SongEditor extends VerticalLayout {
 					titleField.validate();
 					chordsArea.validate();
 
-					Song previousVersion = new Song(song.getArtist(),
-							song.getTitle(), song.getChords());
-					song = getSongFromItem(songItem);
-
-					Vinoigitare vinoigitare = (Vinoigitare) getUI();
-					EventBus eventBus = vinoigitare.getEventBus();
-					eventBus.onEvent(new SongUpdated(previousVersion, song));
-					Notification.show("Song updated: " + song);
-
+					if (song == null) {
+						onSongCreate();
+					} else {
+						onSongUpdate();
+					}
+					
 				} catch (Exception e) {
-					Notification.show(e.getMessage());
+					Notification.show("Please fill the fields properly."
+							+ e.getMessage());
 					e.printStackTrace();
 				}
 
@@ -151,6 +150,30 @@ public class SongEditor extends VerticalLayout {
 
 		button.addClickListener(clickListener);
 		return button;
+	}
+
+	protected void onSongCreate() {
+
+		song = getSongFromItem(songItem);
+
+		Vinoigitare vinoigitare = (Vinoigitare) getUI();
+		EventBus eventBus = vinoigitare.getEventBus();
+		eventBus.onEvent(new SongCreated(song));
+		Notification.show("Song created: " + song);
+
+	}
+
+	protected void onSongUpdate() {
+
+		Song previousVersion = new Song(song.getArtist(), song.getTitle(),
+				song.getChords());
+		song = getSongFromItem(songItem);
+
+		Vinoigitare vinoigitare = (Vinoigitare) getUI();
+		EventBus eventBus = vinoigitare.getEventBus();
+		eventBus.onEvent(new SongUpdated(previousVersion, song));
+		Notification.show("Song updated: " + song);
+
 	}
 
 	private Button getButtonCancel() {
@@ -177,6 +200,13 @@ public class SongEditor extends VerticalLayout {
 
 	private PropertysetItem getItemFromSong(Song song) {
 		PropertysetItem songItem = new PropertysetItem();
+		if (song == null) {
+			songItem.addItemProperty("artist", new ObjectProperty<String>(""));
+			songItem.addItemProperty("title", new ObjectProperty<String>(""));
+			songItem.addItemProperty("chords", new ObjectProperty<String>(""));
+			return songItem;
+		}
+
 		songItem.addItemProperty("artist", new ObjectProperty<String>(song
 				.getArtist().getName()));
 		songItem.addItemProperty("title",

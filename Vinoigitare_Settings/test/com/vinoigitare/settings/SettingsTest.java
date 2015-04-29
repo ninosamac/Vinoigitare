@@ -14,7 +14,7 @@ public class SettingsTest {
 
 	@Test(groups = { "io" })
 	public void testSettings() {
-		Settings settings = new Settings();
+		Settings settings = Settings.getInstance();
 		log.info("Found settings for Vinoigitare:");
 		Properties properties = settings.getValues("SONGS");
 		assertFalse(properties.isEmpty());

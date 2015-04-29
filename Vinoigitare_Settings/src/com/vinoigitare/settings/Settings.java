@@ -14,8 +14,8 @@ import com.vinoigitare.services.api.SettingsService;
 import com.vinoigitare.services.api.SettingsServiceException;
 
 /**
- * Implementation of {@link SettingsService}. Provides settings from settings
- * file in the root directory of Vinoigitare. Uses system property
+ * Implementation of {@link SettingsService}. Provides properties from
+ * properties file in the root directory of Vinoigitare. Uses system property
  * %VINOIGITARE_HOME% to find this file.
  * 
  * @author nino.samac
@@ -27,9 +27,18 @@ public class Settings implements SettingsService {
 
 	private File settingsFile;
 
-	private Properties settings;
+	private Properties properties;
 
-	public Settings() {
+	private static Settings INSTANCE;
+
+	public static Settings getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new Settings();
+		}
+		return INSTANCE;
+	}
+
+	private Settings() {
 		String vinoigitareFolder = System.getenv("VINOIGITARE_HOME");
 		try {
 			if (vinoigitareFolder == null || vinoigitareFolder.trim().isEmpty()) {
@@ -38,10 +47,11 @@ public class Settings implements SettingsService {
 						"System property VINOIGITARE_HOME has not been set.");
 			}
 
-			settingsFile = new File(vinoigitareFolder+"/"+"vinoigitare.properties");
-			settings = new Properties();
+			settingsFile = new File(vinoigitareFolder + "/"
+					+ "vinoigitare.properties");
+			properties = new Properties();
 
-			settings.load(new FileInputStream(settingsFile));
+			properties.load(new FileInputStream(settingsFile));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -56,7 +66,7 @@ public class Settings implements SettingsService {
 	 */
 	@Override
 	public String getValue(String key) {
-		return settings.getProperty(key);
+		return properties.getProperty(key);
 	}
 
 	/**
@@ -73,14 +83,14 @@ public class Settings implements SettingsService {
 	@Override
 	public Properties getValues(String prefix, boolean noPrefix) {
 		Properties result = new Properties();
-		Set<String> allKeys = settings.stringPropertyNames();
+		Set<String> allKeys = properties.stringPropertyNames();
 		for (String key : allKeys) {
 			if (key.startsWith(prefix)) {
 				String key2 = key;
 				if (noPrefix) {
 					key2 = key.substring(prefix.length() + 1);
 				}
-				result.put(key2, settings.get(key));
+				result.put(key2, properties.get(key));
 			}
 		}
 		return result;

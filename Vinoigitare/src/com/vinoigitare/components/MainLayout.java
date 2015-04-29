@@ -1,14 +1,12 @@
 package com.vinoigitare.components;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
-import com.vinoigitare.components.navigator.SongTree;
+import com.vinoigitare.components.navigator.Navigator;
 import com.vinoigitare.components.songpanel.SongPanelTestData;
 import com.vinoigitare.components.songviewer.SongViewer;
+import com.vinoigitare.components.songviewer.ToolsPanel;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongSelected;
@@ -20,7 +18,7 @@ import com.vinoigitare.services.api.DataServiceException;
 @SuppressWarnings({ "serial", "rawtypes" })
 public class MainLayout extends VerticalLayout implements EventHandler {
 
-	private SongTree songTree;
+	private Navigator navigator;
 	private SongViewer songViewer;
 	private EventBus eventBus;
 	private HorizontalSplitPanel panel;
@@ -28,26 +26,20 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 	public MainLayout(Vinoigitare vinoigitare) {
 
+		this.eventBus = vinoigitare.getEventBus();
+
 		setWidth(100, Unit.PERCENTAGE);
 		setHeightUndefined();
 
-		this.eventBus = vinoigitare.getEventBus();
-		songService = vinoigitare.getSongService();
-
-		Collection<Song> songs = new ArrayList<Song>();
-		try {
-			songs = songService.loadAll();
-		} catch (DataServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		songTree = new SongTree(vinoigitare, songs);
+		
+		
+		
+		navigator = new Navigator(vinoigitare);
 
 		Song song = SongPanelTestData.generate();
 		songViewer = new SongViewer(song);
 
-		panel = new HorizontalSplitPanel(songTree, songViewer);
+		panel = new HorizontalSplitPanel(navigator, songViewer);
 		panel.setSplitPosition(300, Unit.PIXELS);
 		addComponent(panel);
 
@@ -78,7 +70,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 		Song oldVersion = event.getOldVersion();
 		try {
-			songService.remove(oldVersion);
+			songService.remove(oldVersion);			
 		} catch (DataServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,14 +88,11 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		songViewer = new SongViewer(newVersion);
 		panel.setSecondComponent(songViewer);
 
-		panel.removeComponent(songTree);
-		try {
-			songTree = new SongTree(vinoigitare, songService.loadAll());
-		} catch (DataServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		panel.setFirstComponent(songTree);
+		panel.removeComponent(navigator);
+
+		navigator = new Navigator(vinoigitare);
+
+		panel.setFirstComponent(navigator);
 	}
 
 }

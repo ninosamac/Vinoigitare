@@ -22,7 +22,7 @@ public class SongTextFileStorage implements DataService<Song> {
 	private static final String FILE_EXTENSION = ".txt";
 	private FolderUtil util;
 
-	public SongTextFileStorage(String folder) {
+	protected SongTextFileStorage(String folder) {
 		util = new FolderUtil(folder);
 		log.info("SongTextFileStorage created for folder: " + folder);
 	}
