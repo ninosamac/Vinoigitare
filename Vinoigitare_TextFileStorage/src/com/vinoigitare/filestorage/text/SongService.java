@@ -7,8 +7,11 @@ import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 import com.vinoigitare.services.api.SettingsService;
 import com.vinoigitare.settings.Settings;
+import com.vinoigitare.eventbus.Event;
+import com.vinoigitare.eventbus.EventHandler;
+import com.vinoigitare.events.SongCreated;
 
-public class SongService implements DataService<Song> {
+public class SongService implements DataService<Song>, EventHandler {
 
 	private SettingsService settings = Settings.getInstance();
 	private SongTextFileStorage storage;
@@ -62,6 +65,22 @@ public class SongService implements DataService<Song> {
 	@Override
 	public Collection<?> listIds() throws DataServiceException {
 		return storage.listIds();
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public void onEvent(Event event) {
+		if (event.getType().equals(SongCreated.class)) {
+			SongCreated songCreated=(SongCreated)event;
+			try {
+				store(songCreated.getSong());
+			} catch (DataServiceException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
 	}
 
 }

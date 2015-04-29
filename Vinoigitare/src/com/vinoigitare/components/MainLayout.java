@@ -9,6 +9,7 @@ import com.vinoigitare.components.songviewer.SongViewer;
 import com.vinoigitare.components.songviewer.ToolsPanel;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
+import com.vinoigitare.events.SongCreated;
 import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.events.SongUpdated;
 import com.vinoigitare.model.Song;
@@ -44,17 +45,37 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		addComponent(panel);
 
 		eventBus.registerForEvents(SongSelected.class, this);
+		eventBus.registerForEvents(SongCreated.class, this);
 		eventBus.registerForEvents(SongUpdated.class, this);
+		
 	}
 
 	@Override
 	public void onEvent(com.vinoigitare.eventbus.Event event) {
 		if (event.getType().equals(SongSelected.class)) {
 			onSongSelected((SongSelected) event);
+		} else if (event.getType().equals(SongCreated.class)) {
+			onSongCreated((SongCreated) event);	
 		} else if (event.getType().equals(SongUpdated.class)) {
 			onSongUpdated((SongUpdated) event);
 		}
 
+	}
+
+	private void onSongCreated(SongCreated event) {
+		panel.removeComponent(songViewer);
+		
+		Song song = ((SongCreated)event).getSong();
+		songViewer = new SongViewer(song);
+		panel.setSecondComponent(songViewer);
+
+		panel.removeComponent(navigator);
+
+		Vinoigitare vinoigitare = (Vinoigitare) this.getUI();
+		navigator = new Navigator(vinoigitare);
+
+		panel.setFirstComponent(navigator);
+		
 	}
 
 	private void onSongSelected(SongSelected event) {

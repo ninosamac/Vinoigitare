@@ -9,6 +9,7 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vinoigitare.components.MainLayout;
 import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.events.SongCreated;
 import com.vinoigitare.filestorage.text.SongService;
 import com.vinoigitare.filestorage.text.SongTextFileStorage;
 import com.vinoigitare.mockservices.TestSongService;
@@ -28,10 +29,11 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 
 	private static final EventBus eventBus = new EventBus();
 	private SettingsService settings;
-	private DataService<Song> songService;
+	private SongService songService;
 
 	public VinoigitareUI() {
 		songService = new SongService();
+		eventBus.registerForEvents(SongCreated.class, songService);
 		//songService = new TestSongService();
 	}
 	
