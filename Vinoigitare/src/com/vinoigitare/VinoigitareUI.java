@@ -32,9 +32,9 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 
 	public VinoigitareUI() {
 		songService = new SongService();
-		eventBus.registerForEvents(SongCreated.class, songService);
-		eventBus.registerForEvents(SongUpdated.class, songService);
-		eventBus.registerForEvents(SongRemoved.class, songService);
+//		eventBus.registerForEvents(SongCreated.class, songService);
+//		eventBus.registerForEvents(SongUpdated.class, songService);
+//		eventBus.registerForEvents(SongRemoved.class, songService);
 		// songService = new TestSongService();
 	}
 

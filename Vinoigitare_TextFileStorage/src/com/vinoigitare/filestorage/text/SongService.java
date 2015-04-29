@@ -14,7 +14,7 @@ import com.vinoigitare.services.api.SettingsService;
 import com.vinoigitare.settings.Settings;
 
 @SuppressWarnings("rawtypes")
-public class SongService implements DataService<Song>, EventHandler {
+public class SongService implements DataService<Song> {
 
 	private SettingsService settings = Settings.getInstance();
 	private SongTextFileStorage storage;
@@ -81,43 +81,4 @@ public class SongService implements DataService<Song>, EventHandler {
 		return storage.listIds();
 	}
 
-	@Override
-	public void onEvent(Event event) {
-		if (event.getType().equals(SongCreated.class)) {
-			onSongCreated((SongCreated) event);
-		} else if (event.getType().equals(SongUpdated.class)) {
-			onSongUpdated((SongUpdated) event);
-		} else if (event.getType().equals(SongRemoved.class)) {
-			onSongRemoved((SongRemoved) event);
-		}
-
-	}
-
-	private void onSongCreated(SongCreated event) {
-		try {
-			store(event.getSong());
-		} catch (DataServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	private void onSongUpdated(SongUpdated event) {
-		try {
-			remove(event.getOldVersion());
-			store(event.getNewVersion());
-		} catch (DataServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	private void onSongRemoved(SongRemoved event) {
-		try {
-			remove(event.getSong());
-		} catch (DataServiceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 }
