@@ -60,14 +60,6 @@ public class SongService implements DataService<Song> {
 		eventBus.onEvent(new SongRemoved(song));
 	}
 
-	// @Override
-	// public boolean exists(Song song) throws DataServiceException {
-	// if (song == null) {
-	// throw new DataServiceException("Invalid argument: null");
-	// }
-	// return storage.exists(song);
-	// }
-
 	@Override
 	public Song load(Comparable<?> id) throws DataServiceException {
 		if (id == null) {
