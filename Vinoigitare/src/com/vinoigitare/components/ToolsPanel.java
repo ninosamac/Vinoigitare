@@ -6,14 +6,17 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.songeditor.EditWindow;
 import com.vinoigitare.eventbus.EventHandler;
-import com.vinoigitare.events.SongRemoved;
 import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Song;
+import com.vinoigitare.services.api.DataService;
+import com.vinoigitare.services.api.DataServiceException;
 
 @SuppressWarnings("serial")
 public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
@@ -21,21 +24,20 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 	private Song song = null;
 
 	public ToolsPanel() {
-		//this.song = song;
+		// this.song = song;
 
-		GridLayout grid = new GridLayout(1,1);
+		GridLayout grid = new GridLayout(1, 1);
 		grid.setSizeFull();
-		
-		
+
 		final HorizontalLayout buttons = new HorizontalLayout();
-		buttons.addStyleName("toolspanel");		
-		
+		buttons.addStyleName("toolspanel");
+
 		final Button newButton = getNewButon();
 		buttons.addComponent(newButton);
-		
+
 		final Button removeButton = getRemoveButon();
 		buttons.addComponent(removeButton);
-		
+
 		final Button editButton = getEditButon();
 		buttons.addComponent(editButton);
 
@@ -83,8 +85,14 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				Vinoigitare vinoigitare = (Vinoigitare) getUI();
-				SongRemoved songRemovedEvent = new SongRemoved(song);
-				vinoigitare.getEventBus().onEvent(songRemovedEvent);
+				DataService<Song> songService = vinoigitare.getSongService();
+				try {
+					songService.remove(song);
+				} catch (DataServiceException e) {
+					Notification.show("Could not remove song: " + song,
+							e.getMessage(), Type.WARNING_MESSAGE);
+					e.printStackTrace();
+				}
 			}
 
 		};
@@ -96,6 +104,6 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 	@Override
 	public void onEvent(SongSelected event) {
 		this.song = event.getSong();
-	}	
+	}
 
 }

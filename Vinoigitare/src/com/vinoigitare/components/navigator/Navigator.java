@@ -8,17 +8,13 @@ import org.apache.commons.logging.LogFactory;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
-import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.eventbus.EventHandler;
-import com.vinoigitare.events.SongUpdated;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "serial" })
 public class Navigator extends Panel {
 
-	private EventBus eventBus;
 	private DataService<Song> songService;
 	private SongTree songTree;
 	private Collection<Song> songs;
@@ -31,7 +27,6 @@ public class Navigator extends Panel {
 		layout.setSizeFull();
 		layout.setMargin(true);
 
-		eventBus = vinoigitare.getEventBus();
 		songService = vinoigitare.getSongService();
 
 		setSizeFull();

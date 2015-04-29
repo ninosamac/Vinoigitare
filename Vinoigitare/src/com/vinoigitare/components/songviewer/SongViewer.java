@@ -8,13 +8,12 @@ import com.vinoigitare.model.Song;
 
 public class SongViewer extends Panel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 7128198025964496737L;
+	private Song song;
 
 	public SongViewer(Song song) {
 
+		this.song = song;
 		addStyleName("songpanel");
 
 		VerticalLayout layout = new VerticalLayout();
@@ -38,6 +37,10 @@ public class SongViewer extends Panel {
 		layout.setExpandRatio(chords, 1.0f);
 		setContent(layout);
 
+	}
+
+	public Song getSong() {
+		return song;
 	}
 
 }

@@ -12,17 +12,17 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Vinoigitare;
-import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.events.SongCreated;
-import com.vinoigitare.events.SongUpdated;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
+import com.vinoigitare.services.api.DataService;
+import com.vinoigitare.services.api.DataServiceException;
 
 @SuppressWarnings("serial")
 public class SongEditor extends VerticalLayout {
@@ -157,10 +157,15 @@ public class SongEditor extends VerticalLayout {
 		song = getSongFromItem(songItem);
 
 		Vinoigitare vinoigitare = (Vinoigitare) getUI();
-		EventBus eventBus = vinoigitare.getEventBus();
-		eventBus.onEvent(new SongCreated(song));
-		Notification.show("Song created: " + song);
+		DataService<Song> songService = vinoigitare.getSongService();
+		try {
+			songService.store(song);
+		} catch (DataServiceException e) {
+			Notification.show("Could not store song: " + song,e.getMessage(), Type.WARNING_MESSAGE);
+			e.printStackTrace();
+		}
 
+		Notification.show("Song created: " + song);
 	}
 
 	protected void onSongUpdate() {
@@ -170,10 +175,16 @@ public class SongEditor extends VerticalLayout {
 		song = getSongFromItem(songItem);
 
 		Vinoigitare vinoigitare = (Vinoigitare) getUI();
-		EventBus eventBus = vinoigitare.getEventBus();
-		eventBus.onEvent(new SongUpdated(previousVersion, song));
-		Notification.show("Song updated: " + song);
+		DataService<Song> songService = vinoigitare.getSongService();
+		try {
+			songService.remove(previousVersion);
+			songService.store(song);
+		} catch (DataServiceException e) {
+			Notification.show("Could not update song: " + previousVersion ,e.getMessage(), Type.WARNING_MESSAGE);
+			e.printStackTrace();
+		}
 
+		Notification.show("Song updated: " + song);
 	}
 
 	private Button getButtonCancel() {
