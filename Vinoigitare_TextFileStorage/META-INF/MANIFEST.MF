@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vinoigitare_TextFileStorage
+Bundle-SymbolicName: Vinoigitare_TextFileStorage
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Aristotel
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: com.ninosamac.storage,
+ com.ninosamac.storage.file,
+ com.ninosamac.storage.file.util,
+ com.ninosamac.storage.file.xml,
+ com.vinoigitare.model,
+ com.vinoigitare.services.api,
+ com.vinoigitare.settings,
+ org.apache.commons.logging;version="1.1.1"
+Export-Package: com.vinoigitare.filestorage.text
+Service-Component: OSGI-INF/component.xml
