@@ -6,6 +6,7 @@ import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.navigator.Navigator;
 import com.vinoigitare.components.songpanel.SongPanelTestData;
 import com.vinoigitare.components.songviewer.SongViewer;
+import com.vinoigitare.components.songviewer.ToolsPanel;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongCreated;
@@ -17,6 +18,7 @@ import com.vinoigitare.model.Song;
 @SuppressWarnings({ "serial", "rawtypes" })
 public class MainLayout extends VerticalLayout implements EventHandler {
 
+	private ToolsPanel toolsPanel;
 	private Navigator navigator;
 	private SongViewer songViewer;
 	private EventBus eventBus;
@@ -26,9 +28,21 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 		this.eventBus = vinoigitare.getEventBus();
 
+		eventBus.registerForEvents(SongSelected.class, this);
+		eventBus.registerForEvents(SongCreated.class, this);
+		eventBus.registerForEvents(SongUpdated.class, this);
+		eventBus.registerForEvents(SongRemoved.class, this);
+		
+		
+		
 		setWidth(100, Unit.PERCENTAGE);
 		setHeightUndefined();
 
+		toolsPanel = new ToolsPanel();
+		eventBus.registerForEvents(SongSelected.class, toolsPanel);
+		addComponent(toolsPanel);
+		
+		
 		navigator = new Navigator(vinoigitare);
 
 		Song song = SongPanelTestData.generate();
@@ -37,11 +51,9 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		panel = new HorizontalSplitPanel(navigator, songViewer);
 		panel.setSplitPosition(300, Unit.PIXELS);
 		addComponent(panel);
+		
+		setExpandRatio(panel, 1.0f);
 
-		eventBus.registerForEvents(SongSelected.class, this);
-		eventBus.registerForEvents(SongCreated.class, this);
-		eventBus.registerForEvents(SongUpdated.class, this);
-		eventBus.registerForEvents(SongRemoved.class, this);
 
 	}
 
@@ -63,7 +75,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		Song song = event.getSong();
 		panel.removeComponent(songViewer);
 		songViewer = new SongViewer(song);
-		panel.setSecondComponent(songViewer);
+		panel.setSecondComponent(songViewer);		
 	}
 
 	private void onSongCreated(SongCreated event) {

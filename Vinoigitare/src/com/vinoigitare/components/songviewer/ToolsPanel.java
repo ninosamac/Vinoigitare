@@ -18,10 +18,10 @@ import com.vinoigitare.model.Song;
 @SuppressWarnings("serial")
 public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 
-	private Song song;
+	private Song song = null;
 
-	public ToolsPanel(Song song) {
-		this.song = song;
+	public ToolsPanel() {
+		//this.song = song;
 
 		GridLayout grid = new GridLayout(1,1);
 		grid.setSizeFull();
@@ -96,6 +96,6 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 	@Override
 	public void onEvent(SongSelected event) {
 		this.song = event.getSong();
-	}
+	}	
 
 }

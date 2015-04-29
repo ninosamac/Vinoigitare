@@ -11,10 +11,9 @@ import org.apache.commons.logging.LogFactory;
 import com.ninosamac.storage.file.util.FolderUtil;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
-public class SongTextFileStorage implements DataService<Song> {
+public class SongTextFileStorage {
 
 	private static final Log log = LogFactory.getLog(SongTextFileStorage.class
 			.getName());
@@ -27,44 +26,40 @@ public class SongTextFileStorage implements DataService<Song> {
 		log.info("SongTextFileStorage created for folder: " + folder);
 	}
 
-	@Override
 	public void store(Song song) throws DataServiceException {
 		String fileName = song.getId() + FILE_EXTENSION;
 		String content = song.getChords();
 		try {
 			util.storeTextual(fileName, content);
-			log.trace("Stored song file: "+fileName );
+			log.trace("Stored song file: " + fileName);
 		} catch (IOException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
 
 	}
 
-	@Override
 	public void remove(Song song) throws DataServiceException {
 		String fileName = song.getId() + FILE_EXTENSION;
 		try {
 			util.removeFile(fileName);
-			log.trace("Removed song file: "+fileName);
+			log.trace("Removed song file: " + fileName);
 		} catch (FileNotFoundException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
 
 	}
 
-	@Override
 	public boolean exists(Song song) throws DataServiceException {
 		String fileName = song.getId() + FILE_EXTENSION;
 		return util.fileExists(fileName);
 	}
 
-	@Override
 	public Song load(Comparable<?> id) throws DataServiceException {
 		String fileName = id.toString() + FILE_EXTENSION;
 		String chords = null;
 		try {
 			chords = util.loadTextual(fileName);
-			log.trace("Loaded song from file: "+fileName);
+			log.trace("Loaded song from file: " + fileName);
 		} catch (IOException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
@@ -77,7 +72,6 @@ public class SongTextFileStorage implements DataService<Song> {
 		return song;
 	}
 
-	@Override
 	public List<Song> loadAll() throws DataServiceException {
 		List<String> fileNames = util.listFileNames();
 		ArrayList<String> ids = new ArrayList<String>();
@@ -94,7 +88,6 @@ public class SongTextFileStorage implements DataService<Song> {
 		return songs;
 	}
 
-	@Override
 	public List<?> listIds() throws DataServiceException {
 		List<String> fileNames = util.listFileNames();
 		for (String fileName : fileNames) {

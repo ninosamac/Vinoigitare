@@ -27,13 +27,13 @@ public class SongViewer extends Panel {
 
 		layout.setMargin(true);
 
-		ToolsPanel toolsPanel = new ToolsPanel(song);
-		layout.addComponent(toolsPanel);
+//		ToolsPanel toolsPanel = new ToolsPanel(song);
+//		layout.addComponent(toolsPanel);
 
 		SongDisplay songDisplay = new SongDisplay(song);
 		layout.addComponent(songDisplay);
 
-		layout.setExpandRatio(songDisplay, 1.0f);
+//		layout.setExpandRatio(songDisplay, 1.0f);
 		setContent(layout);
 
 	}
