@@ -8,7 +8,9 @@ package com.vinoigitare;
  */
 public interface Constants {
 
-	public static String VINOIGITARE_HOME = "VINOIGITARE_HOME";
-	public static String SONGS_FOLDER = "SONGS_FOLDER";
+	// Styles
+	static String STYLE_SONG_TITLE = "song-title";
+	static String STYLE_SONG_ARTIST = "song-artist";
+	static String STYLE_SONG_CHORDS = "song-chords";
 
 }

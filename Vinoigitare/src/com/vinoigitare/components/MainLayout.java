@@ -22,7 +22,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 	private Navigator navigator;
 	private SongViewer songViewer;
 
-	private HorizontalSplitPanel panel;
+	private HorizontalSplitPanel horizontalSplitPanel;
 
 	public MainLayout(Vinoigitare vinoigitare) {
 
@@ -41,14 +41,16 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 		navigator = new Navigator(vinoigitare);
 
-		Song song = SongPanelTestData.generate();
-		songViewer = new SongViewer(song);
+//		Song song = SongPanelTestData.generate();
+//		songViewer = new SongViewer(song);
 
-		panel = new HorizontalSplitPanel(navigator, songViewer);
-		panel.setSplitPosition(300, Unit.PIXELS);
-		addComponent(panel);
+		HelloPage helloPage = new HelloPage();
+		
+		horizontalSplitPanel = new HorizontalSplitPanel(navigator, helloPage);
+		horizontalSplitPanel.setSplitPosition(300, Unit.PIXELS);
+		addComponent(horizontalSplitPanel);
 
-		setExpandRatio(panel, 1.0f);
+		setExpandRatio(horizontalSplitPanel, 1.0f);
 
 	}
 
@@ -69,24 +71,24 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 	private void onSongSelected(SongSelected event) {
 		Song song = event.getSong();
-		panel.removeComponent(songViewer);
+		horizontalSplitPanel.removeComponent(horizontalSplitPanel.getSecondComponent());
 		songViewer = new SongViewer(song);
-		panel.setSecondComponent(songViewer);
+		horizontalSplitPanel.setSecondComponent(songViewer);
 	}
 
 	private void onSongCreated(SongCreated event) {
 
-		panel.removeComponent(songViewer);
+		horizontalSplitPanel.removeComponent(songViewer);
 		Song song = event.getSong();
 		songViewer = new SongViewer(song);
-		panel.setSecondComponent(songViewer);
+		horizontalSplitPanel.setSecondComponent(songViewer);
 
-		panel.removeComponent(navigator);
+		horizontalSplitPanel.removeComponent(navigator);
 
 		Vinoigitare vinoigitare = (Vinoigitare) this.getUI();
 		navigator = new Navigator(vinoigitare);
 
-		panel.setFirstComponent(navigator);
+		horizontalSplitPanel.setFirstComponent(navigator);
 
 	}
 
@@ -94,14 +96,14 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 		Song song = event.getSong();
 		if (songViewer.getSong().equals(song)) {
-			panel.removeComponent(songViewer);
+			horizontalSplitPanel.removeComponent(songViewer);
 		}
 
-		panel.removeComponent(navigator);
+		horizontalSplitPanel.removeComponent(navigator);
 		Vinoigitare vinoigitare = (Vinoigitare) this.getUI();
 		navigator = new Navigator(vinoigitare);
 
-		panel.setFirstComponent(navigator);
+		horizontalSplitPanel.setFirstComponent(navigator);
 	}
 
 }
