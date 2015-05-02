@@ -1,4 +1,4 @@
-package com.vinoigitare.settings;
+package com.vinoigitare;
 
 /**
  * Global constants to be used in Vinoigitare application.
