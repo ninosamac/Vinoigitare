@@ -7,10 +7,14 @@ import java.util.TreeSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
+import com.vaadin.shared.MouseEventDetails.MouseButton;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.Tree;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
@@ -65,7 +69,7 @@ public class SongTree extends Tree {
 			setItemCaption(artist, name);
 			addItem(artist);
 			setChildrenAllowed(artist, true);
-			log.debug("Added Artist: " + artist);
+			log.trace("Added Artist: " + artist);
 
 			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
 			for (Song song : songsByArtist) {
@@ -74,8 +78,42 @@ public class SongTree extends Tree {
 				addItem(song);
 				setParent(song, artist);
 				setChildrenAllowed(song, false);
-				log.debug("Added Song: " + song);
+				log.trace("Added Song: " + song);
 			}
 		}
+	}
+	@SuppressWarnings("serial")
+	class SongTreeClickListener implements ItemClickListener {
+
+		private EventBus eventBus;
+	
+
+		public SongTreeClickListener(EventBus eventBus) {
+			super();
+			this.eventBus = eventBus;
+		}
+
+		@Override
+		public void itemClick(ItemClickEvent event) {
+
+			Object itemId = event.getItemId();
+
+			if (event.getButton() == MouseButton.LEFT) {
+
+				if (itemId instanceof Song) {
+					log.trace("Song selected: " + itemId);
+					Song song = (Song) itemId;
+					SongSelected songSelected = new SongSelected(song);
+					eventBus.onEvent(songSelected);
+				}
+
+				else if (itemId instanceof Artist) {
+					log.trace("Artist selected: " + itemId);
+				}
+			} else if (event.getButton() == MouseButton.RIGHT) {
+				Notification.show("CONTEXT MENU!");
+			}
+		}
+
 	}
 }
