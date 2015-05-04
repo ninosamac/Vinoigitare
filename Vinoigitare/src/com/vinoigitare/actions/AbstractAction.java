@@ -32,9 +32,9 @@ public abstract class AbstractAction implements Action {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(getId());
-		sb.append("\n\t"); //$NON-NLS-1$
+		sb.append("\t"); //$NON-NLS-1$
 		sb.append(getParameterType());
-		sb.append("\n\t\t"); //$NON-NLS-1$
+		sb.append("\t"); //$NON-NLS-1$
 		sb.append(getDescription());
 		return sb.toString();
 

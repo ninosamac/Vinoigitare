@@ -12,4 +12,6 @@ public interface Vinoigitare {
 	public SettingsService getSettings();
 
 	public DataService<Song> getSongService();
+	
+	public ActionRegistry getActionRegistry();
 }

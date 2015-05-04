@@ -17,7 +17,7 @@ public interface Action extends Comparable<Action> {
 	 * 
 	 * @return name of top menu item this action belongs to
 	 */
-	String getTopMenuItemName();
+	String getGroupId();
 
 	/**
 	 * Caption for this action.

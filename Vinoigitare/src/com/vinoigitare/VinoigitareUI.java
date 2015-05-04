@@ -7,6 +7,9 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
+import com.vinoigitare.actions.EditSongAction;
+import com.vinoigitare.actions.NewSongAction;
+import com.vinoigitare.actions.RemoveSongAction;
 import com.vinoigitare.components.MainLayout;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.filestorage.text.SongService;
@@ -24,11 +27,17 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	}
 
 	private static final EventBus eventBus = new EventBus();
+	private ActionRegistry actionRegistry = new ActionRegistry();
 	private SettingsService settings;
 	private SongService songService;
 
 	public VinoigitareUI() {
 		songService = new SongService(eventBus);
+
+		actionRegistry.registerAction(new NewSongAction());
+		actionRegistry.registerAction(new EditSongAction());
+		actionRegistry.registerAction(new RemoveSongAction());
+
 	}
 
 	public void bindSettingsService(SettingsService service) {
@@ -48,13 +57,18 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	}
 
 	@Override
-	public DataService<Song> getSongService() {
+	public final DataService<Song> getSongService() {
 		return songService;
 	}
 
 	@Override
-	public SettingsService getSettings() {
+	public final SettingsService getSettings() {
 		return settings;
+	}
+
+	@Override
+	public final ActionRegistry getActionRegistry() {
+		return actionRegistry;
 	}
 
 }
