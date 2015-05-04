@@ -1,5 +1,6 @@
 package com.vinoigitare.components;
 
+import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
@@ -36,9 +37,9 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		setHeightUndefined();
 
 		MainMenu mainMenu = new MainMenu(vinoigitare);
-		//eventBus.registerForEvents(SongSelected.class, mainMenu);
+		eventBus.registerForEvents(SongSelected.class, mainMenu);
 		addComponent(mainMenu);
-		
+
 		toolsPanel = new ToolsPanel();
 		eventBus.registerForEvents(SongSelected.class, toolsPanel);
 		addComponent(toolsPanel);
@@ -46,7 +47,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		navigator = new Navigator(vinoigitare);
 
 		HelloPage helloPage = new HelloPage();
-		
+
 		horizontalSplitPanel = new HorizontalSplitPanel(navigator, helloPage);
 		horizontalSplitPanel.setSplitPosition(300, Unit.PIXELS);
 		addComponent(horizontalSplitPanel);
@@ -57,7 +58,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 	@Override
 	public void onEvent(com.vinoigitare.eventbus.Event event) {
-		
+
 		if (event.getType().equals(SongSelected.class)) {
 			onSongSelected((SongSelected) event);
 
@@ -70,16 +71,22 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 	}
 
-	private void onSongSelected(SongSelected event) {
+	private void onSongSelected(SongSelected event) {		
+		Component secondComponent = horizontalSplitPanel.getSecondComponent();
+		if (secondComponent != null) {
+			horizontalSplitPanel.removeComponent(secondComponent);
+		}
 		Song song = event.getSong();
-		horizontalSplitPanel.removeComponent(horizontalSplitPanel.getSecondComponent());
 		songViewer = new SongViewer(song);
 		horizontalSplitPanel.setSecondComponent(songViewer);
 	}
 
 	private void onSongCreated(SongCreated event) {
 
-		horizontalSplitPanel.removeComponent(songViewer);
+		Component secondComponent = horizontalSplitPanel.getSecondComponent();
+		if (secondComponent != null) {
+			horizontalSplitPanel.removeComponent(secondComponent);
+		}
 		Song song = event.getSong();
 		songViewer = new SongViewer(song);
 		horizontalSplitPanel.setSecondComponent(songViewer);

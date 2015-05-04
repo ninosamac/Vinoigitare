@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.MenuBar;
-import com.vaadin.ui.Notification;
 import com.vinoigitare.ActionRegistry;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.actions.Action;
-import com.vinoigitare.actions.RemoveSongAction;
+import com.vinoigitare.eventbus.EventHandler;
+import com.vinoigitare.events.SongSelected;
+import com.vinoigitare.model.Song;
 
-@SuppressWarnings("serial")
-public class MainMenu extends MenuBar {
+@SuppressWarnings({ "serial", "rawtypes" })
+public class MainMenu extends MenuBar implements EventHandler {
+
+	private Song selectedSong = null;
 
 	public MainMenu(Vinoigitare vinoigitare) {
 
@@ -36,79 +39,35 @@ public class MainMenu extends MenuBar {
 				String resourceId = action.getIconUrl();
 				Resource icon = new ThemeResource(resourceId);
 				menuItem.setIcon(icon);
-				
+
 			}
 		}
-
-//		MenuItem fileMenuItem = addItem("File", null, null);
-//
-//		Command newSongCommand = getNewSongCommand();
-//		MenuItem newSongItem = fileMenuItem.addItem("New", newSongCommand);
-//		newSongItem.setDescription("Add new song");
-//
-//		Command editSongCommand = getEditSongCommand();
-//		MenuItem editSongItem = fileMenuItem.addItem("Edit", editSongCommand);
-//		editSongItem.setDescription("Edit the song");
-//
-//		Action action = new RemoveSongAction();
-//		Command command = getCommand(action);
-//		String caption = action.getCaption();
-//		ThemeResource icon = new ThemeResource(action.getIconUrl());
-//		MenuItem removeSongItem = fileMenuItem.addItem(caption, icon, command);
-//		String description = action.getDescription();
-//		removeSongItem.setDescription(description);
-
-		// Command removeSongCommand = getRemoveSongCommand();
-		// MenuItem removeSongItem = fileMenuItem.addItem("Remove",
-		// removeSongCommand);
-		// removeSongItem.setDescription("Remove the song");
-		//
 
 		MenuItem aboutMenuItem = addItem("About", null, null);
 
 	}
 
-	private Command getNewSongCommand() {
+	private Command getCommand(final Action action) {
 		Command command = new Command() {
 
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
-				Notification.show(selectedItem.getDescription());
-
+				if (action.getParameterType().equals(Song.class)) {
+					// song related actions
+					Vinoigitare vinoigitare = (Vinoigitare) getUI();
+					action.execute(vinoigitare, selectedSong);
+				}
 			}
-
 		};
 		return command;
 	}
 
-	private Command getEditSongCommand() {
-		Command command = new Command() {
-
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				Notification.show(selectedItem.getDescription());
-
-			}
-
-		};
-		return command;
-	}
-
-	private void createMenuItemForAction(Action action) {
-		Command command = getCommand(action);
-	}
-
-	private Command getCommand(Action action) {
-		Command command = new Command() {
-
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				Notification.show(selectedItem.getDescription());
-
-			}
-
-		};
-		return command;
+	@Override
+	public void onEvent(com.vinoigitare.eventbus.Event event) {
+		if (event.getType().equals(SongSelected.class)) {
+			SongSelected songSelected = (SongSelected) event;
+			selectedSong = songSelected.getSong();
+		}
 	}
 
 }
