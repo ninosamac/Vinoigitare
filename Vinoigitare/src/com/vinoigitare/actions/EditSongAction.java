@@ -2,6 +2,7 @@ package com.vinoigitare.actions;
 
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
+import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.songeditor.EditWindow;
 import com.vinoigitare.model.Song;
@@ -35,7 +36,7 @@ public class EditSongAction extends AbstractAction {
 
 	@Override
 	public String getIconUrl() {
-		return "icons/Write2.gif";
+		return Constants.ICON_EDIT_SONG;
 	}
 
 	@Override

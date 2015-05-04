@@ -3,6 +3,7 @@ package com.vinoigitare.actions;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
@@ -40,7 +41,7 @@ public class RemoveSongAction extends AbstractAction {
 
 	@Override
 	public String getIconUrl() {
-		return "icons/Cancel.gif";
+		return Constants.ICON_REMOVE_SONG;
 	}
 
 	@Override
