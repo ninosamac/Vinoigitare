@@ -2,9 +2,8 @@ package com.vinoigitare.actions;
 
 import com.vinoigitare.Vinoigitare;
 
-
 /**
- * Interface for UI Actions. 
+ * Interface for UI Actions.
  */
 public interface Action extends Comparable<Action> {
 
@@ -16,34 +15,40 @@ public interface Action extends Comparable<Action> {
 	/**
 	 * Used in menus for grouping actions under a sub menu.
 	 * 
-	 * @return actionGroup name of action group this action belongs to
+	 * @return name of top menu item this action belongs to
 	 */
-	String getActionGroup();
+	String getTopMenuItemName();
 
 	/**
-	 * @return description 
+	 * Caption for this action.
+	 * 
+	 * @return caption
+	 */
+	String getCaption();
+
+	/**
+	 * @return description
 	 */
 	String getDescription();
 
 	/**
-	 * @return theme relative URL to icon for this action
+	 * @return theme relative URL of icon for this action
 	 */
 	String getIconUrl();
 
-
 	/**
-	 * @return type of object this action can be executed on
+	 * @return type of parameter object.
 	 */
-	Class<?> getSupportedClass();
+	Class<?> getParameterType();
 
 	/**
-	 * Execution method - called when user selects action from a context menu.
+	 * Execution method.
 	 * 
 	 * @param vinoigitare
-	 *            reference to Vinoigitare application
-	 * @param object
-	 *            reference to object on which to execute this action
+	 *            Vinoigitare application
+	 * @param param
+	 *            Parameter(s) for this action
 	 */
-	void execute(Vinoigitare vinoigitare, Object object);
+	void execute(Vinoigitare vinoigitare, Object param);
 
 }
