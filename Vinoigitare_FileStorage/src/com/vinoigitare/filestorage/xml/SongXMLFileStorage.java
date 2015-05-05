@@ -8,6 +8,7 @@ import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
+@SuppressWarnings("serial")
 public class SongXMLFileStorage implements DataService<Song> {
 
 	private FileXMLStorage storage;

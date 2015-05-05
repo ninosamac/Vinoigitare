@@ -12,6 +12,7 @@ import com.vinoigitare.services.api.DataServiceException;
 import com.vinoigitare.services.api.SettingsService;
 import com.vinoigitare.settings.Settings;
 
+@SuppressWarnings("serial")
 public class SongService implements DataService<Song> {
 
 	private SettingsService settings = Settings.getInstance();
@@ -47,7 +48,7 @@ public class SongService implements DataService<Song> {
 		}
 		storage.store(song);
 		cache.store(song);
-		eventBus.onEvent(new SongCreated(song));
+		eventBus.publish(new SongCreated(song));
 	}
 
 	@Override
@@ -57,7 +58,7 @@ public class SongService implements DataService<Song> {
 		}
 		storage.remove(song);
 		cache.remove(song);
-		eventBus.onEvent(new SongRemoved(song));
+		eventBus.publish(new SongRemoved(song));
 	}
 
 	@Override

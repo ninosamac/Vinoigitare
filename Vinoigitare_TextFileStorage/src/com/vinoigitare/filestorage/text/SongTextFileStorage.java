@@ -14,6 +14,7 @@ import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
+@SuppressWarnings("serial")
 public class SongTextFileStorage implements DataService<Song>{
 
 	private static final Log log = LogFactory.getLog(SongTextFileStorage.class
@@ -24,7 +25,7 @@ public class SongTextFileStorage implements DataService<Song>{
 
 	protected SongTextFileStorage(String folder) {
 		util = new FolderUtil(folder);
-		log.info("SongTextFileStorage created for folder: " + folder);
+		log.info("SongTextFileStorage started. Using folder: " + folder);
 	}
 
 	public void store(Song song) throws DataServiceException {
@@ -32,7 +33,7 @@ public class SongTextFileStorage implements DataService<Song>{
 		String content = song.getChords();
 		try {
 			util.storeTextual(fileName, content);
-			log.trace("Stored song file: " + fileName);
+			log.info("Stored song file: " + fileName);
 		} catch (IOException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
@@ -43,7 +44,7 @@ public class SongTextFileStorage implements DataService<Song>{
 		String fileName = song.getId() + FILE_EXTENSION;
 		try {
 			util.removeFile(fileName);
-			log.trace("Removed song file: " + fileName);
+			log.info("Removed song file: " + fileName);
 		} catch (FileNotFoundException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
@@ -104,5 +105,4 @@ public class SongTextFileStorage implements DataService<Song>{
 		String fileName = id + FILE_EXTENSION;
 		return util.fileExists(fileName);	
 	}
-
 }

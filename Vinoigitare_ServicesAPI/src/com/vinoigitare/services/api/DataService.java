@@ -1,8 +1,9 @@
 package com.vinoigitare.services.api;
 
+import java.io.Serializable;
 import java.util.Collection;
 
-public interface DataService<T> {
+public interface DataService<T> extends Serializable{
 
 	/**
 	 * Store specified object. If there is an object of the same class and the
