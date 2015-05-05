@@ -7,6 +7,7 @@ import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.songeditor.EditWindow;
 import com.vinoigitare.model.Song;
 
+@SuppressWarnings("serial")
 public class EditSongAction extends AbstractAction {
 
 	@Override

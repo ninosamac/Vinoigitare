@@ -19,6 +19,7 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Vinoigitare;
+import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
@@ -166,6 +167,7 @@ public class SongEditor extends VerticalLayout {
 		}
 
 		Notification.show("Song created: " + song);
+		vinoigitare.getEventBus().publish(new SongSelected(song));
 	}
 
 	protected void onSongUpdate() {
@@ -185,6 +187,7 @@ public class SongEditor extends VerticalLayout {
 		}
 
 		Notification.show("Song updated: " + song);
+		vinoigitare.getEventBus().publish(new SongSelected(song));
 	}
 
 	private Button getButtonCancel() {

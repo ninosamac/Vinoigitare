@@ -9,7 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 @SuppressWarnings({ "serial", "rawtypes", })
-public class EventBus implements Serializable, EventHandler<Event> {
+public class EventBus implements Serializable {
 
 	private static final Log log = LogFactory.getLog(EventBus.class.getName());
 
@@ -78,8 +78,8 @@ public class EventBus implements Serializable, EventHandler<Event> {
 
 	}
 
-	@Override
-	public void onEvent(Event event) {
+	
+	public void publish(Event event) {
 		fireEvent(event);
 	}
 

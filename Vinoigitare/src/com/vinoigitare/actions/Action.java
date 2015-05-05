@@ -1,11 +1,13 @@
 package com.vinoigitare.actions;
 
+import java.io.Serializable;
+
 import com.vinoigitare.Vinoigitare;
 
 /**
  * Interface for UI Actions.
  */
-public interface Action extends Comparable<Action> {
+public interface Action extends Comparable<Action>, Serializable {
 
 	/**
 	 * @return Action identifier - must be unique in system.

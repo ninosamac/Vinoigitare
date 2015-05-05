@@ -6,6 +6,7 @@ package com.vinoigitare.actions;
  * implemented.
  * 
  */
+@SuppressWarnings("serial")
 public abstract class AbstractAction implements Action {
 
 	

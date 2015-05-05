@@ -40,9 +40,9 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		eventBus.registerForEvents(SongSelected.class, mainMenu);
 		addComponent(mainMenu);
 
-		toolsPanel = new ToolsPanel();
-		eventBus.registerForEvents(SongSelected.class, toolsPanel);
-		addComponent(toolsPanel);
+//		toolsPanel = new ToolsPanel();
+//		eventBus.registerForEvents(SongSelected.class, toolsPanel);
+//		addComponent(toolsPanel);
 
 		navigator = new Navigator(vinoigitare);
 

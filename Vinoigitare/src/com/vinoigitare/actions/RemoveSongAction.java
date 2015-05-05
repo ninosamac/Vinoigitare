@@ -9,6 +9,7 @@ import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
+@SuppressWarnings("serial")
 public class RemoveSongAction extends AbstractAction {
 
 	private final static Log log = LogFactory.getLog(RemoveSongAction.class

@@ -104,7 +104,7 @@ public class SongTree extends Tree {
 					log.trace("Song selected: " + itemId);
 					Song song = (Song) itemId;
 					SongSelected songSelected = new SongSelected(song);
-					eventBus.onEvent(songSelected);
+					eventBus.publish(songSelected);
 				}
 
 				else if (itemId instanceof Artist) {
