@@ -6,6 +6,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 import com.vinoigitare.actions.EditSongAction;
 import com.vinoigitare.actions.NewSongAction;
@@ -30,6 +31,7 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	private ActionRegistry actionRegistry = new ActionRegistry();
 	private SettingsService settings;
 	private SongService songService;
+	private MainLayout layout;
 
 	public VinoigitareUI() {
 		songService = new SongService(eventBus);
@@ -46,13 +48,13 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		MainLayout layout = new MainLayout(this);
+		layout = new MainLayout(this);
 		setSizeFull();
 		setContent(layout);
 	}
 
 	@Override
-	public EventBus getEventBus() {
+	public final EventBus getEventBus() {
 		return eventBus;
 	}
 
@@ -69,6 +71,11 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	@Override
 	public final ActionRegistry getActionRegistry() {
 		return actionRegistry;
+	}
+
+	@Override
+	public void show(Component component) {
+		layout.show(component);
 	}
 
 }

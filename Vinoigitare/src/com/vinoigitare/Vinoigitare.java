@@ -1,5 +1,6 @@
 package com.vinoigitare;
 
+import com.vaadin.ui.Component;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
@@ -14,4 +15,6 @@ public interface Vinoigitare {
 	public DataService<Song> getSongService();
 	
 	public ActionRegistry getActionRegistry();
+	
+	public void show(Component component);
 }

@@ -24,7 +24,6 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 	private Song song = null;
 
 	public ToolsPanel() {
-		// this.song = song;
 
 		GridLayout grid = new GridLayout(1, 1);
 		grid.setSizeFull();

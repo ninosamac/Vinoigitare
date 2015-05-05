@@ -71,7 +71,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 	}
 
-	private void onSongSelected(SongSelected event) {		
+	private void onSongSelected(SongSelected event) {
 		Component secondComponent = horizontalSplitPanel.getSecondComponent();
 		if (secondComponent != null) {
 			horizontalSplitPanel.removeComponent(secondComponent);
@@ -112,6 +112,14 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		navigator = new Navigator(vinoigitare);
 
 		horizontalSplitPanel.setFirstComponent(navigator);
+	}
+
+	public void show(Component component) {
+		if (component != null) {
+			horizontalSplitPanel.removeComponent(horizontalSplitPanel
+					.getSecondComponent());
+			horizontalSplitPanel.setSecondComponent(component);
+		}
 	}
 
 }
