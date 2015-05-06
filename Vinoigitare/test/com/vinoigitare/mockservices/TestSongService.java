@@ -9,6 +9,7 @@ import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
+@SuppressWarnings("serial")
 public class TestSongService implements DataService<Song> {
 
 	private Storage storage = new TestStorageService();
