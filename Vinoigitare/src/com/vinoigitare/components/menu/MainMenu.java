@@ -10,10 +10,10 @@ import com.vinoigitare.ActionRegistry;
 import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.actions.Action;
-import com.vinoigitare.components.HelloPage;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Song;
+import com.vinoigitare.pages.HelloPage;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class MainMenu extends MenuBar implements EventHandler {

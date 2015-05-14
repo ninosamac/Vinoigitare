@@ -13,6 +13,7 @@ import com.vinoigitare.events.SongCreated;
 import com.vinoigitare.events.SongRemoved;
 import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Song;
+import com.vinoigitare.pages.HelloPage;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class MainLayout extends VerticalLayout implements EventHandler {

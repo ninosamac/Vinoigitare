@@ -1,4 +1,4 @@
-package com.vinoigitare.components;
+package com.vinoigitare.pages;
 
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Label;
