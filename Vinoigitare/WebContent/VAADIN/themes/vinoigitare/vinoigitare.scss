@@ -59,6 +59,19 @@ $v-font-family: Arial, Helvetica, sans-serif;
  font-family: "Lucida Console", Monaco, monospace !important; 
 }
 
+.dialog-title {
+ font-family: Arial, Helvetica, sans-serif;
+ text-align: center;
+ font-size: 200%; 
+ color: red;
+}
+
+.dialog-subtitle {
+ font-family: Arial, Helvetica, sans-serif;
+ text-align: center;
+ font-size: 150%; 
+}
+
 .vinoigitare .v-textarea-song-chords {
  font-family: "Lucida Console", Monaco, monospace;
 }

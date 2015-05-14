@@ -3,8 +3,13 @@ package com.vinoigitare.actions;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.Window.CloseEvent;
+import com.vaadin.ui.Window.CloseListener;
 import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
+import com.vinoigitare.components.ConfirmationDialog;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
@@ -46,15 +51,37 @@ public class RemoveSongAction extends AbstractAction {
 	}
 
 	@Override
-	public void execute(Vinoigitare vinoigitare, Object param) {
-		Song song = (Song) param;
+	public void execute(final Vinoigitare vinoigitare, Object param) {
+		final Song song = (Song) param;
 
-		DataService<Song> songService = vinoigitare.getSongService();
-		try {
-			songService.remove(song);
-		} catch (DataServiceException e) {
-			log.error(e);
-		}
+		CloseListener listener = new CloseListener() {
+
+			@Override
+			public void windowClose(CloseEvent e) {
+				ConfirmationDialog confirmationDialog = (ConfirmationDialog) e
+						.getWindow();
+				if (confirmationDialog.isConfirmed()) {
+					removeSong(song);
+				}
+
+			}
+
+			private void removeSong(Song song) {
+
+				DataService<Song> songService = vinoigitare.getSongService();
+				try {
+					songService.remove(song);
+				} catch (DataServiceException e) {
+					log.error(e);
+				}
+				
+				Notification.show("Song removed: "+song);
+			}
+
+		};
+		ConfirmationDialog confirmationDialog = new ConfirmationDialog(
+				"Do you really want to delete:", song.toString(), listener);
+		((UI) vinoigitare).addWindow(confirmationDialog);
 
 	}
 
