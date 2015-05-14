@@ -4,7 +4,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
-import com.vinoigitare.components.songeditor.EditWindow;
+import com.vinoigitare.components.songeditor.SongEditor;
 import com.vinoigitare.model.Song;
 
 @SuppressWarnings("serial")
@@ -43,10 +43,10 @@ public class EditSongAction extends AbstractAction {
 	@Override
 	public void execute(Vinoigitare vinoigitare, Object param) {
 
-		Song song = (Song)param;
-		Window editWindow = new EditWindow(song);
+		Song song = (Song) param;
+		Window songEditor = new SongEditor(song);
 		UI ui = (UI) vinoigitare;
-		ui.addWindow(editWindow);
+		ui.addWindow(songEditor);
 
 	}
 

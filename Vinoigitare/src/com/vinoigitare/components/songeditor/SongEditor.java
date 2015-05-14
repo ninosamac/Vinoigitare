@@ -11,6 +11,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
@@ -26,7 +27,7 @@ import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
 @SuppressWarnings("serial")
-public class SongEditor extends VerticalLayout {
+public class SongEditor extends Window {
 
 	private static final String REGEX_VALID_INPUT = "[[A-Z][0-9][ÈÆŽŠÐèæžšð]].*";
 	private Song song;
@@ -34,7 +35,6 @@ public class SongEditor extends VerticalLayout {
 	private TextField artistField;
 	private TextField titleField;
 	private TextArea chordsArea;
-	private Window window;
 
 	private final static Log log = LogFactory
 			.getLog(SongEditor.class.getName());
@@ -42,8 +42,19 @@ public class SongEditor extends VerticalLayout {
 	public SongEditor(Song song) {
 		this.song = song;
 
+		setSizeFull();
+		center();
+		Layout layout = createLayout();
+		setContent(layout);
+
+	}
+
+	private Layout createLayout() {
+
+		VerticalLayout layout = new VerticalLayout();
+
 		songItem = getItemFromSong(song);
-		setMargin(true);
+		layout.setMargin(true);
 
 		Panel formPanel = new Panel();
 		formPanel.addStyleName("songeditor");
@@ -65,9 +76,10 @@ public class SongEditor extends VerticalLayout {
 		buttons.addComponent(getButtonOk());
 		buttons.addComponent(getButtonCancel());
 
-		addComponent(formPanel);
-		addComponent(buttons);
+		layout.addComponent(formPanel);
+		layout.addComponent(buttons);
 
+		return layout;
 	}
 
 	private TextField getArtistTextField(PropertysetItem songItem) {
@@ -138,7 +150,7 @@ public class SongEditor extends VerticalLayout {
 					} else {
 						onSongUpdate();
 					}
-					
+
 				} catch (Exception e) {
 					Notification.show("Please fill the fields properly."
 							+ e.getMessage());
@@ -162,12 +174,14 @@ public class SongEditor extends VerticalLayout {
 		try {
 			songService.store(song);
 		} catch (DataServiceException e) {
-			Notification.show("Could not store song: " + song,e.getMessage(), Type.WARNING_MESSAGE);
+			Notification.show("Could not store song: " + song, e.getMessage(),
+					Type.WARNING_MESSAGE);
 			e.printStackTrace();
 		}
 
 		Notification.show("Song created: " + song);
 		vinoigitare.getEventBus().publish(new SongSelected(song));
+		close();
 	}
 
 	protected void onSongUpdate() {
@@ -182,7 +196,8 @@ public class SongEditor extends VerticalLayout {
 			songService.remove(previousVersion);
 			songService.store(song);
 		} catch (DataServiceException e) {
-			Notification.show("Could not update song: " + previousVersion ,e.getMessage(), Type.WARNING_MESSAGE);
+			Notification.show("Could not update song: " + previousVersion,
+					e.getMessage(), Type.WARNING_MESSAGE);
 			e.printStackTrace();
 		}
 
@@ -198,7 +213,7 @@ public class SongEditor extends VerticalLayout {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				try {
-					window.close();
+					close();
 					log.trace("Song edit cancelled: " + song);
 				} catch (Exception e) {
 					Notification.show(e.getMessage());
@@ -245,7 +260,4 @@ public class SongEditor extends VerticalLayout {
 
 	}
 
-	public void setWindow(Window window) {
-		this.window = window;
-	}
 }

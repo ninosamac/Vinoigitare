@@ -11,7 +11,7 @@ import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Vinoigitare;
-import com.vinoigitare.components.songeditor.EditWindow;
+import com.vinoigitare.components.songeditor.SongEditor;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Song;
@@ -51,7 +51,7 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				Window editWindow = new EditWindow(null);
+				Window editWindow = new SongEditor(null);
 				getUI().addWindow(editWindow);
 			}
 
@@ -67,7 +67,7 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				Window editWindow = new EditWindow(song);
+				Window editWindow = new SongEditor(song);
 				getUI().addWindow(editWindow);
 			}
 
