@@ -80,7 +80,7 @@ public class RemoveSongAction extends AbstractAction {
 
 		};
 		ConfirmationDialog confirmationDialog = new ConfirmationDialog(
-				"Do you really want to delete:", song.toString(), listener);
+				"Remove:", song.toString(), listener);
 		((UI) vinoigitare).addWindow(confirmationDialog);
 
 	}

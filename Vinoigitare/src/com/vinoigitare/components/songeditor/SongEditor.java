@@ -19,6 +19,7 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
+import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Artist;
@@ -75,6 +76,7 @@ public class SongEditor extends Window {
 		HorizontalLayout buttons = new HorizontalLayout();
 		buttons.addComponent(getButtonOk());
 		buttons.addComponent(getButtonCancel());
+		buttons.addStyleName(Constants.STYLE_CONFIRMATION_BUTTONS);
 
 		layout.addComponent(formPanel);
 		layout.addComponent(buttons);
