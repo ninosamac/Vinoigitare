@@ -25,8 +25,8 @@ public class ConfirmationDialog extends Window {
 		this.title = title;
 		this.subtitle = subtitle;
 
-		setWidth("800px");
-		setHeight("200px");
+		setWidth("600px");
+		setHeight("150px");
 		center();
 
 		Layout layout = createLayout();
@@ -42,6 +42,7 @@ public class ConfirmationDialog extends Window {
 
 	private Layout createLayout() {
 		VerticalLayout layout = new VerticalLayout();
+		layout.setMargin(true);
 
 		Label titleLabel = new Label(title);
 		titleLabel.addStyleName(Constants.STYLE_DIALOG_TITLE);
@@ -52,6 +53,7 @@ public class ConfirmationDialog extends Window {
 		layout.addComponent(subtitleLabel);
 
 		HorizontalLayout buttons = new HorizontalLayout();
+		buttons.addStyleName(Constants.STYLE_CONFIRMATION_BUTTONS);
 
 		Button okButton = createOkButton();
 		buttons.addComponent(okButton);
