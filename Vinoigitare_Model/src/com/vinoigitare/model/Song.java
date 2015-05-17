@@ -8,43 +8,44 @@ import com.ninosamac.storage.Storable;
 public class Song implements Serializable, Comparable<Song>, Storable<String>,
 		Identifiable<String> {
 
+	private static final String TITLE_UNKONWN = "no title";
 	private static final String ARTIST_UNKNOWN = "unknown";
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Artist artist;
+	private String artist;
 	private String title;
 	private String chords;
 	private String id;
 
 	public Song() {
-		artist = new Artist(ARTIST_UNKNOWN);
-		title = "no title";
+		artist = ARTIST_UNKNOWN;
+		title = TITLE_UNKONWN;
 		chords = "";
-		id = artist.getName() + " - " + title;
+		id = artist + " - " + title;
 	}
 
-	public Song(Artist artist, String title, String chords) {
+	public Song(String artist, String title, String chords) {
 		super();
 		if ((artist == null) || (title == null || chords == null))
 			throw new NullPointerException("Constructor arguments are invalid.");
 		this.artist = artist;
 		this.title = title;
 		this.chords = chords;
-		id = artist.getName() + " - " + title;
+		id = artist + " - " + title;
 	}
 
-	public Artist getArtist() {
+	public String getArtist() {
 		return artist;
 	}
 
-	public void setArtist(Artist artist) {
+	public void setArtist(String artist) {
 		if (artist == null) {
 			throw new NullPointerException("Argument can not be null.");
 		}
 		this.artist = artist;
-		this.id = artist.getName() + " - " + title;
+		this.id = artist + " - " + title;
 	}
 
 	public String getTitle() {
@@ -56,7 +57,7 @@ public class Song implements Serializable, Comparable<Song>, Storable<String>,
 			throw new NullPointerException("Argument can not be null.");
 		}
 		this.title = title;
-		this.id = artist.getName() + " - " + title;
+		this.id = artist + " - " + title;
 	}
 
 	public String getChords() {
@@ -135,7 +136,7 @@ public class Song implements Serializable, Comparable<Song>, Storable<String>,
 
 	public String asText() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(artist.getName());
+		sb.append(artist);
 		sb.append(" | ");
 		sb.append(title);
 		sb.append(" | ");

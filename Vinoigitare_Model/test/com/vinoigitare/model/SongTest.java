@@ -20,9 +20,9 @@ public class SongTest {
 
 	@Test(groups = { "fast" }, expectedExceptions = { NullPointerException.class }, suiteName = "model")
 	public void testConstructorThrowsNullPointException() {
-		new Song(new Artist("artist"), "title", "chords");
-		new Song(new Artist("artist"), "title", null);
-		new Song(new Artist("artist"), null, "chords");
+		new Song("artist", "title", "chords");
+		new Song("artist", "title", null);
+		new Song("artist", null, "chords");
 		new Song(null, "title", "chords");
 		fail("Expected Exception not thrown.");
 	}
@@ -30,8 +30,8 @@ public class SongTest {
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testConstructor() {
 
-		Song song = new Song(new Artist("artist"), "title", "chords");
-		assertEquals(song.getArtist(), new Artist("artist"));
+		Song song = new Song("artist", "title", "chords");
+		assertEquals(song.getArtist(), "artist");
 		assertEquals(song.getChords(), "chords");
 		assertEquals(song.getId(), "artist - title");
 		assertEquals(song.getTitle(), "title");
@@ -40,8 +40,8 @@ public class SongTest {
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testEquals() {
 
-		Artist artist1 = new Artist("artist1");
-		Artist artist2 = new Artist("artist2");
+		String artist1 = "artist1";
+		String artist2 = "artist2";
 
 		String chords1 = "chords1";
 		String chords2 = "chords2";
@@ -66,8 +66,8 @@ public class SongTest {
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testId() {
 
-		Artist artist1 = new Artist("artist1");
-		Artist artist2 = new Artist("artist2");
+		String artist1 = "artist1";
+		String artist2 = "artist2";
 
 		Song song1 = new Song(artist1, "title1", "chords");
 		Song song2 = new Song(artist1, "title1", "chords");
@@ -92,7 +92,7 @@ public class SongTest {
 		Song song = new Song();
 		assertEquals(song.getId(), "unknown - no title");
 
-		song.setArtist(new Artist("Vojislav Šešelj"));
+		song.setArtist("Vojislav Šešelj");
 		assertEquals(song.getId(), "Vojislav Šešelj - no title");
 
 		song.setTitle("S kim si me noæas vavava");
@@ -106,7 +106,7 @@ public class SongTest {
 	@Test(groups = { "fast" }, suiteName = "model")
 	public void testSetArtist() {
 		Song song = new Song();
-		Artist artist = new Artist();
+		String artist = "unknown";
 		song.setArtist(artist);
 		assertEquals(artist, song.getArtist());
 	}
