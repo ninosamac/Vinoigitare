@@ -5,7 +5,8 @@ import java.io.Serializable;
 import com.ninosamac.storage.Identifiable;
 import com.ninosamac.storage.Storable;
 
-public class Song implements Serializable, Comparable<Song>, Storable<String>, Identifiable<String> {
+public class Song implements Serializable, Comparable<Song>, Storable<String>,
+		Identifiable<String> {
 
 	private static final String ARTIST_UNKNOWN = "unknown";
 	/**
@@ -132,4 +133,14 @@ public class Song implements Serializable, Comparable<Song>, Storable<String>, I
 		return "[" + id + "]";
 	}
 
+	public String asText() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(artist.getName());
+		sb.append(" | ");
+		sb.append(title);
+		sb.append(" | ");
+		sb.append(chords);
+		return sb.toString();
+
+	}
 }
