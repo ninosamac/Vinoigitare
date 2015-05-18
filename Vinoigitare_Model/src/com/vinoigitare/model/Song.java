@@ -2,11 +2,10 @@ package com.vinoigitare.model;
 
 import java.io.Serializable;
 
-import com.ninosamac.storage.Identifiable;
 import com.ninosamac.storage.Storable;
 
-public class Song implements Serializable, Comparable<Song>, Storable<String>,
-		Identifiable<String> {
+public class Song implements Serializable, Comparable<Song>, Storable<String>
+		{
 
 	private static final String TITLE_UNKONWN = "no title";
 	private static final String ARTIST_UNKNOWN = "unknown";
@@ -86,13 +85,14 @@ public class Song implements Serializable, Comparable<Song>, Storable<String>,
 		this.id = id;
 	}
 
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((artist == null) ? 0 : artist.hashCode());
 		result = prime * result + ((chords == null) ? 0 : chords.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -115,11 +115,6 @@ public class Song implements Serializable, Comparable<Song>, Storable<String>,
 			if (other.chords != null)
 				return false;
 		} else if (!chords.equals(other.chords))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
 			return false;
 		if (title == null) {
 			if (other.title != null)

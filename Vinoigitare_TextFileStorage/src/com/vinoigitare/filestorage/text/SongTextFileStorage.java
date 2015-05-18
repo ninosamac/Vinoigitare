@@ -42,14 +42,17 @@ public class SongTextFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public void remove(String id) throws DataServiceException {
+	public Song remove(String id) throws DataServiceException {
+		Song song = load(id);
 		String fileName = getFilenameFromId(id);
+		
 		try {
 			util.removeFile(fileName);
 			log.info("Removed song file: " + fileName);
 		} catch (FileNotFoundException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
+		return song;
 	}
 
 	@Override

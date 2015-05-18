@@ -1,6 +1,8 @@
 package com.vinoigitare.filestorage.text;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,59 +13,64 @@ import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataServiceException;
 
 public class SongServiceCacheTest {
-	
-	@SuppressWarnings("unchecked")
+
 	@Test(groups = "fast")
 	public void testStoreAndLoadSong() throws DataServiceException {
-		
+
 		SongServiceCache storage = new SongServiceCache();
 		Song song = new TestHelper().getTestSong();
-		if (storage.exists(song.getId())) {
-			storage.remove(song);
+		String id = song.getId();
+		if (storage.exists(id)) {
+			storage.remove(id);
 		}
-		assertEquals(storage.exists(song.getId()), false);
+		assertFalse(storage.exists(id));
 
 		Collection<?> ids = storage.listIds();
 
-		assertEquals(ids.contains(song.getId()), false);
+		assertFalse(ids.contains(id));
 
 		storage.store(song);
-		assertEquals(storage.exists(song.getId()), true);
+		assertTrue(storage.exists(id));
 
 		ids = (ArrayList<String>) storage.listIds();
-		assertEquals(ids.contains(song.getId()), true);
+		assertTrue(ids.contains(id));
 
 		Song song1 = null;
 		song1 = storage.load(song.getId());
 		assertEquals(song, song1);
 
-		// clean up afterwards.
-		storage.remove(song);
-	
+		storage.remove(id);
+		assertFalse(storage.exists(id));
+
+		ids = (ArrayList<String>) storage.listIds();
+		assertFalse(ids.contains(id));
+
+		assertTrue(ids.isEmpty());
+
 	}
-	
-	@Test(groups = "fast", expectedExceptions={NullPointerException.class})
+
+	@Test(groups = "fast", expectedExceptions = { NullPointerException.class })
 	public void testStoreThrowsNullPointerException() {
 		SongServiceCache storage = new SongServiceCache();
 		storage.store(null);
 	}
 
-	@Test(groups = "fast", expectedExceptions={NullPointerException.class})
+	@Test(groups = "fast", expectedExceptions = { NullPointerException.class })
 	public void testRemoveThrowsNullPointerException() {
 		SongServiceCache storage = new SongServiceCache();
 		storage.remove(null);
 	}
 
-	@Test(groups = "fast", expectedExceptions={NullPointerException.class})
+	@Test(groups = "fast", expectedExceptions = { NullPointerException.class })
 	public void testExistsThrowsNullPointerException() {
 		SongServiceCache storage = new SongServiceCache();
 		storage.exists(null);
 	}
-	
-	@Test(groups = "fast", expectedExceptions={NullPointerException.class})
+
+	@Test(groups = "fast", expectedExceptions = { NullPointerException.class })
 	public void testLoadThrowsNullPointerException() {
 		SongServiceCache storage = new SongServiceCache();
-		storage.load(null);		
+		storage.load(null);
 	}
 
 }

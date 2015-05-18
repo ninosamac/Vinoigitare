@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Vinoigitare_Util
+Bundle-SymbolicName: Vinoigitare_Util
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: com.vinoigitare.eventbus
+Import-Package: org.apache.commons.logging

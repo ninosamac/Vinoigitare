@@ -32,15 +32,18 @@ public class SongXMLFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public void remove(String id) throws DataServiceException {
+	public Song remove(String id) throws DataServiceException {
 
 		StringId storageId = new StringId((String) id);
+		Song song = null;
 
 		try {
+			song = (Song) storage.load(Song.class, storageId);
 			storage.remove(Song.class, storageId);
 		} catch (StorageException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
+		return song;
 	}
 
 	@Override

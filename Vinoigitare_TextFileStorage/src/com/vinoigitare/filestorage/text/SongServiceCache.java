@@ -18,8 +18,8 @@ public class SongServiceCache {
 		songsByIds.put(song.getId(), song);
 	}
 
-	public void remove(Song song) {
-		songsByIds.remove(song.getId());
+	public void remove(String id) {
+		songsByIds.remove(id);
 	}
 
 	public boolean exists(String id) {
@@ -29,7 +29,7 @@ public class SongServiceCache {
 		return songsByIds.containsKey(id);
 	}
 
-	public Song load(Comparable<?> id) {
+	public Song load(String id) {
 		return songsByIds.get(id);
 	}
 
@@ -39,7 +39,7 @@ public class SongServiceCache {
 		return songs;
 	}
 
-	public Collection<?> listIds() {
+	public Collection<String> listIds() {
 		ArrayList<String> ids = new ArrayList<String>();
 		ids.addAll(songsByIds.keySet());
 		return ids;

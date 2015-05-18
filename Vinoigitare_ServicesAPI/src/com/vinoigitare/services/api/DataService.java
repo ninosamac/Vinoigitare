@@ -36,10 +36,11 @@ public interface DataService<T> extends Serializable {
 	 * 
 	 * @param id
 	 *            id of object to be removed
+	 * @return removed object
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
-	void remove(String id) throws DataServiceException;
+	T remove(String id) throws DataServiceException;
 
 	/**
 	 * Checks if there is an object of the same class and the same id already in

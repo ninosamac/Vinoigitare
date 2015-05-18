@@ -42,27 +42,29 @@ public class SongService implements DataService<Song> {
 	}
 
 	@Override
-	public void store(Song song) throws DataServiceException {
+	public String store(Song song) throws DataServiceException {
 		if (song == null) {
 			throw new DataServiceException("Can not store: null");
 		}
 		storage.store(song);
 		cache.store(song);
 		eventBus.publish(new SongCreated(song));
+		return song.getId();
 	}
 
 	@Override
-	public void remove(Song song) throws DataServiceException {
-		if (song == null) {
+	public Song remove(String id) throws DataServiceException {
+		if (id == null) {
 			throw new DataServiceException("Can not remove: null");
 		}
-		storage.remove(song);
-		cache.remove(song);
+		Song song = storage.remove(id);
+		cache.remove(id);
 		eventBus.publish(new SongRemoved(song));
+		return song;
 	}
 
 	@Override
-	public Song load(Comparable<?> id) throws DataServiceException {
+	public Song load(String id) throws DataServiceException {
 		if (id == null) {
 			throw new DataServiceException("Invalid argument: null");
 		}
@@ -74,13 +76,11 @@ public class SongService implements DataService<Song> {
 		Song song = storage.load(id);
 		cache.store(song);
 		return song;
-
 	}
 
 	@Override
 	public Collection<Song> loadAll() throws DataServiceException {
 
-		@SuppressWarnings("unchecked")
 		ArrayList<String> ids = (ArrayList<String>) storage.listIds();
 		ArrayList<Song> songs = new ArrayList<Song>();
 		for (String id : ids) {
@@ -97,12 +97,12 @@ public class SongService implements DataService<Song> {
 	}
 
 	@Override
-	public Collection<?> listIds() throws DataServiceException {
+	public Collection<String> listIds() throws DataServiceException {
 		return storage.listIds();
 	}
 
 	@Override
-	public boolean contains(Comparable<?> id) throws DataServiceException {
+	public boolean contains(String id) throws DataServiceException {
 		return storage.contains(id);
 	}
 
