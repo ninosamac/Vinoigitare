@@ -1,43 +1,58 @@
 package com.vinoigitare.filestorage.xml;
 
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 
+import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataServiceException;
 
 public class SongXMLFileStorageTest {
-	private static final String testFolder = System.getProperty("user.home")
-			+ "/" + "Vinoigitare/Songs";
+	
+	private static final String FOLDER = System.getProperty("user.home") + "/"
+			+ "temp/SongXMLFileStorage";
 
 	@Test(groups = "io")
 	public void testStoreAndLoadSong() throws DataServiceException {
-		SongXMLFileStorage storage = new SongXMLFileStorage(testFolder);
+		SongXMLFileStorage storage = new SongXMLFileStorage(FOLDER);
 
 		Song song = getTestSong();
-		if (storage.contains(song)) {
-			storage.remove(song);
+		String id = song.getId();
+		if (storage.contains(id)) {
+			storage.remove(id);
 		}
-		assertEquals(storage.contains(song), false);
-		
+		assertEquals(storage.contains(id), false);
+
 		Collection<?> ids = storage.listIds();
-		assertEquals(ids.contains(song.getId()), false);
-		
-		storage.store(song);		
-		assertEquals(storage.contains(song), true);
-		
+		assertEquals(ids.contains(id), false);
+
+		storage.store(song);
+		assertEquals(storage.contains(id), true);		
+
 		ids = storage.listIds();
-		assertEquals(ids.contains(song.getId()), true);
-		
+		assertTrue(ids.contains(id));
+		Collection<Song> songs = storage.loadAll();
+		assertTrue(songs.contains(song));		
+
 		Song song1 = null;
 		song1 = storage.load(song.getId());
 		assertEquals(song, song1);
+		
+		storage.remove(id);
+		assertFalse(storage.contains(id));
+		assertFalse(storage.listIds().contains(id));
 
 		// clean up afterwards.
-		storage.remove(song);
+		try {
+			FileUtils.deleteDirectory(new File(FOLDER));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 

@@ -1,8 +1,11 @@
 package com.vinoigitare.filestorage.xml;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.ninosamac.storage.StorageException;
+import com.ninosamac.storage.StorageId;
+import com.ninosamac.storage.StringId;
 import com.ninosamac.storage.file.xml.XMLFileStorage;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
@@ -18,27 +21,35 @@ public class SongXMLFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public void store(Song song) throws DataServiceException {
+	public String store(Song song) throws DataServiceException {
+		StorageId<?> storageId = null;
 		try {
-			storage.store(song);
+			storageId = storage.store(song);
+		} catch (StorageException e) {
+			throw new DataServiceException(e.getMessage(), e);
+		}
+		return (String) storageId.getValue();
+	}
+
+	@Override
+	public void remove(String id) throws DataServiceException {
+
+		StringId storageId = new StringId((String) id);
+
+		try {
+			storage.remove(Song.class, storageId);
 		} catch (StorageException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
 	}
 
 	@Override
-	public void remove(Song song) throws DataServiceException {
-		try {
-			storage.remove(song);
-		} catch (StorageException e) {
-			throw new DataServiceException(e.getMessage(), e);
-		}
-	}
+	public Song load(String id) throws DataServiceException {
 
-	@Override
-	public Song load(Comparable<?> id) throws DataServiceException {
+		StringId storageId = new StringId((String) id);
+
 		try {
-			return (Song) storage.load(Song.class, id);
+			return (Song) storage.load(Song.class, storageId);
 		} catch (StorageException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
@@ -55,18 +66,28 @@ public class SongXMLFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public Collection<?> listIds() throws DataServiceException {
+	public Collection<String> listIds() throws DataServiceException {
 		try {
-			return storage.listIds(Song.class);
+			Collection<StorageId<?>> storageIds = storage.listIds(Song.class);
+			ArrayList<String> ids = new ArrayList<String>();
+			for (StorageId<?> storageId : storageIds) {
+				String id = (String) storageId.getValue();
+				ids.add(id);
+			}
+			return ids;
 		} catch (StorageException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
+
 	}
 
 	@Override
-	public boolean contains(Comparable<?> id) throws DataServiceException {
+	public boolean contains(String id) throws DataServiceException {
+
+		StringId storageId = new StringId((String) id);
+
 		try {
-			return storage.contains(Song.class, id);
+			return storage.contains(Song.class, storageId);
 		} catch (StorageException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}

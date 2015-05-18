@@ -3,41 +3,55 @@ package com.vinoigitare.services.api;
 import java.io.Serializable;
 import java.util.Collection;
 
-public interface DataService<T> extends Serializable{
+/**
+ * Interface for services providing storage for objects of type <code>T</code>.
+ * Uses ids of type <code>String</String> to address objects.
+ * <p>
+ * Note: String <code>ids</code> used for accessing objects may be created by
+ * {@link #store(Object)} method, or may be provided by user beforehand. Check
+ * implementation for this.
+ * 
+ * @author nino.samac
+ *
+ * @param <T>
+ */
+public interface DataService<T> extends Serializable {
 
 	/**
 	 * Store specified object. If there is an object of the same class and the
 	 * same id already in the data store, it will be overridden.
+	 * <p>
+	 * Note: id for object may be created by this method, or it
 	 * 
 	 * @param object
 	 *            object to be stored
+	 * @return id of stored object.
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
-	void store(T object) throws DataServiceException;
+	String store(T object) throws DataServiceException;
 
 	/**
 	 * Removes object from data store.
 	 * 
-	 * @param object
-	 *            object to be removed
+	 * @param id
+	 *            id of object to be removed
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
-	void remove(T object) throws DataServiceException;
-
+	void remove(String id) throws DataServiceException;
 
 	/**
 	 * Checks if there is an object of the same class and the same id already in
 	 * the data store.
 	 * 
 	 * @param id
-	 *            reference to object for which to check
+	 *            object's identifier
 	 * @return <code>true</code> if stored, <code>false</code> if not
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
-	boolean contains(Comparable<?> id) throws DataServiceException;
+	boolean contains(String id) throws DataServiceException;
 
 	/**
 	 * Loads object of the given type and with the given id from data store.
@@ -51,7 +65,7 @@ public interface DataService<T> extends Serializable{
 	 *             if any error occurs
 	 */
 
-	T load(Comparable<?> id) throws DataServiceException;
+	T load(String id) throws DataServiceException;
 
 	/**
 	 * Returns all stored objects of the type <code>T</code>. Note: if there are
@@ -73,6 +87,6 @@ public interface DataService<T> extends Serializable{
 	 * @throws DataServiceException
 	 *             if any error occurs
 	 */
-	Collection<?> listIds() throws DataServiceException;
+	Collection<String> listIds() throws DataServiceException;
 
 }
