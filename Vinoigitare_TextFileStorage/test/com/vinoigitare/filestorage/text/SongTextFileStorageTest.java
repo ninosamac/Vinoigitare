@@ -1,10 +1,15 @@
 package com.vinoigitare.filestorage.text;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
 import com.vinoigitare.model.Song;
@@ -12,37 +17,46 @@ import com.vinoigitare.services.api.DataServiceException;
 
 public class SongTextFileStorageTest {
 
-	private static final String testFolder = System.getProperty("user.home")
-			+ "/" + "Vinoigitare/Songs";
+	private static final String FOLDER = System.getProperty("user.home") + "/"
+			+ "temp/SongTextFileStorageTest";
 
-	@SuppressWarnings("unchecked")
 	@Test(groups = "io")
 	public void testStoreAndLoadSong() throws DataServiceException {
-		SongTextFileStorage storage = new SongTextFileStorage(testFolder);
+		SongTextFileStorage storage = new SongTextFileStorage(FOLDER);
 
-		
 		Song song = new TestHelper().getTestSong();
-		if (storage.contains(song)) {
-			storage.remove(song);
+		String id = song.getId();
+		if (storage.contains(id)) {
+			storage.remove(id);
 		}
-		assertEquals(storage.contains(song), false);
+		assertFalse(storage.contains(id));
 
 		Collection<?> ids = storage.listIds();
 
-		assertEquals(ids.contains(song.getId()), false);
+		assertFalse(ids.contains(id));
 
 		storage.store(song);
-		assertEquals(storage.contains(song), true);
+		assertTrue(storage.contains(id));
 
 		ids = (ArrayList<String>) storage.listIds();
-		assertEquals(ids.contains(song.getId()), true);
+		assertTrue(ids.contains(id));
 
 		Song song1 = null;
-		song1 = storage.load(song.getId());
+		song1 = storage.load(id);
 		assertEquals(song, song1);
 
+		storage.remove(id);
+		assertFalse(storage.contains(id));
+		ids = storage.listIds();
+		assertFalse(ids.contains(id));
+
 		// clean up afterwards.
-		storage.remove(song);
+		try {
+			FileUtils.deleteDirectory(new File(FOLDER));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

@@ -1,11 +1,10 @@
 package com.vinoigitare.filestorage.text;
 
-import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
 public class TestHelper {
 	public Song getTestSong() {
-		Artist artist = new Artist("Mišo Kovaè");
+		String artist = "Mišo Kovaè";
 		Song song = new Song(artist, "Dalmacija u mom oku",
 				"Pitaju me zasto pjevam\n" + "o tom moru, buri, jugu\n"
 						+ "govore mi kako sanjam\n" + "obecanu zemlju drugu\n"

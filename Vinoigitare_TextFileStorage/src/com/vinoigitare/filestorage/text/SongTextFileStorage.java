@@ -9,13 +9,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.ninosamac.storage.file.util.FolderUtil;
-import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
 
 @SuppressWarnings("serial")
-public class SongTextFileStorage implements DataService<Song>{
+public class SongTextFileStorage implements DataService<Song> {
 
 	private static final Log log = LogFactory.getLog(SongTextFileStorage.class
 			.getName());
@@ -28,8 +27,10 @@ public class SongTextFileStorage implements DataService<Song>{
 		log.info("SongTextFileStorage started. Using folder: " + folder);
 	}
 
-	public void store(Song song) throws DataServiceException {
-		String fileName = song.getId() + FILE_EXTENSION;
+	@Override
+	public String store(Song song) throws DataServiceException {
+		String id = song.getId();
+		String fileName = getFilenameFromId(id);
 		String content = song.getChords();
 		try {
 			util.storeTextual(fileName, content);
@@ -37,22 +38,23 @@ public class SongTextFileStorage implements DataService<Song>{
 		} catch (IOException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
-
+		return id;
 	}
 
-	public void remove(Song song) throws DataServiceException {
-		String fileName = song.getId() + FILE_EXTENSION;
+	@Override
+	public void remove(String id) throws DataServiceException {
+		String fileName = getFilenameFromId(id);
 		try {
 			util.removeFile(fileName);
 			log.info("Removed song file: " + fileName);
 		} catch (FileNotFoundException e) {
 			throw new DataServiceException(e.getMessage(), e);
 		}
-
 	}
 
-	public Song load(Comparable<?> id) throws DataServiceException {
-		String fileName = id.toString() + FILE_EXTENSION;
+	@Override
+	public Song load(String id) throws DataServiceException {
+		String fileName = getFilenameFromId(id);
 		String chords = null;
 		try {
 			chords = util.loadTextual(fileName);
@@ -65,10 +67,11 @@ public class SongTextFileStorage implements DataService<Song>{
 		String artist = tokens[0];
 		String title = tokens[1].replace(FILE_EXTENSION, "");
 
-		Song song = new Song(new Artist(artist), title, chords);
+		Song song = new Song(artist, title, chords);
 		return song;
 	}
 
+	@Override
 	public List<Song> loadAll() throws DataServiceException {
 		List<String> fileNames = util.listFileNames();
 		ArrayList<String> ids = new ArrayList<String>();
@@ -85,7 +88,8 @@ public class SongTextFileStorage implements DataService<Song>{
 		return songs;
 	}
 
-	public List<?> listIds() throws DataServiceException {
+	@Override
+	public List<String> listIds() throws DataServiceException {
 		List<String> fileNames = util.listFileNames();
 		for (String fileName : fileNames) {
 			if (!fileName.endsWith(FILE_EXTENSION)) {
@@ -101,8 +105,12 @@ public class SongTextFileStorage implements DataService<Song>{
 	}
 
 	@Override
-	public boolean contains(Comparable<?> id) throws DataServiceException {
-		String fileName = id + FILE_EXTENSION;
-		return util.fileExists(fileName);	
+	public boolean contains(String id) throws DataServiceException {
+		String fileName = getFilenameFromId(id);
+		return util.fileExists(fileName);
+	}
+
+	private String getFilenameFromId(String id) {
+		return id + FILE_EXTENSION;
 	}
 }
