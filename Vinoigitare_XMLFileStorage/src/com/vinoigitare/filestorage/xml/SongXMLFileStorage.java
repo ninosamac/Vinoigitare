@@ -3,7 +3,7 @@ package com.vinoigitare.filestorage.xml;
 import java.util.Collection;
 
 import com.ninosamac.storage.StorageException;
-import com.ninosamac.storage.file.xml.FileXMLStorage;
+import com.ninosamac.storage.file.xml.XMLFileStorage;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.api.DataService;
 import com.vinoigitare.services.api.DataServiceException;
@@ -11,10 +11,10 @@ import com.vinoigitare.services.api.DataServiceException;
 @SuppressWarnings("serial")
 public class SongXMLFileStorage implements DataService<Song> {
 
-	private FileXMLStorage storage;
+	private XMLFileStorage storage;
 
 	public SongXMLFileStorage(String folder) {
-		storage = new FileXMLStorage(folder);
+		storage = new XMLFileStorage(folder);
 	}
 
 	@Override
