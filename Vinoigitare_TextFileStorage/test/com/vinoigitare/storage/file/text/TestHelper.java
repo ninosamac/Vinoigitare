@@ -1,4 +1,4 @@
-package com.vinoigitare.filestorage.text;
+package com.vinoigitare.storage.file.text;
 
 import com.vinoigitare.model.Song;
 

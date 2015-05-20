@@ -1,4 +1,4 @@
-package com.vinoigitare.filestorage.text;
+package com.vinoigitare.storage.file.text;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -13,7 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataServiceException;
+import com.vinoigitare.storage.StorageException;
 
 public class SongTextFileStorageTest {
 
@@ -21,7 +21,7 @@ public class SongTextFileStorageTest {
 			+ "temp/SongTextFileStorageTest";
 
 	@Test(groups = "io")
-	public void testStoreAndLoadSong() throws DataServiceException {
+	public void testStoreAndLoadSong() throws StorageException {
 		SongTextFileStorage storage = new SongTextFileStorage(FOLDER);
 
 		Song song = new TestHelper().getTestSong();

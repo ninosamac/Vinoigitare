@@ -5,16 +5,14 @@ Bundle-SymbolicName: Vinoigitare_TextFileStorage
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Aristotel
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: com.ninosamac.storage,
- com.ninosamac.storage.file,
- com.ninosamac.storage.file.util,
- com.ninosamac.storage.file.xml,
- com.vinoigitare.eventbus,
+Import-Package: com.vinoigitare.eventbus,
  com.vinoigitare.events,
  com.vinoigitare.model,
  com.vinoigitare.services.api,
  com.vinoigitare.settings,
+ com.vinoigitare.storage,
+ com.vinoigitare.util.file,
  org.apache.commons.io;version="2.4.0",
  org.apache.commons.logging;version="1.1.1"
-Export-Package: com.vinoigitare.filestorage.text
+Export-Package: com.vinoigitare.storage.file.text
 Service-Component: OSGI-INF/component.xml

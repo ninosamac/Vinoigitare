@@ -1,4 +1,4 @@
-package com.vinoigitare.filestorage.text;
+package com.vinoigitare.storage.file.text;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -8,13 +8,13 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.ninosamac.storage.file.util.FolderUtil;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataService;
-import com.vinoigitare.services.api.DataServiceException;
+import com.vinoigitare.storage.Storage;
+import com.vinoigitare.storage.StorageException;
+import com.vinoigitare.util.file.FolderUtil;
 
 @SuppressWarnings("serial")
-public class SongTextFileStorage implements DataService<Song> {
+public class SongTextFileStorage implements Storage<Song> {
 
 	private static final Log log = LogFactory.getLog(SongTextFileStorage.class
 			.getName());
@@ -28,43 +28,44 @@ public class SongTextFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public String store(Song song) throws DataServiceException {
+	public String store(Song song) throws StorageException {
 		String id = song.getId();
 		String fileName = getFilenameFromId(id);
 		String content = song.getChords();
+
 		try {
 			util.storeTextual(fileName, content);
-			log.info("Stored song file: " + fileName);
 		} catch (IOException e) {
-			throw new DataServiceException(e.getMessage(), e);
+			throw new StorageException(e.getMessage(), e);
 		}
+		log.info("Stored song file: " + fileName);
+
 		return id;
 	}
 
 	@Override
-	public Song remove(String id) throws DataServiceException {
-		Song song = load(id);
+	public void remove(String id) throws StorageException {
+
 		String fileName = getFilenameFromId(id);
-		
+
 		try {
 			util.removeFile(fileName);
-			log.info("Removed song file: " + fileName);
 		} catch (FileNotFoundException e) {
-			throw new DataServiceException(e.getMessage(), e);
+			throw new StorageException(e.getMessage(), e);
 		}
-		return song;
+		log.info("Removed song file: " + fileName);
 	}
 
 	@Override
-	public Song load(String id) throws DataServiceException {
+	public Song load(String id) throws StorageException {
 		String fileName = getFilenameFromId(id);
 		String chords = null;
 		try {
 			chords = util.loadTextual(fileName);
-			log.trace("Loaded song from file: " + fileName);
 		} catch (IOException e) {
-			throw new DataServiceException(e.getMessage(), e);
+			throw new StorageException(e.getMessage(), e);
 		}
+		log.trace("Loaded song from file: " + fileName);
 
 		String[] tokens = fileName.split("\\s-\\s");
 		String artist = tokens[0];
@@ -75,7 +76,8 @@ public class SongTextFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public List<Song> loadAll() throws DataServiceException {
+	public List<Song> loadAll() throws StorageException {
+		log.trace("Loading all songs... ");
 		List<String> fileNames = util.listFileNames();
 		ArrayList<String> ids = new ArrayList<String>();
 		for (String fileName : fileNames) {
@@ -92,7 +94,7 @@ public class SongTextFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public List<String> listIds() throws DataServiceException {
+	public List<String> listIds() throws StorageException {
 		List<String> fileNames = util.listFileNames();
 		for (String fileName : fileNames) {
 			if (!fileName.endsWith(FILE_EXTENSION)) {
@@ -108,7 +110,7 @@ public class SongTextFileStorage implements DataService<Song> {
 	}
 
 	@Override
-	public boolean contains(String id) throws DataServiceException {
+	public boolean contains(String id) throws StorageException {
 		String fileName = getFilenameFromId(id);
 		return util.fileExists(fileName);
 	}

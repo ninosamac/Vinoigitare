@@ -8,4 +8,4 @@
  * @author nino.samac
  *
  */
-package com.vinoigitare.filestorage.text;
+package com.vinoigitare.storage.file.text;
