@@ -15,7 +15,6 @@ import com.vaadin.ui.Tree;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.events.SongSelected;
-import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
 public class SongTree extends Tree {
@@ -27,7 +26,7 @@ public class SongTree extends Tree {
 	private final static Log log = LogFactory.getLog(SongTree.class.getName());
 
 	private Collection<Song> songs;
-	private TreeMap<Artist, TreeSet<Song>> songsByArtists = new TreeMap<Artist, TreeSet<Song>>();
+	private TreeMap<String, TreeSet<Song>> songsByArtists = new TreeMap<String, TreeSet<Song>>();
 	private EventBus eventBus;
 
 	public SongTree(Vinoigitare vinoigitare, Collection<Song> songs) {
@@ -46,26 +45,26 @@ public class SongTree extends Tree {
 
 	private void populateItems() {
 
-		TreeSet<Artist> artists = new TreeSet<Artist>();
+		TreeSet<String> artists = new TreeSet<String>();
 
 		for (Song song : songs) {
-			Artist artist = song.getArtist();
+			String artist = song.getArtist();
 			artists.add(artist);
 		}
 
-		for (Artist artist : artists) {
+		for (String artist : artists) {
 			TreeSet<Song> songsByArtist = new TreeSet<Song>();
 			songsByArtists.put(artist, songsByArtist);
 		}
 
 		for (Song song : songs) {
-			Artist artist = song.getArtist();
+			String artist = song.getArtist();
 			TreeSet<Song> songsByArtist = songsByArtists.get(artist);
 			songsByArtist.add(song);
 		}
 
-		for (Artist artist : artists) {
-			String name = artist.getName();
+		for (String artist : artists) {
+			String name = artist;
 			setItemCaption(artist, name);
 			addItem(artist);
 			setChildrenAllowed(artist, true);
@@ -82,11 +81,11 @@ public class SongTree extends Tree {
 			}
 		}
 	}
+
 	@SuppressWarnings("serial")
 	class SongTreeClickListener implements ItemClickListener {
 
 		private EventBus eventBus;
-	
 
 		public SongTreeClickListener(EventBus eventBus) {
 			super();
@@ -107,7 +106,7 @@ public class SongTree extends Tree {
 					eventBus.publish(songSelected);
 				}
 
-				else if (itemId instanceof Artist) {
+				else if (itemId instanceof String) {
 					log.trace("Artist selected: " + itemId);
 				}
 			} else if (event.getButton() == MouseButton.RIGHT) {

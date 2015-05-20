@@ -3,7 +3,6 @@ package com.vinoigitare.components.navigator;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
 public class SongTreeTestData {
@@ -11,9 +10,9 @@ public class SongTreeTestData {
 	public static Collection<Song> generate() {
 		ArrayList<Song> songs = new ArrayList<Song>();
 
-		Artist artist1 = new Artist("Artist 1");
-		Artist artist2 = new Artist("Artist 2");
-		Artist artist3 = new Artist("Artist 3");
+		String artist1 = "Artist 1";
+		String artist2 = "Artist 2";
+		String artist3 = "Artist 3";
 		songs.add(new Song(artist1, "Title 1", "Text 1/nText 1"));
 		songs.add(new Song(artist1, "Title 2", "Text 2/nText 2"));
 		songs.add(new Song(artist1, "Title 3", "Text 3/nText 3"));

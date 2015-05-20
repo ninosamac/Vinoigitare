@@ -15,8 +15,8 @@ import com.vinoigitare.components.songeditor.SongEditor;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongSelected;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataService;
-import com.vinoigitare.services.api.DataServiceException;
+import com.vinoigitare.services.SongService;
+import com.vinoigitare.services.SongServiceException;
 
 @SuppressWarnings("serial")
 public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
@@ -84,10 +84,10 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				Vinoigitare vinoigitare = (Vinoigitare) getUI();
-				DataService<Song> songService = vinoigitare.getSongService();
+				SongService songService = vinoigitare.getSongService();
 				try {
-					songService.remove(song);
-				} catch (DataServiceException e) {
+					songService.remove(song.getId());
+				} catch (SongServiceException e) {
 					Notification.show("Could not remove song: " + song,
 							e.getMessage(), Type.WARNING_MESSAGE);
 					e.printStackTrace();

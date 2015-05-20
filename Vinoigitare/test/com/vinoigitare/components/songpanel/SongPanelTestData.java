@@ -1,13 +1,12 @@
 package com.vinoigitare.components.songpanel;
 
-import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
 public class SongPanelTestData {
 
 	public static Song generate() {
 
-		Artist artist = new Artist("QUEEN");
+		String artist = "QUEEN";
 		String title = "A kind of magic";
 		String chords = "N.C. (no chord!)\r\n"
 				+ "Its a kind of magic, its a kind of magic, its a kind of magic\r\n"

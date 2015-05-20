@@ -11,8 +11,9 @@ import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.ConfirmationDialog;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataService;
-import com.vinoigitare.services.api.DataServiceException;
+import com.vinoigitare.services.SongService;
+import com.vinoigitare.services.SongServiceException;
+
 
 @SuppressWarnings("serial")
 public class RemoveSongAction extends AbstractAction {
@@ -68,10 +69,10 @@ public class RemoveSongAction extends AbstractAction {
 
 			private void removeSong(Song song) {
 
-				DataService<Song> songService = vinoigitare.getSongService();
+				 SongService songService = vinoigitare.getSongService();
 				try {
-					songService.remove(song);
-				} catch (DataServiceException e) {
+					songService.remove(song.getId());
+				} catch (SongServiceException e) {
 					log.error(e);
 				}
 				

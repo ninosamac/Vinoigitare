@@ -22,10 +22,9 @@ import com.vaadin.ui.Window;
 import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.events.SongSelected;
-import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataService;
-import com.vinoigitare.services.api.DataServiceException;
+import com.vinoigitare.services.SongService;
+import com.vinoigitare.services.SongServiceException;
 
 @SuppressWarnings("serial")
 public class SongEditor extends Window {
@@ -172,10 +171,10 @@ public class SongEditor extends Window {
 		song = getSongFromItem(songItem);
 
 		Vinoigitare vinoigitare = (Vinoigitare) getUI();
-		DataService<Song> songService = vinoigitare.getSongService();
+		SongService songService = vinoigitare.getSongService();
 		try {
 			songService.store(song);
-		} catch (DataServiceException e) {
+		} catch (SongServiceException e) {
 			Notification.show("Could not store song: " + song, e.getMessage(),
 					Type.WARNING_MESSAGE);
 			e.printStackTrace();
@@ -193,11 +192,11 @@ public class SongEditor extends Window {
 		song = getSongFromItem(songItem);
 
 		Vinoigitare vinoigitare = (Vinoigitare) getUI();
-		DataService<Song> songService = vinoigitare.getSongService();
+		SongService songService = vinoigitare.getSongService();
 		try {
-			songService.remove(previousVersion);
+			songService.remove(previousVersion.getId());
 			songService.store(song);
-		} catch (DataServiceException e) {
+		} catch (SongServiceException e) {
 			Notification.show("Could not update song: " + previousVersion,
 					e.getMessage(), Type.WARNING_MESSAGE);
 			e.printStackTrace();
@@ -238,8 +237,8 @@ public class SongEditor extends Window {
 			return songItem;
 		}
 
-		songItem.addItemProperty("artist", new ObjectProperty<String>(song
-				.getArtist().getName()));
+		songItem.addItemProperty("artist",
+				new ObjectProperty<String>(song.getArtist()));
 		songItem.addItemProperty("title",
 				new ObjectProperty<String>(song.getTitle()));
 		songItem.addItemProperty("chords",
@@ -250,8 +249,7 @@ public class SongEditor extends Window {
 	private Song getSongFromItem(PropertysetItem item) {
 		Song song = new Song();
 
-		Artist artist = new Artist((String) songItem.getItemProperty("artist")
-				.getValue());
+		String artist = (String) songItem.getItemProperty("artist").getValue();
 		String title = (String) songItem.getItemProperty("title").getValue();
 		String chords = (String) songItem.getItemProperty("chords").getValue();
 

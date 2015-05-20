@@ -1,14 +1,13 @@
 package com.vinoigitare.mockservices;
 
-import com.vinoigitare.model.Artist;
 import com.vinoigitare.model.Song;
 
-public class TestStorageData {
+public class MockStorageData {
 
 	public Song getMisoKovac_DalmacijaUMomOku() {
 		Song song = new Song();
 
-		Artist misoKovac = new Artist("Mišo Kovaè");
+		String misoKovac = "Mišo Kovaè";
 		song.setArtist(misoKovac);
 		song.setTitle("Dalmacija u mom oku");
 		song.setChords("G                                      D7\r\n"
@@ -38,7 +37,7 @@ public class TestStorageData {
 	public Song getMisoKovac_SamoJedanDanZivota() {
 		Song song = new Song();
 
-		Artist misoKovac = new Artist("Mišo Kovaè");
+		String misoKovac = "Mišo Kovaè";
 		song.setArtist(misoKovac);
 		song.setTitle("Samo jedan dan života");
 		song.setChords("G                 D\r\n" + "SAMO JEDAN DAN ŽIVOTA\r\n"
@@ -76,7 +75,7 @@ public class TestStorageData {
 	public Song getMisoKovac_SviPjevajuJaNeCujem() {
 		Song song = new Song();
 
-		Artist misoKovac = new Artist("Mišo Kovaè");
+		String misoKovac = "Mišo Kovaè";
 		song.setArtist(misoKovac);
 		song.setTitle("Svi pjevaju, ja ne èujem");
 		song.setChords("   D        A   D   \r\n"
@@ -98,7 +97,7 @@ public class TestStorageData {
 	public Song getQueen_ItsAKindOfMagic() {
 		Song song = new Song();
 
-		Artist artist = new Artist("QUEEN");
+		String artist = "QUEEN";
 		song.setArtist(artist);
 		song.setTitle("It's a kind of magic");
 		song.setChords("A\r\n"
@@ -149,7 +148,7 @@ public class TestStorageData {
 	}
 
 	public Song getDivljeJagode_KrivoJeMore() {
-		Artist artist = new Artist("Divlje jagode");
+		String artist = "Divlje jagode";
 		String title = "Krivo je more";
 		String chords = "G             Am\n" + "Ti, ti si ga upoznala\n"
 				+ "  C             G\n" + "jedne ljetnje veceri\n"
@@ -196,7 +195,7 @@ public class TestStorageData {
 	}
 
 	public Song getDivljeJagode_JedinaMoja() {
-		Artist artist = new Artist("Divlje jagode");
+		String artist = "Divlje jagode";
 		String title = "Jedina moja";
 		String chords = "Em              Am\n" + "Pogledaj u moje oci\n"
 				+ "D                    Em\n" + "Zasto skrivas pogled taj\n"

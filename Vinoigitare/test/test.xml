@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite" parallel="false">
+  <test name="Test">
+    <classes>
+      <class name="com.vinoigitare.components.navigator.ActinRegistryTest"/>
+      <class name="com.vinoigitare.services.SongServiceCacheTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

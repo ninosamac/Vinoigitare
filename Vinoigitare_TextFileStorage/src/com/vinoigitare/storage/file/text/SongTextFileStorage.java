@@ -22,7 +22,7 @@ public class SongTextFileStorage implements Storage<Song> {
 	private static final String FILE_EXTENSION = ".txt";
 	private FolderUtil util;
 
-	protected SongTextFileStorage(String folder) {
+	public SongTextFileStorage(String folder) {
 		util = new FolderUtil(folder);
 		log.info("SongTextFileStorage started. Using folder: " + folder);
 	}

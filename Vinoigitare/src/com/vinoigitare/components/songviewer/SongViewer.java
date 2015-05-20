@@ -24,7 +24,7 @@ public class SongViewer extends Panel {
 		title.addStyleName("song-title");
 		layout.addComponent(title);
 
-		Label artist = new Label(song.getArtist().getName());
+		Label artist = new Label(song.getArtist());
 		artist.addStyleName("song-artist");
 		layout.addComponent(artist);
 

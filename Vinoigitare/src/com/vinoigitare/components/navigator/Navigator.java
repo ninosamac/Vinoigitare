@@ -10,13 +10,13 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataService;
-import com.vinoigitare.services.api.DataServiceException;
+import com.vinoigitare.services.SongService;
+import com.vinoigitare.services.SongServiceException;
 
 @SuppressWarnings({ "serial" })
 public class Navigator extends Panel {
 
-	private DataService<Song> songService;
+	private SongService songService;
 	private SongTree songTree;
 
 	private final static Log log = LogFactory.getLog(Navigator.class);
@@ -30,11 +30,11 @@ public class Navigator extends Panel {
 		songService = vinoigitare.getSongService();
 
 		setSizeFull();
-		
+
 		Collection<Song> songs = new ArrayList<Song>();
 		try {
-			songs  = songService.loadAll();
-		} catch (DataServiceException e) {
+			songs = songService.loadAll();
+		} catch (SongServiceException e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}

@@ -5,10 +5,7 @@ Bundle-SymbolicName: Vinoigitare_TextFileStorage
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Aristotel
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: com.vinoigitare.eventbus,
- com.vinoigitare.events,
- com.vinoigitare.model,
- com.vinoigitare.services.api,
+Import-Package: com.vinoigitare.model,
  com.vinoigitare.settings,
  com.vinoigitare.storage,
  com.vinoigitare.util.file,

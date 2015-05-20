@@ -13,9 +13,8 @@ import com.vinoigitare.actions.NewSongAction;
 import com.vinoigitare.actions.RemoveSongAction;
 import com.vinoigitare.components.MainLayout;
 import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.filestorage.text.SongService;
-import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.DataService;
+import com.vinoigitare.services.SongService;
+import com.vinoigitare.services.TextFileSongService;
 import com.vinoigitare.services.api.SettingsService;
 
 @SuppressWarnings("serial")
@@ -30,11 +29,11 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	private static final EventBus eventBus = new EventBus();
 	private ActionRegistry actionRegistry = new ActionRegistry();
 	private SettingsService settings;
-	private SongService songService;
+	private TextFileSongService textFileSongService;
 	private MainLayout layout;
 
 	public VinoigitareUI() {
-		songService = new SongService(eventBus);
+		textFileSongService = new TextFileSongService(eventBus);
 
 		actionRegistry.registerAction(new NewSongAction());
 		actionRegistry.registerAction(new EditSongAction());
@@ -59,8 +58,8 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	}
 
 	@Override
-	public final DataService<Song> getSongService() {
-		return songService;
+	public final SongService getSongService() {
+		return textFileSongService;
 	}
 
 	@Override
