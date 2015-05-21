@@ -148,4 +148,13 @@ public class SongTest {
 		fail("No exception was thrown");
 	}
 
+	@Test(groups = { "fast" }, suiteName = "model")
+	public void testGetSearchableText() {
+		Song song = new Song("Ðuro", "Kuæne èarolije",
+				"Šiš æevap na žeravici za ðaèki sendviè" + "\n" + "ŠÐÈÆŽšðèæž");
+		assertEquals(song.getSearchableText(),
+				"duro | kucne carolije | sis cevap na zeravici za dacki sendvic\n" + 
+				"sdcczsdccz");
+	}
+
 }
