@@ -5,7 +5,7 @@ import java.util.Collection;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.SongService;
 import com.vinoigitare.services.SongServiceException;
-import com.vinoigitare.storage.StorageException;
+import com.vinoigitare.storage.api.StorageException;
 
 @SuppressWarnings("serial")
 public class MockSongService implements SongService {

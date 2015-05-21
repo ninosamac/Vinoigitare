@@ -5,4 +5,4 @@
  * @author nino.samac
  *
  */
-package com.vinoigitare.storage;
+package com.vinoigitare.storage.api;

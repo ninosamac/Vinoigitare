@@ -9,8 +9,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.vinoigitare.model.Song;
-import com.vinoigitare.storage.Storage;
-import com.vinoigitare.storage.StorageException;
+import com.vinoigitare.storage.api.Storage;
+import com.vinoigitare.storage.api.StorageException;
 import com.vinoigitare.util.file.FolderUtil;
 
 @SuppressWarnings("serial")

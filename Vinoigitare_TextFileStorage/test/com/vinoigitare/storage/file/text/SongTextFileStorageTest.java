@@ -13,7 +13,7 @@ import org.apache.commons.io.FileUtils;
 import org.testng.annotations.Test;
 
 import com.vinoigitare.model.Song;
-import com.vinoigitare.storage.StorageException;
+import com.vinoigitare.storage.api.StorageException;
 
 public class SongTextFileStorageTest {
 

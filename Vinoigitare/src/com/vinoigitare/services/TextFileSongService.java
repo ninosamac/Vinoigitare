@@ -7,9 +7,9 @@ import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.events.SongCreated;
 import com.vinoigitare.events.SongRemoved;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.services.api.SettingsService;
+import com.vinoigitare.settings.api.SettingsService;
 import com.vinoigitare.settings.Settings;
-import com.vinoigitare.storage.StorageException;
+import com.vinoigitare.storage.api.StorageException;
 import com.vinoigitare.storage.file.text.SongTextFileStorage;
 
 @SuppressWarnings("serial")

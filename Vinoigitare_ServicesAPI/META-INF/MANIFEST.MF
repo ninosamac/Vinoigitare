@@ -5,5 +5,5 @@ Bundle-SymbolicName: Vinoigitare_ServicesAPI
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Aristotel
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: com.vinoigitare.settings.api
-Import-Package: com.vinoigitare.model
+Export-Package: com.vinoigitare.settings.api,
+ com.vinoigitare.storage.api

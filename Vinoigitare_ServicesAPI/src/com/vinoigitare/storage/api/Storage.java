@@ -1,4 +1,4 @@
-package com.vinoigitare.storage;
+package com.vinoigitare.storage.api;
 
 import java.io.Serializable;
 import java.util.Collection;

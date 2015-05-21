@@ -15,7 +15,7 @@ import com.vinoigitare.components.MainLayout;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.services.SongService;
 import com.vinoigitare.services.TextFileSongService;
-import com.vinoigitare.services.api.SettingsService;
+import com.vinoigitare.settings.api.SettingsService;
 
 @SuppressWarnings("serial")
 @Theme("vinoigitare")

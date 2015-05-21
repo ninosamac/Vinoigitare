@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.TreeMap;
 
 import com.vinoigitare.model.Song;
-import com.vinoigitare.storage.Storage;
-import com.vinoigitare.storage.StorageException;
+import com.vinoigitare.storage.api.Storage;
+import com.vinoigitare.storage.api.StorageException;
 
 @SuppressWarnings("serial")
 public class MockStorageService implements Storage<Song> {

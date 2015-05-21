@@ -3,7 +3,7 @@ package com.vinoigitare;
 import com.vaadin.ui.Component;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.services.SongService;
-import com.vinoigitare.services.api.SettingsService;
+import com.vinoigitare.settings.api.SettingsService;
 
 public interface Vinoigitare {
 

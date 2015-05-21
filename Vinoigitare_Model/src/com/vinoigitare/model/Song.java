@@ -2,7 +2,7 @@ package com.vinoigitare.model;
 
 import java.io.Serializable;
 
-import com.vinoigitare.storage.Storable;
+import com.vinoigitare.storage.api.Storable;
 
 public class Song implements Serializable, Comparable<Song>, Storable
 		{

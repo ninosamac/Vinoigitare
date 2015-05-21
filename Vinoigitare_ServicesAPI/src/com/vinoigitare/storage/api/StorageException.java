@@ -1,4 +1,4 @@
-package com.vinoigitare.storage;
+package com.vinoigitare.storage.api;
 
 @SuppressWarnings("serial")
 public class StorageException extends Exception {
