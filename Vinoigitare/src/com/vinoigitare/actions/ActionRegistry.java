@@ -1,11 +1,9 @@
-package com.vinoigitare;
+package com.vinoigitare.actions;
 
 import java.util.ArrayList;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.vinoigitare.actions.Action;
 
 public class ActionRegistry {
 
@@ -18,7 +16,7 @@ public class ActionRegistry {
 
 	}
 
-	void registerAction(Action action) {
+	public void registerAction(Action action) {
 		if (action == null) {
 			throw new NullPointerException("Can not register action: null");
 		}
@@ -27,7 +25,7 @@ public class ActionRegistry {
 		log.info("Action registered: " + action);
 	}
 
-	void unRegisterAction(Action action) {
+	public void unRegisterAction(Action action) {
 		if (action == null) {
 			throw new NullPointerException("Can not unregister action: null");
 		}

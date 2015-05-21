@@ -2,7 +2,7 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-      <class name="com.vinoigitare.components.navigator.ActinRegistryTest"/>
+      <class name="com.vinoigitare.ActionRegistryTest"/>
       <class name="com.vinoigitare.services.SongServiceCacheTest"/>
     </classes>
   </test> <!-- Test -->

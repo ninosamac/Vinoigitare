@@ -2,8 +2,7 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-      <class name="com.vinoigitare.storage.api.file.text.SongTextFileStorageTest"/>
-      <class name="com.vinoigitare.services.SongServiceCacheTest"/>
+      <class name="com.vinoigitare.storage.file.text.SongTextFileStorageTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

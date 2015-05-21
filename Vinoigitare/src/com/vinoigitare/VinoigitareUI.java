@@ -8,6 +8,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
+import com.vinoigitare.actions.ActionRegistry;
 import com.vinoigitare.actions.EditSongAction;
 import com.vinoigitare.actions.NewSongAction;
 import com.vinoigitare.actions.RemoveSongAction;
