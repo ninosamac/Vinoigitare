@@ -4,19 +4,17 @@ import java.io.Serializable;
 
 import com.vinoigitare.storage.api.Storable;
 
-public class Song implements Serializable, Comparable<Song>, Storable
+public class Song implements Serializable, Comparable<Song>, Storable, Searchable
 		{
 
 	private static final String TITLE_UNKONWN = "no title";
 	private static final String ARTIST_UNKNOWN = "unknown";
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private String artist;
 	private String title;
 	private String chords;
-	private String id;
+	private String id;	
 
 	public Song() {
 		artist = ARTIST_UNKNOWN;
@@ -129,14 +127,22 @@ public class Song implements Serializable, Comparable<Song>, Storable
 		return "[" + id + "]";
 	}
 
-	public String asText() {
+	@Override
+	public String getSearchableText() {
 		StringBuilder sb = new StringBuilder();
 		sb.append(artist);
 		sb.append(" | ");
 		sb.append(title);
 		sb.append(" | ");
 		sb.append(chords);
-		return sb.toString();
-
-	}
+		String result = sb.toString();
+		result = result.toLowerCase();
+		result = result.replace('š', 's');
+		result = result.replace('ð', 'd');
+		result = result.replace('è', 'c');
+		result = result.replace('æ', 'c');
+		result = result.replace('ž', 'z');
+		return result;		
+	}	
+	
 }
