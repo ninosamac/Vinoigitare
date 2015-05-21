@@ -1,13 +1,13 @@
-package com.vinoigitare;
+package com.vinoigitare.actions;
 
 import static org.testng.Assert.*;
 
 import org.testng.annotations.Test;
 
-import com.vinoigitare.ActionRegistry;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.actions.AbstractAction;
 import com.vinoigitare.actions.Action;
+import com.vinoigitare.actions.ActionRegistry;
 
 public class ActionRegistryTest {
 

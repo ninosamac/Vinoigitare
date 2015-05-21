@@ -1,6 +1,7 @@
 package com.vinoigitare;
 
 import com.vaadin.ui.Component;
+import com.vinoigitare.actions.ActionRegistry;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.services.SongService;
 import com.vinoigitare.settings.api.SettingsService;
