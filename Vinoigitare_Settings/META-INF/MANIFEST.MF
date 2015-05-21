@@ -6,5 +6,5 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Aristotel
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: com.vinoigitare.settings
-Import-Package: com.vinoigitare.services.api,
+Import-Package: com.vinoigitare.settings.api,
  org.apache.commons.logging

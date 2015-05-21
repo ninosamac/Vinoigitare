@@ -1,4 +1,4 @@
-package com.vinoigitare.services.api;
+package com.vinoigitare.settings.api;
 
 @SuppressWarnings("serial")
 public class SettingsServiceException extends Exception {

@@ -10,8 +10,8 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.vinoigitare.services.api.SettingsService;
-import com.vinoigitare.services.api.SettingsServiceException;
+import com.vinoigitare.settings.api.SettingsService;
+import com.vinoigitare.settings.api.SettingsServiceException;
 
 /**
  * Implementation of {@link SettingsService}. Provides properties from
