@@ -4,7 +4,8 @@ Bundle-Name: Vinoigitare_Util
 Bundle-SymbolicName: Vinoigitare_Utils
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: com.vinoigitare.eventbus,
+Export-Package: com.vinoigitare.criteria,
+ com.vinoigitare.eventbus,
  com.vinoigitare.util.file
 Import-Package: org.apache.commons.io;version="2.4.0",
  org.apache.commons.logging
