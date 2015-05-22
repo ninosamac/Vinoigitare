@@ -15,9 +15,11 @@ public interface Action extends Comparable<Action>, Serializable {
 	String getId();
 
 	/**
-	 * Used in menus for grouping actions under a sub menu.
+	 * Used in menus for grouping actions under a menu. Menus are
+	 * hierarchical, so a groupId has the form
+	 * <code>MenuId/SubMenuId/SubMenuId/etc</code>
 	 * 
-	 * @return name of top menu item this action belongs to
+	 * @return the action group id
 	 */
 	String getGroupId();
 
