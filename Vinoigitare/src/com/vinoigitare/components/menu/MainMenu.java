@@ -75,10 +75,15 @@ public class MainMenu extends MenuBar implements EventHandler {
 			@Override
 			public void menuSelected(MenuItem selectedItem) {
 				if (action.getParameterType().equals(Song.class)) {
-					// song related actions
+					// actions on selected song.
 					Vinoigitare vinoigitare = (Vinoigitare) getUI();
 					action.execute(vinoigitare, selectedSong);
+				}else{
+					Vinoigitare vinoigitare = (Vinoigitare) getUI();
+					action.execute(vinoigitare, null);
 				}
+				
+				
 			}
 		};
 		return command;

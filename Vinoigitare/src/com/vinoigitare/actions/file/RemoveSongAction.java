@@ -1,4 +1,4 @@
-package com.vinoigitare.actions;
+package com.vinoigitare.actions.file;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,6 +9,7 @@ import com.vaadin.ui.Window.CloseEvent;
 import com.vaadin.ui.Window.CloseListener;
 import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
+import com.vinoigitare.actions.AbstractAction;
 import com.vinoigitare.components.ConfirmationDialog;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.SongService;

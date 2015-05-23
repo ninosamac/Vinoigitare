@@ -1,9 +1,10 @@
-package com.vinoigitare.actions;
+package com.vinoigitare.actions.file;
 
 import com.vaadin.ui.UI;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
+import com.vinoigitare.actions.AbstractAction;
 import com.vinoigitare.components.songeditor.SongEditor;
 import com.vinoigitare.model.Song;
 
