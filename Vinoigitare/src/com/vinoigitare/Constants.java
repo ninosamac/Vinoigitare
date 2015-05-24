@@ -28,8 +28,10 @@ public interface Constants {
 	static String ICON_REMOVE_SONG = FOLDER_ICONS + "Cancel.gif";
 	
 	static String ICON_SEARCH = FOLDER_ICONS + "Search.gif";
+	static String ICON_CANCEL = FOLDER_ICONS + "Cancel.gif";
 	
 	static String ICON_ABOUT = FOLDER_ICONS + "Info.gif";
+
 	
 
 }
