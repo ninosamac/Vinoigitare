@@ -19,8 +19,9 @@ import java.io.Serializable;
  */
 public interface Criteria<T> extends Serializable {
 
-	@SuppressWarnings("serial")
-	Criteria<Object> ALWAYS_SATISFIED = new Criteria<Object>() {
+	
+	@SuppressWarnings({ "serial", "rawtypes" })
+	public static final Criteria ALWAYS_SATISFIED = new Criteria() {
 
 		@Override
 		public boolean isSatisfiedBy(Object t) {
@@ -29,8 +30,8 @@ public interface Criteria<T> extends Serializable {
 
 	};
 
-	@SuppressWarnings("serial")
-	Criteria<Object> NEVER_SATISFIED = new Criteria<Object>() {
+	@SuppressWarnings({ "serial", "rawtypes" })
+	public static final Criteria NEVER_SATISFIED = new Criteria() {
 
 		@Override
 		public boolean isSatisfiedBy(Object t) {
