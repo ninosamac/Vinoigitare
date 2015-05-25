@@ -3,8 +3,7 @@ package com.vinoigitare.events;
 import com.vinoigitare.eventbus.Event;
 import com.vinoigitare.model.Song;
 
-@SuppressWarnings("rawtypes")
-public class SongRemoved implements Event{
+public class SongRemoved implements Event {
 
 	private final static Class<SongRemoved> type = SongRemoved.class;
 
@@ -19,7 +18,7 @@ public class SongRemoved implements Event{
 	}
 
 	@Override
-	public Object getType() {
+	public Class<?> getType() {
 		return type;
 	}
 

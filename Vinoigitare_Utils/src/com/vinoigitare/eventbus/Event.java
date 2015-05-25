@@ -1,7 +1,7 @@
 package com.vinoigitare.eventbus;
 
-public interface Event<T> {
+public interface Event {
 
-	public T getType();
+	public Class<?> getType();
 
 }

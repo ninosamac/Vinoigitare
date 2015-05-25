@@ -57,7 +57,7 @@ public class EventBus implements Serializable {
 	 *            event to be sent to listeners
 	 */
 	@SuppressWarnings({ "unchecked" })
-	protected final void fireEvent(Event<?> event) {
+	protected final void fireEvent(Event event) {
 		// log.trace("fire " + event + " to eventhandlers");
 		// Synchronized to disable changing of event handlers list while sending
 		// events
