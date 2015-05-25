@@ -11,6 +11,7 @@ import java.util.Collection;
  * @param <T>
  *            the type for this {@link Filter}
  */
+@SuppressWarnings("serial")
 public class ANDFilter<T> implements Filter<T> {
 
 	private ANDCriteria<T> criteriaSet = new ANDCriteria<T>();

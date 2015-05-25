@@ -1,5 +1,7 @@
 package com.vinoigitare.criteria;
 
+import java.io.Serializable;
+
 /**
  * Interface for classes that check objects of type <code>T</code> for
  * satisfying a given criteria.
@@ -15,8 +17,9 @@ package com.vinoigitare.criteria;
  * @see Filter
  * 
  */
-public interface Criteria<T> {
+public interface Criteria<T> extends Serializable {
 
+	@SuppressWarnings("serial")
 	Criteria<Object> ALWAYS_SATISFIED = new Criteria<Object>() {
 
 		@Override
@@ -26,6 +29,7 @@ public interface Criteria<T> {
 
 	};
 
+	@SuppressWarnings("serial")
 	Criteria<Object> NEVER_SATISFIED = new Criteria<Object>() {
 
 		@Override

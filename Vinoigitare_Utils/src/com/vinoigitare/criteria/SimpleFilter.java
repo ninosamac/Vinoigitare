@@ -19,9 +19,18 @@ import java.util.TreeSet;
  * @param <T>
  *            the type for this Filter
  */
+@SuppressWarnings("serial")
 public class SimpleFilter<T> implements Filter<T> {
 
 	private Criteria<T> criteria;
+
+	public SimpleFilter(){
+		// Does nothing.
+	}
+	
+	public SimpleFilter(Criteria<T> criteria) {
+		this.criteria = criteria;
+	}
 
 	public Criteria<T> getCriteria() {
 		return this.criteria;

@@ -18,6 +18,7 @@ import java.util.HashSet;
  *            @see ORCriteria
  *            
  */
+@SuppressWarnings("serial")
 public class ANDCriteria<T> implements Criteria<T> {
 
 	protected HashSet<Criteria<T>> criteriaSet = new HashSet<Criteria<T>>();
