@@ -3,13 +3,13 @@ package com.vinoigitare.events;
 import com.vinoigitare.eventbus.Event;
 import com.vinoigitare.model.Song;
 
-public class SongRemoved implements Event {
+public class SongCreatedEvent implements Event {
 
-	private final static Class<SongRemoved> type = SongRemoved.class;
+	private final static Class<SongCreatedEvent> type = SongCreatedEvent.class;
 
 	private Song song;
 
-	public SongRemoved(Song song) {
+	public SongCreatedEvent(Song song) {
 		this.song = song;
 	}
 

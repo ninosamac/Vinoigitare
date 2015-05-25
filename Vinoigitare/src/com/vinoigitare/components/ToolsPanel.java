@@ -13,13 +13,13 @@ import com.vaadin.ui.Window;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.songeditor.SongEditor;
 import com.vinoigitare.eventbus.EventHandler;
-import com.vinoigitare.events.SongSelected;
+import com.vinoigitare.events.SongSelectedEvent;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.SongService;
 import com.vinoigitare.services.SongServiceException;
 
 @SuppressWarnings("serial")
-public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
+public class ToolsPanel extends Panel implements EventHandler<SongSelectedEvent> {
 
 	private Song song = null;
 
@@ -101,7 +101,7 @@ public class ToolsPanel extends Panel implements EventHandler<SongSelected> {
 	}
 
 	@Override
-	public void onEvent(SongSelected event) {
+	public void onEvent(SongSelectedEvent event) {
 		this.song = event.getSong();
 	}
 

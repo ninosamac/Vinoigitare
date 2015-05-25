@@ -11,7 +11,7 @@ import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.actions.Action;
 import com.vinoigitare.actions.ActionRegistry;
 import com.vinoigitare.eventbus.EventHandler;
-import com.vinoigitare.events.SongSelected;
+import com.vinoigitare.events.SongSelectedEvent;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.pages.HelloPage;
 
@@ -91,9 +91,9 @@ public class MainMenu extends MenuBar implements EventHandler {
 
 	@Override
 	public void onEvent(com.vinoigitare.eventbus.Event event) {
-		if (event.getType().equals(SongSelected.class)) {
-			SongSelected songSelected = (SongSelected) event;
-			selectedSong = songSelected.getSong();
+		if (event.getType().equals(SongSelectedEvent.class)) {
+			SongSelectedEvent songSelectedEvent = (SongSelectedEvent) event;
+			selectedSong = songSelectedEvent.getSong();
 		}
 	}
 

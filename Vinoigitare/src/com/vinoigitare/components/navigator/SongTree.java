@@ -14,7 +14,7 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.Tree;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.events.SongSelected;
+import com.vinoigitare.events.SongSelectedEvent;
 import com.vinoigitare.model.Song;
 
 public class SongTree extends Tree {
@@ -102,8 +102,8 @@ public class SongTree extends Tree {
 				if (itemId instanceof Song) {
 					log.trace("Song selected: " + itemId);
 					Song song = (Song) itemId;
-					SongSelected songSelected = new SongSelected(song);
-					eventBus.publish(songSelected);
+					SongSelectedEvent songSelectedEvent = new SongSelectedEvent(song);
+					eventBus.publish(songSelectedEvent);
 				}
 
 				else if (itemId instanceof String) {

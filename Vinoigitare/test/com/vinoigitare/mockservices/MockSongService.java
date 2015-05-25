@@ -5,8 +5,8 @@ import java.util.Collection;
 import com.vinoigitare.criteria.Criteria;
 import com.vinoigitare.criteria.SimpleFilter;
 import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.events.SongCreated;
-import com.vinoigitare.events.SongRemoved;
+import com.vinoigitare.events.SongCreatedEvent;
+import com.vinoigitare.events.SongRemovedEvent;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.SongService;
 import com.vinoigitare.services.SongServiceException;
@@ -50,7 +50,7 @@ public class MockSongService implements SongService {
 
 		try {
 			storage.store(song);			
-			eventBus.publish(new SongCreated(song));			
+			eventBus.publish(new SongCreatedEvent(song));			
 		} catch (StorageException e) {
 			throw new SongServiceException(e.getMessage(), e);
 		}
@@ -62,7 +62,7 @@ public class MockSongService implements SongService {
 		try {
 			Song song = storage.load(id);
 			storage.remove(id);
-			eventBus.publish(new SongRemoved(song));
+			eventBus.publish(new SongRemovedEvent(song));
 			return song;
 		} catch (StorageException e) {
 			throw new SongServiceException(e.getMessage(), e);

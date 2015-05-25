@@ -22,7 +22,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
-import com.vinoigitare.events.SongSelected;
+import com.vinoigitare.events.SongSelectedEvent;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.SongService;
 import com.vinoigitare.services.SongServiceException;
@@ -185,7 +185,7 @@ public class SongEditor extends Window {
 		}
 
 		Notification.show("Song created: " + song);
-		vinoigitare.getEventBus().publish(new SongSelected(song));
+		vinoigitare.getEventBus().publish(new SongSelectedEvent(song));
 		close();
 	}
 
@@ -207,7 +207,7 @@ public class SongEditor extends Window {
 		}
 
 		Notification.show("Song updated: " + song);
-		vinoigitare.getEventBus().publish(new SongSelected(song));
+		vinoigitare.getEventBus().publish(new SongSelectedEvent(song));
 	}
 
 	private Button getButtonCancel() {

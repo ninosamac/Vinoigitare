@@ -9,9 +9,9 @@ import com.vinoigitare.components.navigator.Navigator;
 import com.vinoigitare.components.songviewer.SongViewer;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
-import com.vinoigitare.events.SongCreated;
-import com.vinoigitare.events.SongRemoved;
-import com.vinoigitare.events.SongSelected;
+import com.vinoigitare.events.SongCreatedEvent;
+import com.vinoigitare.events.SongRemovedEvent;
+import com.vinoigitare.events.SongSelectedEvent;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.pages.HelloPage;
 
@@ -30,19 +30,19 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 		this.eventBus = vinoigitare.getEventBus();
 
-		eventBus.registerForEvents(SongSelected.class, this);
-		eventBus.registerForEvents(SongCreated.class, this);
-		eventBus.registerForEvents(SongRemoved.class, this);
+		eventBus.registerForEvents(SongSelectedEvent.class, this);
+		eventBus.registerForEvents(SongCreatedEvent.class, this);
+		eventBus.registerForEvents(SongRemovedEvent.class, this);
 
 		setWidth(100, Unit.PERCENTAGE);
 		setHeightUndefined();
 
 		MainMenu mainMenu = new MainMenu(vinoigitare);
-		eventBus.registerForEvents(SongSelected.class, mainMenu);
+		eventBus.registerForEvents(SongSelectedEvent.class, mainMenu);
 		addComponent(mainMenu);
 
 //		toolsPanel = new ToolsPanel();
-//		eventBus.registerForEvents(SongSelected.class, toolsPanel);
+//		eventBus.registerForEvents(SongSelectedEvent.class, toolsPanel);
 //		addComponent(toolsPanel);
 
 		navigator = new Navigator(vinoigitare);
@@ -60,19 +60,19 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 	@Override
 	public void onEvent(com.vinoigitare.eventbus.Event event) {
 
-		if (event.getType().equals(SongSelected.class)) {
-			onSongSelected((SongSelected) event);
+		if (event.getType().equals(SongSelectedEvent.class)) {
+			onSongSelected((SongSelectedEvent) event);
 
-		} else if (event.getType().equals(SongCreated.class)) {
-			onSongCreated((SongCreated) event);
+		} else if (event.getType().equals(SongCreatedEvent.class)) {
+			onSongCreated((SongCreatedEvent) event);
 
-		} else if (event.getType().equals(SongRemoved.class)) {
-			onSongRemoved((SongRemoved) event);
+		} else if (event.getType().equals(SongRemovedEvent.class)) {
+			onSongRemoved((SongRemovedEvent) event);
 		}
 
 	}
 
-	private void onSongSelected(SongSelected event) {
+	private void onSongSelected(SongSelectedEvent event) {
 		Component secondComponent = horizontalSplitPanel.getSecondComponent();
 		if (secondComponent != null) {
 			horizontalSplitPanel.removeComponent(secondComponent);
@@ -82,7 +82,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		horizontalSplitPanel.setSecondComponent(songViewer);
 	}
 
-	private void onSongCreated(SongCreated event) {
+	private void onSongCreated(SongCreatedEvent event) {
 
 		Component secondComponent = horizontalSplitPanel.getSecondComponent();
 		if (secondComponent != null) {
@@ -101,7 +101,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 	}
 
-	private void onSongRemoved(SongRemoved event) {
+	private void onSongRemoved(SongRemovedEvent event) {
 
 		Song song = event.getSong();
 		if (songViewer.getSong().equals(song)) {

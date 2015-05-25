@@ -5,8 +5,8 @@ import java.util.Collection;
 
 import com.vinoigitare.criteria.Criteria;
 import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.events.SongCreated;
-import com.vinoigitare.events.SongRemoved;
+import com.vinoigitare.events.SongCreatedEvent;
+import com.vinoigitare.events.SongRemovedEvent;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.settings.api.SettingsService;
 import com.vinoigitare.settings.Settings;
@@ -52,7 +52,7 @@ public class TextFileSongService implements SongService {
 			throw new SongServiceException(e.getMessage(), e);
 		}
 		cache.store(song);
-		eventBus.publish(new SongCreated(song));
+		eventBus.publish(new SongCreatedEvent(song));
 		return song.getId();
 	}
 
@@ -67,7 +67,7 @@ public class TextFileSongService implements SongService {
 			throw new SongServiceException(e.getMessage(), e);
 		}
 		Song song = cache.remove(id);
-		eventBus.publish(new SongRemoved(song));
+		eventBus.publish(new SongRemovedEvent(song));
 		return song;
 	}
 
