@@ -16,6 +16,9 @@ import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Constants;
+import com.vinoigitare.Vinoigitare;
+import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.events.SearchEvent;
 
 @SuppressWarnings("serial")
 public class SearchDialog extends Window {
@@ -66,7 +69,10 @@ public class SearchDialog extends Window {
 					textField.validate();
 					textField.removeAllValidators();
 					searchString = textField.getValue();
-					Notification.show("Search for: " + searchString);
+					
+					EventBus eventBus = ((Vinoigitare)getUI()).getEventBus();
+					eventBus.publish(new SearchEvent(searchString));
+					
 					log.debug("Search for: " + searchString);
 				} catch (Exception e) {
 					Notification.show("Please fill the search field properly.");

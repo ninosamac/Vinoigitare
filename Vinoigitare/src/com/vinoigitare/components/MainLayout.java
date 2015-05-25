@@ -9,6 +9,7 @@ import com.vinoigitare.components.navigator.Navigator;
 import com.vinoigitare.components.songviewer.SongViewer;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
+import com.vinoigitare.events.SearchEvent;
 import com.vinoigitare.events.SongCreatedEvent;
 import com.vinoigitare.events.SongRemovedEvent;
 import com.vinoigitare.events.SongSelectedEvent;
@@ -41,11 +42,12 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		eventBus.registerForEvents(SongSelectedEvent.class, mainMenu);
 		addComponent(mainMenu);
 
-//		toolsPanel = new ToolsPanel();
-//		eventBus.registerForEvents(SongSelectedEvent.class, toolsPanel);
-//		addComponent(toolsPanel);
+		// toolsPanel = new ToolsPanel();
+		// eventBus.registerForEvents(SongSelectedEvent.class, toolsPanel);
+		// addComponent(toolsPanel);
 
 		navigator = new Navigator(vinoigitare);
+		eventBus.registerForEvents(SearchEvent.class, navigator);
 
 		HelloPage helloPage = new HelloPage();
 
