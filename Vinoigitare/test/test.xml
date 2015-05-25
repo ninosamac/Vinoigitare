@@ -2,8 +2,9 @@
 <suite name="Suite" parallel="false">
   <test name="Test">
     <classes>
-      <class name="com.vinoigitare.ActionRegistryTest"/>
+      <class name="com.vinoigitare.actions.ActionRegistryTest"/>
       <class name="com.vinoigitare.services.SongServiceCacheTest"/>
+      <class name="com.vinoigitare.services.MockSongServiceTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
