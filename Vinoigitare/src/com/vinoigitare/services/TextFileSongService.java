@@ -3,6 +3,7 @@ package com.vinoigitare.services;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import com.vinoigitare.criteria.Criteria;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.events.SongCreated;
 import com.vinoigitare.events.SongRemoved;
@@ -88,6 +89,35 @@ public class TextFileSongService implements SongService {
 		}
 		cache.store(song);
 		return song;
+	}
+
+	@Override
+	public Collection<Song> load(Criteria<Song> criteria)
+			throws SongServiceException {
+		ArrayList<String> ids;
+		try {
+			ids = (ArrayList<String>) storage.listIds();
+		} catch (StorageException e) {
+			throw new SongServiceException(e.getMessage(), e);
+		}
+		ArrayList<Song> songs = new ArrayList<Song>();
+		for (String id : ids) {
+			Song song = null;
+			if (cache.exists(id)) {
+				song = cache.load(id);
+			} else {
+				try {
+					song = storage.load(id);
+					cache.store(song);
+				} catch (StorageException e) {
+					throw new SongServiceException(e.getMessage(), e);
+				}
+			}
+			if (criteria.isSatisfiedBy(song)) {
+				songs.add(song);
+			}
+		}
+		return songs;
 	}
 
 	@Override

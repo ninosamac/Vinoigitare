@@ -5,6 +5,7 @@ Bundle-SymbolicName: Vinoigitare
 Bundle-Version: 1.0.0.qualifier
 Service-Component: OSGI-INF/component.xml
 Import-Package: com.vaadin.data;version="7.4.3",
+ com.vinoigitare.criteria,
  com.vinoigitare.eventbus,
  com.vinoigitare.model,
  com.vinoigitare.settings,
