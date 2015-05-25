@@ -1,11 +1,6 @@
 package com.vinoigitare.actions;
 
-import com.vaadin.server.Sizeable.Unit;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.Window;
-import com.vaadin.ui.Window.CloseEvent;
-import com.vaadin.ui.Window.CloseListener;
 import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.components.search.SearchDialog;
@@ -46,12 +41,8 @@ public class SearchAction extends AbstractAction {
 	@Override
 	public void execute(Vinoigitare vinoigitare, Object param) {
 
-		
 		final SearchDialog searchDialog = new SearchDialog();
-
-
 		((UI) vinoigitare).addWindow(searchDialog);
-
 
 	}
 
