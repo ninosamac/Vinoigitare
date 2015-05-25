@@ -8,6 +8,7 @@ import java.util.Collection;
 import org.testng.annotations.Test;
 
 import com.vinoigitare.criteria.Criteria;
+import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.mockservices.MockSongService;
 import com.vinoigitare.mockservices.MockStorageData;
 import com.vinoigitare.model.Song;
@@ -17,7 +18,7 @@ public class MockSongServiceTest {
 	@Test(groups = "fast")
 	public void testStoreAndLoadSong() throws SongServiceException {
 
-		MockSongService storage = new MockSongService();
+		MockSongService storage = new MockSongService(new EventBus());
 		Song song = new MockStorageData().getMisoKovac_DalmacijaUMomOku();
 		String id = song.getId();
 		if (storage.contains(id)) {
@@ -44,14 +45,16 @@ public class MockSongServiceTest {
 
 		ids = (ArrayList<String>) storage.listIds();
 		assertFalse(ids.contains(id));
-
+		assertTrue(ids.isEmpty());
 	}
 
 	@SuppressWarnings("unchecked")
 	@Test(groups = "fast")
 	public void testLoadWithCriteria() throws SongServiceException {
 
-		MockSongService storage = new MockSongService();
+		MockSongService storage = new MockSongService(new EventBus());
+		storage.init();
+
 		Criteria<Song> criteria = null;
 		Collection<Song> result = null;
 
@@ -68,7 +71,8 @@ public class MockSongServiceTest {
 		result = storage.load(criteria);
 		assertFalse(result.isEmpty());
 		assertEquals(result.size(), 3);
-		assertTrue(result.contains(new MockStorageData().getMisoKovac_DalmacijaUMomOku()));
+		assertTrue(result.contains(new MockStorageData()
+				.getMisoKovac_DalmacijaUMomOku()));
 
 	}
 
