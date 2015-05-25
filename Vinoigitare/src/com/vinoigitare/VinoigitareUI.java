@@ -15,6 +15,7 @@ import com.vinoigitare.actions.file.NewSongAction;
 import com.vinoigitare.actions.file.RemoveSongAction;
 import com.vinoigitare.components.MainLayout;
 import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.mockservices.MockSongService;
 import com.vinoigitare.services.SongService;
 import com.vinoigitare.services.TextFileSongService;
 import com.vinoigitare.settings.api.SettingsService;
@@ -31,12 +32,14 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	private static final EventBus eventBus = new EventBus();
 	private ActionRegistry actionRegistry;
 	private SettingsService settings;
-	private TextFileSongService textFileSongService;
+	private SongService songService;
 	private MainLayout layout;
 
 	public VinoigitareUI() {
 
-		textFileSongService = new TextFileSongService(eventBus);
+		//songService = new TextFileSongService(eventBus);
+		songService = new MockSongService(eventBus);
+		((MockSongService)songService).init();
 		initActionRegistry();
 
 	}
@@ -69,7 +72,7 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 
 	@Override
 	public final SongService getSongService() {
-		return textFileSongService;
+		return songService;
 	}
 
 	@Override

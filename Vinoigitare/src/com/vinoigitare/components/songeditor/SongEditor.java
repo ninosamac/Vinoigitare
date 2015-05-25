@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import com.vaadin.data.Validator;
 import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.data.util.PropertysetItem;
+import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -44,6 +45,10 @@ public class SongEditor extends Window {
 
 		setSizeFull();
 		center();
+		
+		setCaption("Edit song");
+		setCloseShortcut(KeyCode.ESCAPE);
+		
 		Layout layout = createLayout();
 		setContent(layout);
 
@@ -155,7 +160,6 @@ public class SongEditor extends Window {
 				} catch (Exception e) {
 					Notification.show("Please fill the fields properly."
 							+ e.getMessage());
-					e.printStackTrace();
 				}
 
 			}

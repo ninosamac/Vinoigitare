@@ -97,7 +97,7 @@ public class MockStorageData {
 	public Song getQueen_ItsAKindOfMagic() {
 		Song song = new Song();
 
-		String artist = "QUEEN";
+		String artist = "Queen";
 		song.setArtist(artist);
 		song.setTitle("It's a kind of magic");
 		song.setChords("A\r\n"

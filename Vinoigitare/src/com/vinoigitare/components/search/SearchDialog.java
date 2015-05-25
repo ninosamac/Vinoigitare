@@ -11,8 +11,8 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.Notification;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Window;
 import com.vinoigitare.Constants;
@@ -28,12 +28,15 @@ public class SearchDialog extends Window {
 
 		center();
 		setWidth(25, Unit.EM);
-		// setHeight(12, Unit.EX);
 
 		setCaption("Search");
 		setCloseShortcut(KeyCode.ESCAPE);
 
-		Panel panel = new Panel();
+		Layout layout = createLayout();
+		setContent(layout);
+	}
+
+	private Layout createLayout() {
 
 		HorizontalLayout layout = new HorizontalLayout();
 		layout.setMargin(true);
@@ -67,7 +70,6 @@ public class SearchDialog extends Window {
 					log.debug("Search for: " + searchString);
 				} catch (Exception e) {
 					Notification.show("Please fill the search field properly.");
-					e.printStackTrace();
 				}
 
 			}
@@ -86,8 +88,7 @@ public class SearchDialog extends Window {
 		});
 		layout.addComponent(cancelButton);
 
-		panel.setContent(layout);
-		setContent(panel);
+		return layout;
 	}
 
 	public String getSearchString() {
