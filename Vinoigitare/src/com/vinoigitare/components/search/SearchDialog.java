@@ -1,5 +1,9 @@
 package com.vinoigitare.components.search;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.vaadin.data.Validator;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
@@ -15,6 +19,8 @@ import com.vinoigitare.Constants;
 
 @SuppressWarnings("serial")
 public class SearchDialog extends Window {
+
+	private static final Log log = LogFactory.getLog(SearchDialog.class);
 
 	protected String searchString;
 
@@ -42,12 +48,30 @@ public class SearchDialog extends Window {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				textField.validate();
-				searchString = textField.getValue();
-				Notification.show("Searching for: " + searchString);
+				try {
+					Validator validator = new Validator() {
+						@Override
+						public void validate(Object value)
+								throws InvalidValueException {
+							String text = ((String) value).trim();
+							if (text.length() < 3)
+								throw new InvalidValueException(
+										"Please enter at least three characters.");
+						}
+					};
+					textField.addValidator(validator);
+					textField.validate();
+					textField.removeAllValidators();
+					searchString = textField.getValue();
+					Notification.show("Search for: " + searchString);
+					log.debug("Search for: " + searchString);
+				} catch (Exception e) {
+					Notification.show("Please fill the search field properly.");
+					e.printStackTrace();
+				}
+
 			}
 		});
-
 		layout.addComponent(searchButton);
 
 		Button cancelButton = new Button();
@@ -60,7 +84,6 @@ public class SearchDialog extends Window {
 				close();
 			}
 		});
-
 		layout.addComponent(cancelButton);
 
 		panel.setContent(layout);
