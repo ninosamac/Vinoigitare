@@ -11,50 +11,107 @@ import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.criteria.ANDCriteria;
 import com.vinoigitare.criteria.Criteria;
+import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SearchEvent;
+import com.vinoigitare.events.SongCreatedEvent;
+import com.vinoigitare.events.SongRemovedEvent;
+import com.vinoigitare.events.SongSelectedEvent;
 import com.vinoigitare.model.Song;
 import com.vinoigitare.services.SongService;
 import com.vinoigitare.services.SongServiceException;
 
-@SuppressWarnings({ "serial" })
-public class Navigator extends Panel implements EventHandler<SearchEvent> {
+@SuppressWarnings({ "serial", "rawtypes" })
+public class Navigator extends Panel implements EventHandler {
 
 	private SongService songService;
 	private SongTree songTree;
 
 	private ANDCriteria<Song> criteria = new ANDCriteria<Song>();
+
+	private Collection<Song> songs;
+
 	private VerticalLayout layout;
-	private Vinoigitare vinoigitare;
+	private EventBus eventBus;
 
 	private final static Log log = LogFactory.getLog(Navigator.class);
 
 	public Navigator(Vinoigitare vinoigitare) {
-		this.vinoigitare = vinoigitare;
 
+		initServices(vinoigitare);
+		initLayout(vinoigitare);
+
+	}
+
+	private void initServices(Vinoigitare vinoigitare) {
+		songService = vinoigitare.getSongService();
+
+		eventBus = vinoigitare.getEventBus();
+
+		eventBus.registerForEvents(SongSelectedEvent.class, this);
+
+		eventBus.registerForEvents(SongCreatedEvent.class, this);
+		eventBus.registerForEvents(SongRemovedEvent.class, this);
+
+		eventBus.registerForEvents(SearchEvent.class, this);
+	}
+
+	private void initLayout(Vinoigitare vinoigitare) {
 		layout = new VerticalLayout();
 		layout.setSizeFull();
 		layout.setMargin(true);
 
-		songService = vinoigitare.getSongService();
-
 		setSizeFull();
 
-		Collection<Song> songs = new ArrayList<Song>();
+		songs = new ArrayList<Song>();
 		try {
 			songs = songService.loadAll();
 		} catch (SongServiceException e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}
-		songTree = new SongTree(vinoigitare, songs);
+
+		songTree = new SongTree(eventBus, songs);
 		layout.addComponent(songTree);
 
 		setContent(layout);
 	}
 
 	@Override
-	public void onEvent(SearchEvent event) {
+	public void onEvent(com.vinoigitare.eventbus.Event event) {
+		Class<?> eventType = event.getType();
+
+		if (eventType.equals(SearchEvent.class)) {
+			onSearchEvent((SearchEvent) event);
+
+		} else if (eventType.equals(SongRemovedEvent.class)) {
+			onSongRemovedEvent((SongRemovedEvent) event);
+
+		} else if (eventType.equals(SongCreatedEvent.class)) {
+			onSongCreatedEvent((SongCreatedEvent) event);
+
+		}
+
+	}
+
+	private void onSongCreatedEvent(SongCreatedEvent event) {
+
+		Song song = event.getSong();
+		songTree.addSong(song);
+		String artist = song.getArtist();
+		songTree.expandItem(artist);
+		songTree.select(song);
+
+	}
+
+	private void onSongRemovedEvent(SongRemovedEvent event) {
+
+		Song song = event.getSong();
+		songTree.removeSong(song);
+
+	}
+
+	public void onSearchEvent(SearchEvent event) {
 		String searchText = event.getSearchText();
 
 		searchText = searchText.toLowerCase();
@@ -74,12 +131,14 @@ public class Navigator extends Panel implements EventHandler<SearchEvent> {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 		}
-		
-		layout.removeComponent(songTree);
-		songTree = new SongTree(vinoigitare, songs);
-		layout.addComponent(songTree);
 
-		setContent(layout);
+		Collection<Song> treeSongs = songTree.getSongs();
+		for (Song song : treeSongs) {
+			if (!songs.contains(song)) {
+				songTree.removeSong(song);
+			}
+		}
+
 	}
 
 	class ContainsText implements Criteria<Song> {

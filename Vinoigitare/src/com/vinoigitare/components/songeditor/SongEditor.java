@@ -160,6 +160,7 @@ public class SongEditor extends Window {
 				} catch (Exception e) {
 					Notification.show("Please fill the fields properly."
 							+ e.getMessage());
+					e.printStackTrace();
 				}
 
 			}

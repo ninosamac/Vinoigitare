@@ -2,6 +2,9 @@ package com.vinoigitare.mockservices;
 
 import java.util.Collection;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.vinoigitare.criteria.Criteria;
 import com.vinoigitare.criteria.SimpleFilter;
 import com.vinoigitare.eventbus.EventBus;
@@ -15,6 +18,8 @@ import com.vinoigitare.storage.api.StorageException;
 @SuppressWarnings("serial")
 public class MockSongService implements SongService {
 
+	private static final Log log = LogFactory.getLog(MockSongService.class);
+
 	private MockStorageService storage = new MockStorageService();
 	private EventBus eventBus;
 
@@ -23,11 +28,11 @@ public class MockSongService implements SongService {
 	 * 
 	 */
 	public MockSongService() {
-		// Does nothing. 
+		// Does nothing.
 	}
 
-	public MockSongService(EventBus eventBus) {		
-		this.eventBus  = eventBus;
+	public MockSongService(EventBus eventBus) {
+		this.eventBus = eventBus;
 	}
 
 	public void init() {
@@ -49,8 +54,9 @@ public class MockSongService implements SongService {
 	public String store(Song song) throws SongServiceException {
 
 		try {
-			storage.store(song);			
-			eventBus.publish(new SongCreatedEvent(song));			
+			storage.store(song);
+			eventBus.publish(new SongCreatedEvent(song));
+			log.debug("Song added: " + song);
 		} catch (StorageException e) {
 			throw new SongServiceException(e.getMessage(), e);
 		}
@@ -63,6 +69,7 @@ public class MockSongService implements SongService {
 			Song song = storage.load(id);
 			storage.remove(id);
 			eventBus.publish(new SongRemovedEvent(song));
+			log.debug("Song removed: " + song);
 			return song;
 		} catch (StorageException e) {
 			throw new SongServiceException(e.getMessage(), e);

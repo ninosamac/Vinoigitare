@@ -1,5 +1,6 @@
 package com.vinoigitare.components.navigator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -12,7 +13,6 @@ import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.shared.MouseEventDetails.MouseButton;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Tree;
-import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.events.SongSelectedEvent;
 import com.vinoigitare.model.Song;
@@ -25,25 +25,21 @@ public class SongTree extends Tree {
 	private static final long serialVersionUID = 1L;
 	private final static Log log = LogFactory.getLog(SongTree.class.getName());
 
-	private Collection<Song> songs;
 	private TreeMap<String, TreeSet<Song>> songsByArtists = new TreeMap<String, TreeSet<Song>>();
-	private EventBus eventBus;
 
-	public SongTree(Vinoigitare vinoigitare, Collection<Song> songs) {
+	public SongTree(EventBus eventBus, Collection<Song> songs) {
 		super();
-		this.eventBus = vinoigitare.getEventBus();
-		this.songs = songs;
 
 		setSizeFull();
 		setItemCaptionMode(ItemCaptionMode.EXPLICIT);
-		populateItems();
+		populateItems(songs);
 
 		ItemClickListener listener = new SongTreeClickListener(eventBus);
 		addItemClickListener(listener);
 
 	}
 
-	private void populateItems() {
+	private void populateItems(Collection<Song> songs) {
 
 		TreeSet<String> artists = new TreeSet<String>();
 
@@ -82,6 +78,62 @@ public class SongTree extends Tree {
 		}
 	}
 
+	public void addSong(Song song) {
+
+		String artist = song.getArtist();
+
+		if (!containsId(artist)) {
+
+			setItemCaption(artist, artist);
+			addItem(artist);
+			setChildrenAllowed(artist, true);
+			TreeSet<Song> songsByArtist = new TreeSet<Song>();
+			songsByArtists.put(artist, songsByArtist);
+			log.trace("Added Artist: " + artist);
+
+		}
+
+		addItem(song);
+
+		String title = song.getTitle();
+		setItemCaption(song, title);
+		setParent(song, artist);
+		setChildrenAllowed(song, false);
+		TreeSet<Song> songsByArtist = songsByArtists.get(artist);
+		songsByArtist.add(song);
+		log.trace("Added Song: " + song);
+
+	}
+
+	public void removeSong(Song song) {
+
+		String artist = (String) getParent(song);
+
+		removeItem(song);
+		TreeSet<Song> songsByArtist = songsByArtists.get(artist);
+		songsByArtist.remove(song);
+		log.trace("Removed Song: " + song);
+		if (!hasChildren(artist)) {
+			removeItem(artist);
+			songsByArtists.remove(artist);
+			log.trace("Removed Artist: " + artist);
+		}
+		sanitizeSelection();
+	}
+
+	public ArrayList<Song> getSongs() {
+
+		ArrayList<Song> result = new ArrayList<Song>();
+
+		Collection<TreeSet<Song>> songSets = songsByArtists.values();
+		for (TreeSet<Song> songSet : songSets) {
+			result.addAll(songSet);
+		}
+
+		return result;
+
+	}
+
 	@SuppressWarnings("serial")
 	class SongTreeClickListener implements ItemClickListener {
 
@@ -102,7 +154,8 @@ public class SongTree extends Tree {
 				if (itemId instanceof Song) {
 					log.trace("Song selected: " + itemId);
 					Song song = (Song) itemId;
-					SongSelectedEvent songSelectedEvent = new SongSelectedEvent(song);
+					SongSelectedEvent songSelectedEvent = new SongSelectedEvent(
+							song);
 					eventBus.publish(songSelectedEvent);
 				}
 
@@ -113,6 +166,5 @@ public class SongTree extends Tree {
 				Notification.show("CONTEXT MENU!");
 			}
 		}
-
 	}
 }
