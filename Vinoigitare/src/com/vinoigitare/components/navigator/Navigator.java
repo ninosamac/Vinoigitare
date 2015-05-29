@@ -44,6 +44,7 @@ public class Navigator extends Panel implements EventHandler {
 	}
 
 	private void initServices(Vinoigitare vinoigitare) {
+		
 		songService = vinoigitare.getSongService();
 
 		eventBus = vinoigitare.getEventBus();
@@ -57,6 +58,7 @@ public class Navigator extends Panel implements EventHandler {
 	}
 
 	private void initLayout(Vinoigitare vinoigitare) {
+		
 		layout = new VerticalLayout();
 		layout.setSizeFull();
 		layout.setMargin(true);
@@ -75,10 +77,12 @@ public class Navigator extends Panel implements EventHandler {
 		layout.addComponent(songTree);
 
 		setContent(layout);
+		
 	}
 
 	@Override
 	public void onEvent(com.vinoigitare.eventbus.Event event) {
+		
 		Class<?> eventType = event.getType();
 
 		if (eventType.equals(SearchEvent.class)) {
@@ -111,19 +115,30 @@ public class Navigator extends Panel implements EventHandler {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void onSearchEvent(SearchEvent event) {
+
 		String searchText = event.getSearchText();
 
-		searchText = searchText.toLowerCase();
-		searchText = searchText.replace('š', 's');
-		searchText = searchText.replace('ð', 'd');
-		searchText = searchText.replace('è', 'c');
-		searchText = searchText.replace('æ', 'c');
-		searchText = searchText.replace('ž', 'z');
+		if (searchText.equals(".")) {
 
-		Criteria<Song> containsText = new ContainsText(searchText);
-		criteria.add(containsText);
+			criteria.clear();
+			criteria.add(Criteria.ALWAYS_SATISFIED);
+			
+		} else {
 
+			searchText = searchText.toLowerCase();
+			searchText = searchText.replace('š', 's');
+			searchText = searchText.replace('ð', 'd');
+			searchText = searchText.replace('è', 'c');
+			searchText = searchText.replace('æ', 'c');
+			searchText = searchText.replace('ž', 'z');
+
+			Criteria<Song> containsText = new ContainsText(searchText);
+			criteria.add(containsText);
+			
+		}
+		
 		Collection<Song> songs = new ArrayList<Song>();
 		try {
 			songs = songService.load(criteria);

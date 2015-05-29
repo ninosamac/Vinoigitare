@@ -63,23 +63,32 @@ public class SearchDialog extends Window {
 			public void buttonClick(ClickEvent event) {
 				try {
 					Validator validator = new Validator() {
+						
 						@Override
 						public void validate(Object value)
 								throws InvalidValueException {
+							
 							String text = ((String) value).trim();
+
+							// clear criteria
+							if (".".equals(text))
+								return;
+
+							// invalid search text
 							if (text.length() < 3)
 								throw new InvalidValueException(
 										"Please enter at least three characters.");
+							
 						}
 					};
 					textField.addValidator(validator);
 					textField.validate();
 					textField.removeAllValidators();
 					searchString = textField.getValue();
-					
-					EventBus eventBus = ((Vinoigitare)getUI()).getEventBus();
+
+					EventBus eventBus = ((Vinoigitare) getUI()).getEventBus();
 					eventBus.publish(new SearchEvent(searchString));
-					
+
 					log.debug("Search for: " + searchString);
 				} catch (Exception e) {
 					Notification.show("Please fill the search field properly.");
