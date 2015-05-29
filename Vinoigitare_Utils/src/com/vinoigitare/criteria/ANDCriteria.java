@@ -3,20 +3,16 @@ package com.vinoigitare.criteria;
 import java.util.HashSet;
 
 /**
- * A composite {@link Criteria} using AND logic. This criteria is satisfied if all
- * <code>Criteria</code> that compose this composite <code>Criteria</code> are
- * satisfied. <br>
- * i.e, if type <code>T</code> is <code>Woman</code>, and criteria are
- * <code>Good</code>, <code>Smart</code> and <code>Beautiful</code>, than a
- * <code>woman</code> of type <code>Woman</code> will satisfy this criteria if
- * she satisfies all of <code>Good AND Smart AND Beautiful</code>.
+ * A composite {@link Criteria} using AND logic. This criteria is satisfied if
+ * all <code>Criteria</code> that compose this composite <code>Criteria</code>
+ * are satisfied.
  * 
  * @author nino.samac
  *
  * @param <T>
  *            the type for this Criteria
- *            @see ORCriteria
- *            
+ * @see ORCriteria
+ * 
  */
 @SuppressWarnings("serial")
 public class ANDCriteria<T> implements Criteria<T> {

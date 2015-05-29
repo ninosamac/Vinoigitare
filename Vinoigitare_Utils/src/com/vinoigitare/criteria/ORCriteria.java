@@ -5,11 +5,7 @@ import java.util.HashSet;
 /**
  * A composite {@link Criteria} using OR logic. This criteria is satisfied if
  * any <code>Criteria</code> that composes this composite <code>Criteria</code>
- * is satisfied. <br>
- * i.e, if type <code>T</code> is <code>Man</code>, and criteria are
- * <code>Rich</code>, <code>Criminal</code> and <code>Asshole</code>, than a
- * <code>man</code> of type <code>Man</code> will satisfy this criteria if he
- * satisfies any of <code>Rich OR Criminal OR Asshole</code>.
+ * is satisfied.
  * 
  * @author nino.samac
  *
