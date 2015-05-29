@@ -37,9 +37,9 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 
 	public VinoigitareUI() {
 
-		//songService = new TextFileSongService(eventBus);
-		songService = new MockSongService(eventBus);
-		((MockSongService)songService).init();
+		songService = new TextFileSongService(eventBus);
+//		songService = new MockSongService(eventBus);
+//		((MockSongService)songService).init();
 		initActionRegistry();
 
 	}

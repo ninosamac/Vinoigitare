@@ -47,7 +47,7 @@ public class MainMenu extends MenuBar implements EventHandler {
 				vinoigitare.show(aboutPage);
 			}
 		};
-		MenuItem aboutMenuItem = addItem("About", aboutIcon, aboutCommand);
+		MenuItem aboutMenuItem = addItem("Help", aboutIcon, aboutCommand);
 
 	}
 
