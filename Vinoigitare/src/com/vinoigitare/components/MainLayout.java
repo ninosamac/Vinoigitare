@@ -68,54 +68,51 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 	}
 
 	private void onSongSelected(SongSelectedEvent event) {
+		
 		Component secondComponent = horizontalSplitPanel.getSecondComponent();
+		
 		if (secondComponent != null) {
 			horizontalSplitPanel.removeComponent(secondComponent);
 		}
+		
 		Song song = event.getSong();
 		songViewer = new SongViewer(song);
 		horizontalSplitPanel.setSecondComponent(songViewer);
+		
 	}
 
 	private void onSongCreated(SongCreatedEvent event) {
 
 		Component secondComponent = horizontalSplitPanel.getSecondComponent();
+		
 		if (secondComponent != null) {
 			horizontalSplitPanel.removeComponent(secondComponent);
 		}
+		
 		Song song = event.getSong();
 		songViewer = new SongViewer(song);
 		horizontalSplitPanel.setSecondComponent(songViewer);
-
-//		horizontalSplitPanel.removeComponent(navigator);
-//
-//		Vinoigitare vinoigitare = (Vinoigitare) this.getUI();
-//		navigator = new Navigator(vinoigitare);
-//
-//		horizontalSplitPanel.setFirstComponent(navigator);
-
+		
 	}
 
 	private void onSongRemoved(SongRemovedEvent event) {
 
 		Song song = event.getSong();
+		
 		if (songViewer.getSong().equals(song)) {
 			horizontalSplitPanel.removeComponent(songViewer);
 		}
-
-//		horizontalSplitPanel.removeComponent(navigator);
-//		Vinoigitare vinoigitare = (Vinoigitare) this.getUI();
-//		navigator = new Navigator(vinoigitare);
-//
-//		horizontalSplitPanel.setFirstComponent(navigator);
+		
 	}
 
 	public void show(Component component) {
+		
 		if (component != null) {
 			horizontalSplitPanel.removeComponent(horizontalSplitPanel
 					.getSecondComponent());
 			horizontalSplitPanel.setSecondComponent(component);
 		}
+		
 	}
 
 }

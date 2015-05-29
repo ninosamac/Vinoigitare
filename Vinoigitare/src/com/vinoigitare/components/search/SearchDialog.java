@@ -27,6 +27,12 @@ public class SearchDialog extends Window {
 
 	protected String searchString;
 
+	private TextField textField;
+
+	private Button searchButton;
+
+	private Button cancelButton;
+
 	public SearchDialog() {
 
 		center();
@@ -37,6 +43,7 @@ public class SearchDialog extends Window {
 
 		Layout layout = createLayout();
 		setContent(layout);
+		textField.focus();
 	}
 
 	private Layout createLayout() {
@@ -44,10 +51,10 @@ public class SearchDialog extends Window {
 		HorizontalLayout layout = new HorizontalLayout();
 		layout.setMargin(true);
 
-		final TextField textField = new TextField();
+		textField = new TextField();
 		layout.addComponent(textField);
 
-		Button searchButton = new Button();
+		searchButton = new Button();
 		Resource searchIcon = new ThemeResource(Constants.ICON_SEARCH);
 		searchButton.setIcon(searchIcon);
 		searchButton.addClickListener(new ClickListener() {
@@ -82,7 +89,7 @@ public class SearchDialog extends Window {
 		});
 		layout.addComponent(searchButton);
 
-		Button cancelButton = new Button();
+		cancelButton = new Button();
 		Resource Icon = new ThemeResource(Constants.ICON_CANCEL);
 		cancelButton.setIcon(Icon);
 		cancelButton.addClickListener(new ClickListener() {
