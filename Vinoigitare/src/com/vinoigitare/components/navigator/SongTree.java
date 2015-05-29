@@ -121,6 +121,15 @@ public class SongTree extends Tree {
 		sanitizeSelection();
 	}
 
+	public void removeAllSongs() {
+		
+		ArrayList<Song> songs = getSongs();
+		for (Song song : songs) {
+			removeSong(song);
+		}
+
+	}
+
 	public ArrayList<Song> getSongs() {
 
 		ArrayList<Song> result = new ArrayList<Song>();
@@ -167,5 +176,5 @@ public class SongTree extends Tree {
 			}
 		}
 	}
-	
+
 }

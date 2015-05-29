@@ -147,11 +147,12 @@ public class Navigator extends Panel implements EventHandler {
 			e.printStackTrace();
 		}
 
-		Collection<Song> treeSongs = songTree.getSongs();
-		for (Song song : treeSongs) {
-			if (!songs.contains(song)) {
-				songTree.removeSong(song);
-			}
+		songTree.removeAllSongs();
+		
+		for (Song song : songs) {
+			
+				songTree.addSong(song);
+			
 		}
 
 	}
