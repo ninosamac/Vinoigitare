@@ -4,57 +4,48 @@ import java.util.ArrayList;
 
 import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
-import com.vaadin.ui.Component;
 import com.vaadin.ui.MenuBar;
-import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.actions.Action;
 import com.vinoigitare.actions.ActionRegistry;
+import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
 import com.vinoigitare.events.SongSelectedEvent;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.pages.HelloPage;
 
-@SuppressWarnings({ "serial", "rawtypes" })
-public class MainMenu extends MenuBar implements EventHandler {
+@SuppressWarnings({ "serial" })
+public class LeftMenu extends MenuBar implements
+		EventHandler<SongSelectedEvent> {
 
 	private Song selectedSong = null;
 
-	public MainMenu(final Vinoigitare vinoigitare) {
+	public LeftMenu(final Vinoigitare vinoigitare) {
+
+		EventBus eventBus = vinoigitare.getEventBus();
+		eventBus.registerForEvents(SongSelectedEvent.class, this);
 
 		ActionRegistry actionRegistry = vinoigitare.getActionRegistry();
 		ArrayList<String> actionGroupIds = actionRegistry.getActionGroupIds();
 
 		for (String groupId : actionGroupIds) {
-			MenuItem topMenuItem = addItem(groupId, null, null);
+			MenuItem topItem = addItem(groupId, null, null);
 
 			ArrayList<Action> actions = actionRegistry
 					.getActionsForGroup(groupId);
 
 			for (Action action : actions) {
 
-				createMenuItem(topMenuItem, action);
+				createMenuItem(topItem, action);
 
 			}
 		}
 
-		Resource aboutIcon = new ThemeResource(Constants.ICON_ABOUT);
-		Command aboutCommand = new Command() {
-
-			@Override
-			public void menuSelected(MenuItem selectedItem) {
-				Component aboutPage = new HelloPage();
-				vinoigitare.show(aboutPage);
-			}
-		};
-		MenuItem aboutMenuItem = addItem("Help", aboutIcon, aboutCommand);
-
 	}
 
-	private MenuItem createMenuItem(MenuItem topMenuItem, Action action) {
+	private MenuItem createMenuItem(MenuItem topItem, Action action) {
 
 		String caption = action.getCaption();
-		MenuItem menuItem = topMenuItem.addItem(caption, null);
+		MenuItem menuItem = topItem.addItem(caption, null);
 
 		Command command = getCommand(action);
 		menuItem.setCommand(command);
@@ -78,23 +69,19 @@ public class MainMenu extends MenuBar implements EventHandler {
 					// actions on selected song.
 					Vinoigitare vinoigitare = (Vinoigitare) getUI();
 					action.execute(vinoigitare, selectedSong);
-				}else{
+				} else {
 					Vinoigitare vinoigitare = (Vinoigitare) getUI();
 					action.execute(vinoigitare, null);
 				}
-				
-				
+
 			}
 		};
 		return command;
 	}
 
 	@Override
-	public void onEvent(com.vinoigitare.eventbus.Event event) {
-		if (event.getType().equals(SongSelectedEvent.class)) {
-			SongSelectedEvent songSelectedEvent = (SongSelectedEvent) event;
-			selectedSong = songSelectedEvent.getSong();
-		}
+	public void onEvent(SongSelectedEvent event) {
+		selectedSong = event.getSong();
 	}
 
 }

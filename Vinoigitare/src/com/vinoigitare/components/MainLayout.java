@@ -4,7 +4,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
-import com.vinoigitare.components.menu.MainMenu;
+import com.vinoigitare.components.menu.LeftMenu;
 import com.vinoigitare.components.navigator.Navigator;
 import com.vinoigitare.components.songviewer.SongViewer;
 import com.vinoigitare.eventbus.EventBus;
@@ -36,9 +36,8 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		setWidth(100, Unit.PERCENTAGE);
 		setHeightUndefined();
 
-		MainMenu mainMenu = new MainMenu(vinoigitare);
-		eventBus.registerForEvents(SongSelectedEvent.class, mainMenu);
-		addComponent(mainMenu);
+		LeftMenu leftMenu = new LeftMenu(vinoigitare);
+		addComponent(leftMenu);
 
 		navigator = new Navigator(vinoigitare);
 
