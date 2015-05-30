@@ -1,9 +1,12 @@
 package com.vinoigitare.components;
 
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalSplitPanel;
 import com.vaadin.ui.VerticalLayout;
 import com.vinoigitare.Vinoigitare;
+import com.vinoigitare.components.menu.HelpMenu;
 import com.vinoigitare.components.menu.LeftMenu;
 import com.vinoigitare.components.navigator.Navigator;
 import com.vinoigitare.components.songviewer.SongViewer;
@@ -18,8 +21,6 @@ import com.vinoigitare.pages.HelloPage;
 @SuppressWarnings({ "serial", "rawtypes" })
 public class MainLayout extends VerticalLayout implements EventHandler {
 
-	private EventBus eventBus;
-
 	private Navigator navigator;
 	private SongViewer songViewer;
 
@@ -27,7 +28,7 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 	public MainLayout(Vinoigitare vinoigitare) {
 
-		this.eventBus = vinoigitare.getEventBus();
+		EventBus eventBus = vinoigitare.getEventBus();
 
 		eventBus.registerForEvents(SongSelectedEvent.class, this);
 		eventBus.registerForEvents(SongCreatedEvent.class, this);
@@ -36,8 +37,19 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		setWidth(100, Unit.PERCENTAGE);
 		setHeightUndefined();
 
+		GridLayout menuLayout = new GridLayout(2, 1);
+		menuLayout.setWidth(100, Unit.PERCENTAGE);
+
 		LeftMenu leftMenu = new LeftMenu(vinoigitare);
-		addComponent(leftMenu);
+		menuLayout.addComponent(leftMenu, 0, 0);
+		
+		HelpMenu helpMenu = new HelpMenu(vinoigitare);
+		menuLayout.addComponent(helpMenu, 1, 0);
+		
+		menuLayout.setColumnExpandRatio(1, 1);
+		menuLayout.setComponentAlignment(helpMenu, Alignment.MIDDLE_RIGHT);
+		
+		addComponent(menuLayout);
 
 		navigator = new Navigator(vinoigitare);
 
@@ -67,51 +79,51 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 	}
 
 	private void onSongSelected(SongSelectedEvent event) {
-		
+
 		Component secondComponent = horizontalSplitPanel.getSecondComponent();
-		
+
 		if (secondComponent != null) {
 			horizontalSplitPanel.removeComponent(secondComponent);
 		}
-		
+
 		Song song = event.getSong();
 		songViewer = new SongViewer(song);
 		horizontalSplitPanel.setSecondComponent(songViewer);
-		
+
 	}
 
 	private void onSongCreated(SongCreatedEvent event) {
 
 		Component secondComponent = horizontalSplitPanel.getSecondComponent();
-		
+
 		if (secondComponent != null) {
 			horizontalSplitPanel.removeComponent(secondComponent);
 		}
-		
+
 		Song song = event.getSong();
 		songViewer = new SongViewer(song);
 		horizontalSplitPanel.setSecondComponent(songViewer);
-		
+
 	}
 
 	private void onSongRemoved(SongRemovedEvent event) {
 
 		Song song = event.getSong();
-		
+
 		if (songViewer.getSong().equals(song)) {
 			horizontalSplitPanel.removeComponent(songViewer);
 		}
-		
+
 	}
 
 	public void show(Component component) {
-		
+
 		if (component != null) {
 			horizontalSplitPanel.removeComponent(horizontalSplitPanel
 					.getSecondComponent());
 			horizontalSplitPanel.setSecondComponent(component);
 		}
-		
+
 	}
 
 }
