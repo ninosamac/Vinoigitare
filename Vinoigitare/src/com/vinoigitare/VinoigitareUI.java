@@ -15,7 +15,6 @@ import com.vinoigitare.actions.file.NewSongAction;
 import com.vinoigitare.actions.file.RemoveSongAction;
 import com.vinoigitare.components.MainLayout;
 import com.vinoigitare.eventbus.EventBus;
-import com.vinoigitare.mockservices.MockSongService;
 import com.vinoigitare.services.SongService;
 import com.vinoigitare.services.TextFileSongService;
 import com.vinoigitare.settings.api.SettingsService;
@@ -38,15 +37,13 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 	public VinoigitareUI() {
 
 		songService = new TextFileSongService(eventBus);
-//		songService = new MockSongService(eventBus);
-//		((MockSongService)songService).init();
 		initActionRegistry();
 
 	}
 
 	private void initActionRegistry() {
 		actionRegistry = new ActionRegistry();
-		
+
 		actionRegistry.registerAction(new NewSongAction());
 		actionRegistry.registerAction(new EditSongAction());
 		actionRegistry.registerAction(new RemoveSongAction());

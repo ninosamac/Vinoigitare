@@ -28,12 +28,6 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 
 	public MainLayout(Vinoigitare vinoigitare) {
 
-		EventBus eventBus = vinoigitare.getEventBus();
-
-		eventBus.registerForEvents(SongSelectedEvent.class, this);
-		eventBus.registerForEvents(SongCreatedEvent.class, this);
-		eventBus.registerForEvents(SongRemovedEvent.class, this);
-
 		setWidth(100, Unit.PERCENTAGE);
 		setHeightUndefined();
 
@@ -60,6 +54,12 @@ public class MainLayout extends VerticalLayout implements EventHandler {
 		addComponent(horizontalSplitPanel);
 
 		setExpandRatio(horizontalSplitPanel, 1.0f);
+		
+		EventBus eventBus = vinoigitare.getEventBus();
+
+		eventBus.registerForEvents(SongSelectedEvent.class, this);
+		eventBus.registerForEvents(SongCreatedEvent.class, this);
+		eventBus.registerForEvents(SongRemovedEvent.class, this);
 
 	}
 
