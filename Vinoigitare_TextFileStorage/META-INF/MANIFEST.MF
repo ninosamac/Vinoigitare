@@ -7,6 +7,7 @@ Bundle-Vendor: Aristotel
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: com.vinoigitare.model,
  com.vinoigitare.settings,
+ com.vinoigitare.settings.api,
  com.vinoigitare.storage.api,
  com.vinoigitare.util.file,
  org.apache.commons.io;version="2.4.0",

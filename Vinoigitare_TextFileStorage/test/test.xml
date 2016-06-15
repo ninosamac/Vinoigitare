@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<suite name="Suite" parallel="false">
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite" parallel="none">
   <test name="Test">
     <classes>
       <class name="com.vinoigitare.storage.file.text.SongTextFileStorageTest"/>
     </classes>
-  </test> <!-- Test -->
-</suite> <!-- Suite -->
+  </test>
+</suite> 

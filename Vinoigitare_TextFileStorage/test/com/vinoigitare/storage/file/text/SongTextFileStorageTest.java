@@ -20,9 +20,11 @@ public class SongTextFileStorageTest {
 	private static final String FOLDER = System.getProperty("user.home") + "/"
 			+ "temp/SongTextFileStorageTest";
 
+	private static final String EXTENSION = "test";
+
 	@Test(groups = "io")
 	public void testStoreAndLoadSong() throws StorageException {
-		SongTextFileStorage storage = new SongTextFileStorage(FOLDER);
+		SongTextFileStorage storage = new SongTextFileStorage(FOLDER, EXTENSION);
 
 		Song song = new TestHelper().getTestSong();
 		String id = song.getId();

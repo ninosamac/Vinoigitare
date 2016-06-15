@@ -1,5 +1,6 @@
 package com.vinoigitare.services;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,8 +9,8 @@ import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.events.SongCreatedEvent;
 import com.vinoigitare.events.SongRemovedEvent;
 import com.vinoigitare.model.Song;
-import com.vinoigitare.settings.api.SettingsService;
 import com.vinoigitare.settings.Settings;
+import com.vinoigitare.settings.api.SettingsService;
 import com.vinoigitare.storage.api.StorageException;
 import com.vinoigitare.storage.file.text.SongTextFileStorage;
 
@@ -23,10 +24,13 @@ public class TextFileSongService implements SongService {
 
 	public TextFileSongService(EventBus eventBus) {
 		String folder = getSongsFolder();
-		storage = new SongTextFileStorage(folder);
+		String fileExtension = getSongsFileExtension();
+	
+		storage = new SongTextFileStorage(folder, fileExtension);
 		cache = new SongServiceCache();
 		this.eventBus = eventBus;
 	}
+
 
 	public void bindSettingsService(SettingsService service) {
 		this.settings = service;
@@ -37,9 +41,14 @@ public class TextFileSongService implements SongService {
 	}
 
 	private String getSongsFolder() {
-		return System.getenv("VINOIGITARE_HOME") + "/"
+		return System.getenv("VINOIGITARE_HOME") + File.separator
 				+ settings.getValue("SONGS_FOLDER");
 	}
+	
+	private String getSongsFileExtension() {
+		return settings.getValue("SONGS_FILE_EXTENSION");
+	}
+	
 
 	@Override
 	public String store(Song song) throws SongServiceException {

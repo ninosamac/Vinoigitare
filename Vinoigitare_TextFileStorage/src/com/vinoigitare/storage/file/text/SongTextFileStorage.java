@@ -19,10 +19,15 @@ public class SongTextFileStorage implements Storage<Song> {
 	private static final Log log = LogFactory.getLog(SongTextFileStorage.class
 			.getName());
 
-	private static final String FILE_EXTENSION = ".txt";
 	private FolderUtil util;
 
-	public SongTextFileStorage(String folder) {
+	String folder;
+	String fileExtension;
+
+	public SongTextFileStorage(String folder, String fileExtension) {
+		this.folder = folder;
+		this.fileExtension = fileExtension;
+
 		util = new FolderUtil(folder);
 		log.info("SongTextFileStorage started. Using folder: " + folder);
 	}
@@ -67,9 +72,10 @@ public class SongTextFileStorage implements Storage<Song> {
 		}
 		log.trace("Loaded song from file: " + fileName);
 
-		String[] tokens = fileName.split("\\s-\\s");
+		String songId = getIdFromFileName(fileName);
+		String[] tokens = songId.split("\\s-\\s");
 		String artist = tokens[0];
-		String title = tokens[1].replace(FILE_EXTENSION, "");
+		String title = tokens[1];
 
 		Song song = new Song(artist, title, chords);
 		return song;
@@ -81,8 +87,8 @@ public class SongTextFileStorage implements Storage<Song> {
 		List<String> fileNames = util.listFileNames();
 		ArrayList<String> ids = new ArrayList<String>();
 		for (String fileName : fileNames) {
-			if (fileName.endsWith(FILE_EXTENSION)) {
-				ids.add(fileName.replace(FILE_EXTENSION, ""));
+			if (fileName.endsWith(fileExtension)) {
+				ids.add(getIdFromFileName(fileName));
 			}
 		}
 		ArrayList<Song> songs = new ArrayList<Song>();
@@ -96,16 +102,14 @@ public class SongTextFileStorage implements Storage<Song> {
 	@Override
 	public List<String> listIds() throws StorageException {
 		List<String> fileNames = util.listFileNames();
-		for (String fileName : fileNames) {
-			if (!fileName.endsWith(FILE_EXTENSION)) {
-				fileNames.remove(fileName);
-			}
-		}
 		ArrayList<String> ids = new ArrayList<String>();
 		for (String fileName : fileNames) {
-			String id = fileName.replace(FILE_EXTENSION, "");
-			ids.add(id);
+			if (fileName.endsWith(fileExtension)) {
+				String id = getIdFromFileName(fileName);
+				ids.add(id);
+			}
 		}
+
 		return ids;
 	}
 
@@ -116,6 +120,10 @@ public class SongTextFileStorage implements Storage<Song> {
 	}
 
 	private String getFilenameFromId(String id) {
-		return id + FILE_EXTENSION;
+		return id + "." + fileExtension;
+	}
+
+	private String getIdFromFileName(String fileName) {
+		return fileName.substring(0, fileName.lastIndexOf("."));
 	}
 }
