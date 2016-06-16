@@ -52,6 +52,9 @@ public class SearchDialog extends Window {
 		layout.setMargin(true);
 
 		textField = new TextField();
+		Validator validator = new SearchStringValidator();
+		textField.addValidator(validator);
+
 		layout.addComponent(textField);
 
 		searchButton = new Button();
@@ -62,28 +65,7 @@ public class SearchDialog extends Window {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				try {
-					Validator validator = new Validator() {
-						
-						@Override
-						public void validate(Object value)
-								throws InvalidValueException {
-							
-							String text = ((String) value).trim();
-
-							// clear criteria
-							if (".".equals(text))
-								return;
-
-							// invalid search text
-							if (text.length() < 3)
-								throw new InvalidValueException(
-										"Please enter at least three characters.");
-							
-						}
-					};
-					textField.addValidator(validator);
 					textField.validate();
-					textField.removeAllValidators();
 					searchString = textField.getValue();
 
 					EventBus eventBus = ((Vinoigitare) getUI()).getEventBus();
@@ -91,7 +73,7 @@ public class SearchDialog extends Window {
 
 					log.debug("Search for: " + searchString);
 				} catch (Exception e) {
-					Notification.show("Please fill the search field properly.");
+					Notification.show(e.getMessage());
 				}
 
 			}
@@ -118,3 +100,24 @@ public class SearchDialog extends Window {
 	}
 
 }
+
+class SearchStringValidator implements Validator {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public void validate(Object value) throws InvalidValueException {
+
+		String text = ((String) value).trim();
+
+		// clear criteria
+		if (".".equals(text))
+			return;
+
+		// invalid search text
+		if (text.length() < 3)
+			throw new InvalidValueException(
+					"Please enter at least three characters.");
+
+	}
+};
