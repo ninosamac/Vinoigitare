@@ -18,6 +18,7 @@ import com.vaadin.ui.Window;
 import com.vinoigitare.Constants;
 import com.vinoigitare.Vinoigitare;
 import com.vinoigitare.eventbus.EventBus;
+import com.vinoigitare.events.ClearSearchFilterEvent;
 import com.vinoigitare.events.SearchEvent;
 
 @SuppressWarnings("serial")
@@ -87,7 +88,12 @@ public class SearchDialog extends Window {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				close();
+				EventBus eventBus = ((Vinoigitare) getUI()).getEventBus();
+				eventBus.publish(new ClearSearchFilterEvent());
+
+				textField.clear();
+
+				log.debug("Clear search filter.");
 			}
 		});
 		layout.addComponent(cancelButton);

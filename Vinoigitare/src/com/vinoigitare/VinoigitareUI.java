@@ -48,7 +48,7 @@ public class VinoigitareUI extends UI implements Vinoigitare {
 		actionRegistry.registerAction(new EditSongAction());
 		actionRegistry.registerAction(new RemoveSongAction());
 
-		actionRegistry.registerAction(new SearchAction());
+		actionRegistry.registerAction(new SearchAction());		
 	}
 
 	public void bindSettingsService(SettingsService service) {

@@ -13,6 +13,7 @@ import com.vinoigitare.criteria.ANDCriteria;
 import com.vinoigitare.criteria.Criteria;
 import com.vinoigitare.eventbus.EventBus;
 import com.vinoigitare.eventbus.EventHandler;
+import com.vinoigitare.events.ClearSearchFilterEvent;
 import com.vinoigitare.events.SearchEvent;
 import com.vinoigitare.events.SongCreatedEvent;
 import com.vinoigitare.events.SongRemovedEvent;
@@ -44,7 +45,7 @@ public class Navigator extends Panel implements EventHandler {
 	}
 
 	private void initServices(Vinoigitare vinoigitare) {
-		
+
 		songService = vinoigitare.getSongService();
 
 		eventBus = vinoigitare.getEventBus();
@@ -55,10 +56,11 @@ public class Navigator extends Panel implements EventHandler {
 		eventBus.registerForEvents(SongRemovedEvent.class, this);
 
 		eventBus.registerForEvents(SearchEvent.class, this);
+		eventBus.registerForEvents(ClearSearchFilterEvent.class, this);
 	}
 
 	private void initLayout(Vinoigitare vinoigitare) {
-		
+
 		layout = new VerticalLayout();
 		layout.setSizeFull();
 		layout.setMargin(true);
@@ -77,21 +79,29 @@ public class Navigator extends Panel implements EventHandler {
 		layout.addComponent(songTree);
 
 		setContent(layout);
-		
+
 	}
 
 	@Override
 	public void onEvent(com.vinoigitare.eventbus.Event event) {
-		
+
 		Class<?> eventType = event.getType();
 
 		if (eventType.equals(SearchEvent.class)) {
 			onSearchEvent((SearchEvent) event);
 
-		} else if (eventType.equals(SongRemovedEvent.class)) {
+		}
+
+		else if (eventType.equals(ClearSearchFilterEvent.class)) {
+			onClearSearchFilterEvent();
+		}
+
+		else if (eventType.equals(SongRemovedEvent.class)) {
 			onSongRemovedEvent((SongRemovedEvent) event);
 
-		} else if (eventType.equals(SongCreatedEvent.class)) {
+		}
+
+		else if (eventType.equals(SongCreatedEvent.class)) {
 			onSongCreatedEvent((SongCreatedEvent) event);
 
 		}
@@ -120,25 +130,21 @@ public class Navigator extends Panel implements EventHandler {
 
 		String searchText = event.getSearchText();
 
-		if (searchText.equals(".")) {
+		searchText = searchText.toLowerCase();
+		searchText = searchText.replace('š', 's');
+		searchText = searchText.replace('ð', 'd');
+		searchText = searchText.replace('è', 'c');
+		searchText = searchText.replace('æ', 'c');
+		searchText = searchText.replace('ž', 'z');
 
-			criteria.clear();
-			criteria.add(Criteria.ALWAYS_SATISFIED);
-			
-		} else {
+		Criteria<Song> containsText = new ContainsText(searchText);
+		criteria.add(containsText);
 
-			searchText = searchText.toLowerCase();
-			searchText = searchText.replace('š', 's');
-			searchText = searchText.replace('ð', 'd');
-			searchText = searchText.replace('è', 'c');
-			searchText = searchText.replace('æ', 'c');
-			searchText = searchText.replace('ž', 'z');
+		reloadSongTree();
 
-			Criteria<Song> containsText = new ContainsText(searchText);
-			criteria.add(containsText);
-			
-		}
-		
+	}
+
+	private void reloadSongTree() {
 		Collection<Song> songs = new ArrayList<Song>();
 		try {
 			songs = songService.load(criteria);
@@ -148,12 +154,20 @@ public class Navigator extends Panel implements EventHandler {
 		}
 
 		songTree.removeAllSongs();
-		
+
 		for (Song song : songs) {
-			
-				songTree.addSong(song);
-			
+			songTree.addSong(song);
 		}
+
+		songTree.sanitizeSelection();
+	}
+
+	@SuppressWarnings("unchecked")
+	private void onClearSearchFilterEvent() {
+
+		criteria.clear();
+		criteria.add(Criteria.ALWAYS_SATISFIED);
+		reloadSongTree();
 
 	}
 

@@ -19,9 +19,6 @@ import com.vinoigitare.model.Song;
 
 public class SongTree extends Tree {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final static Log log = LogFactory.getLog(SongTree.class.getName());
 
@@ -36,6 +33,7 @@ public class SongTree extends Tree {
 
 		ItemClickListener listener = new SongTreeClickListener(eventBus);
 		addItemClickListener(listener);
+		
 
 	}
 
