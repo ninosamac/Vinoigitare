@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore">
+  <widgets xsi:type="model:Panel" id="12" x="224" y="72" width="729" height="681" measuredWidth="729" measuredHeight="681"/>
+  <widgets xsi:type="model:SearchField" id="1" x="238" y="40" width="390" text="Search" measuredWidth="390" measuredHeight="24">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Tree" id="2" y="103" width="217" height="650" text="Folder One&#xA;-Folder Two&#xA;--File One&#xA;--File Two&#xA;v Collapse Arrow&#xA;-[>] Closed Folder&#xA;-[v] Open Folder&#xA;> Expand Arrow&#xA;[-] Collapse&#xA;-[+] Expand&#xA;[] You can have&#xA;[x] Checkboxes&#xA;() And even radio buttons&#xA;{attachment} Or just any other icon&#xA;[_] And no icon too" measuredWidth="217" measuredHeight="650">
+    <items x="0" y="5" width="217" height="21" text="Folder One"/>
+    <items x="0" y="26" width="217" height="21" text="-Folder Two"/>
+    <items x="0" y="47" width="217" height="21" text="--File One"/>
+    <items x="0" y="68" width="217" height="21" text="--File Two"/>
+    <items x="0" y="89" width="217" height="21" text="v Collapse Arrow"/>
+    <items x="0" y="110" width="217" height="21" text="-[>] Closed Folder"/>
+    <items x="0" y="131" width="217" height="21" text="-[v] Open Folder"/>
+    <items x="0" y="152" width="217" height="21" text="> Expand Arrow"/>
+    <items x="0" y="173" width="217" height="21" text="[-] Collapse"/>
+    <items x="0" y="194" width="217" height="21" text="-[+] Expand"/>
+    <items x="0" y="215" width="217" height="21" text="[] You can have"/>
+    <items x="0" y="236" width="217" height="21" text="[x] Checkboxes"/>
+    <items x="0" y="257" width="217" height="21" text="() And even radio buttons"/>
+    <items x="0" y="278" width="217" height="21" text="{attachment} Or just any other icon"/>
+    <items x="0" y="299" width="217" height="21" text="[_] And no icon too"/>
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Menu" id="4" y="8" width="217" text="&amp;File,&amp;Edit,&amp;View,~&amp;Window~,&amp;Help" measuredWidth="217" measuredHeight="27">
+    <items x="5" y="0" width="29" height="27" text="&amp;File"/>
+    <items x="34" y="0" width="31" height="27" text="&amp;Edit"/>
+    <items x="65" y="0" width="36" height="27" text="&amp;View"/>
+    <items x="101" y="0" width="55" height="27" text="~&amp;Window~"/>
+    <items x="156" y="0" width="36" height="27" text="&amp;Help"/>
+  </widgets>
+  <widgets xsi:type="model:Text" id="5" x="264" y="224" width="400" height="120" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." measuredWidth="400" measuredHeight="120">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="6" x="536" y="108" text="Title" measuredWidth="86" measuredHeight="67">
+    <font size="43px"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="7" x="8" y="40" text="123 results" measuredWidth="61" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="8" x="304" y="40" text="Search text: dalmacija, mišo, samo moja" measuredWidth="217" measuredHeight="23">
+    <font/>
+  </widgets>
+  <widgets xsi:type="model:Icon" id="10" x="921" y="6" measuredWidth="32" measuredHeight="32" icon="list (large)"/>
+  <widgets xsi:type="model:LinkBar" id="11" x="872" y="10" text="Logout" measuredWidth="42" measuredHeight="23">
+    <font/>
+    <items x="0" y="0" width="41" height="23" text="Logout"/>
+  </widgets>
+  <widgets xsi:type="model:ButtonBar" id="13" x="812" y="82" text="Edit,Print,PDF" measuredWidth="131" measuredHeight="27" selection="0">
+    <font/>
+    <items x="0" y="0" width="42" height="27" text="Edit"/>
+    <items x="42" y="0" width="46" height="27" text="Print"/>
+    <items x="88" y="0" width="43" height="27" text="PDF"/>
+  </widgets>
+  <widgets xsi:type="model:ButtonBar" id="14" y="72" text="New, Delete" measuredWidth="101" measuredHeight="27" selection="0">
+    <font/>
+    <items x="0" y="0" width="46" height="27" text="New"/>
+    <items x="46" y="0" width="55" height="27" text="Delete"/>
+  </widgets>
+  <widgets xsi:type="model:Label" id="15" x="552" y="160" text="Artist" measuredWidth="53" measuredHeight="36">
+    <font size="20px"/>
+  </widgets>
+  <widgets xsi:type="model:ButtonBar" id="16" x="107" y="72" text="Sort,Collapse" measuredWidth="110" measuredHeight="27" selection="0">
+    <font/>
+    <items x="0" y="0" width="43" height="27" text="Sort"/>
+    <items x="43" y="0" width="67" height="27" text="Collapse"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
